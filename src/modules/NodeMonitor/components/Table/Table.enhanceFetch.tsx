@@ -1,16 +1,17 @@
 import React from 'react';
 import ErrorBoundary from 'src/components/ErrorBoundary';
+import { useDispatch } from 'react-redux';
+import { actionFetchTableData } from './Table.actions';
 
 interface IProps {
-    currentPage: number;
     handleFetchData: () => void;
 }
 
 const withFetch = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const { currentPage } = props;
-    const handleFetchData = () => {};
+    const dispatch = useDispatch();
+    const handleFetchData = async (page: number) => dispatch(actionFetchTableData(page));
     React.useEffect(() => {
-        handleFetchData();
+        handleFetchData(0).then();
     }, []);
 
     return (

@@ -1,7 +1,9 @@
 export interface ITableReducer {
     currentPage: number;
-    limitRowPerPage: number;
+    rowsPerPage: number;
     limitPage: number;
+    data: ITableData[];
+    fetching: boolean;
 }
 
 export interface ITableData {

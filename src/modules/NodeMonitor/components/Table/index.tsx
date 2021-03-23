@@ -9,17 +9,23 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import LoadingOverlay from 'src/components/LoadingOverlay';
 import withTable from './Table.enhance';
+import { ITableData } from './Table.interface';
 
 interface IProps {
+    data: ITableData[];
     currentPage: number;
+    limitPage: number;
+    rowsPerPage: number;
+    fetching: boolean;
+
     handleChangePage: (page: number) => void;
     handleChangeRowsPerPage: () => void;
 }
 const Table = (props: IProps & any) => {
-    const { currentPage, handleChangePage, handleChangeRowsPerPage } = props;
+    const { currentPage, limitPage, rowsPerPage, handleChangePage, handleChangeRowsPerPage, data, fetching } = props;
     const columns = MockupColumns;
-    const data = MockupData;
     const { getTableProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data,
@@ -69,17 +75,20 @@ const Table = (props: IProps & any) => {
             <Card className="card">
                 <MaUTable {...getTableProps()}>
                     {renderHeader()}
-                    {renderBody()}
+                    {!fetching && renderBody()}
                 </MaUTable>
-                <TablePagination
-                    component="div"
-                    count={100}
-                    page={currentPage}
-                    rowsPerPage={10}
-                    rowsPerPageOptions={[10, 20, 30]}
-                    onChangePage={onChangePage}
-                    onChangeRowsPerPage={onChangeRowsPerPage}
-                />
+                {!!fetching && <LoadingOverlay />}
+                {!!limitPage && (
+                    <TablePagination
+                        component="div"
+                        count={limitPage}
+                        page={currentPage}
+                        rowsPerPage={rowsPerPage}
+                        rowsPerPageOptions={[10, 20, 30]}
+                        onChangePage={onChangePage}
+                        onChangeRowsPerPage={onChangeRowsPerPage}
+                    />
+                )}
             </Card>
         </Styled>
     );

@@ -20,4 +20,7 @@ export const Styled = styled.div`
     .header-row {
         background-color: ${({ theme }: { theme: ITheme }) => theme.headerRow};
     }
+    .wrap-loading {
+        height: 100px;
+    }
 `;

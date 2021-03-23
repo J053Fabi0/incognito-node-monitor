@@ -1,18 +1,18 @@
 import React from 'react';
 import ErrorBoundary from 'src/components/ErrorBoundary';
-import { useDispatch } from 'react-redux';
 import { actionChangePage } from './Table.actions';
 
 interface IProps {
-    handleChangePage: (page: number) => void;
-    handleChangeRowsPerPage: () => void;
+    handleFetchData: (page: number) => void;
 }
 
 const withPagination = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const dispatch = useDispatch();
+    const { handleFetchData } = props;
     const handleChangePage = async (page: number) => {
         /** Change number page */
-        dispatch(actionChangePage({ page }));
+        // dispatch(actionChangePage({ page }));
+        console.log('SANG TEST: ', handleFetchData, page);
+        handleFetchData && handleFetchData(page);
     };
     const handleChangeRowsPerPage = () => {};
 
