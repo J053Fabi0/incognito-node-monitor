@@ -37,6 +37,11 @@ export function colors(darkMode: boolean): Colors {
         // base
         white,
         black,
+
+        headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
+        hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+        darkRow: darkMode ? '#fafafa' : '#fafafa',
+        lightRow: darkMode ? '#e0e0e0' : '#e0e0e0',
     };
 }
 
@@ -127,9 +132,9 @@ html {
 `;
 
 export const ThemedGlobalStyle = createGlobalStyle`
-body {
-  min-height: 100vh;
-  background-position: 0 -30vh;
-  background-repeat: no-repeat;
-}
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      box-sizing: border-box;
+    }
 `;

@@ -5,6 +5,12 @@ export interface Colors {
     // base
     white: Color;
     black: Color;
+
+    // table
+    headerRow: Color;
+    hoverRow: Color;
+    darkRow: Color;
+    lightRow: Color;
 }
 
 export interface Grids {
