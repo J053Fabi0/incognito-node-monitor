@@ -13,78 +13,63 @@ import withTable from './Table.enhance';
 
 interface IProps {
     currentPage: number;
+    handleChangePage: (page: number) => void;
+    handleChangeRowsPerPage: () => void;
 }
 const Table = (props: IProps & any) => {
-    const { currentPage } = props;
+    const { currentPage, handleChangePage, handleChangeRowsPerPage } = props;
     const columns = MockupColumns;
     const data = MockupData;
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
+    const { getTableProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data,
     });
 
     const renderHeader = () => (
-        <thead>
+        <TableHead>
             {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
+                <TableRow className="header-row" {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
-                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                        <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
                     ))}
-                </tr>
+                </TableRow>
             ))}
-        </thead>
+        </TableHead>
     );
 
-    const renderContent = () => (
-        <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
+    const renderBody = () => (
+        <TableBody>
+            {rows.map((row, index) => {
                 prepareRow(row);
                 return (
-                    <tr {...row.getRowProps()}>
+                    <TableRow className="table-row" {...row.getRowProps()}>
                         {row.cells.map((cell) => {
-                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                            return (
+                                <TableCell
+                                    className={`table-cell ${index % 2 !== 0 && 'dark-row'}`}
+                                    {...cell.getCellProps()}
+                                >
+                                    {cell.render('Cell')}
+                                </TableCell>
+                            );
                         })}
-                    </tr>
+                    </TableRow>
                 );
             })}
-        </tbody>
+        </TableBody>
     );
 
-    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => {};
-    const handleChangeRowsPerPage = () => {};
+    const onChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, page: number) =>
+        handleChangePage && handleChangePage(page);
+
+    const onChangeRowsPerPage = () => handleChangeRowsPerPage && handleChangeRowsPerPage();
 
     return (
         <Styled>
             <Card className="card">
                 <MaUTable {...getTableProps()}>
-                    <TableHead>
-                        {headerGroups.map((headerGroup) => (
-                            <TableRow className="header-row" {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row, index) => {
-                            prepareRow(row);
-                            return (
-                                <TableRow className="table-row" {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <TableCell
-                                                className={`table-cell ${index % 2 !== 0 && 'dark-row'}`}
-                                                {...cell.getCellProps()}
-                                            >
-                                                {cell.render('Cell')}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
+                    {renderHeader()}
+                    {renderBody()}
                 </MaUTable>
                 <TablePagination
                     component="div"
@@ -92,8 +77,8 @@ const Table = (props: IProps & any) => {
                     page={currentPage}
                     rowsPerPage={10}
                     rowsPerPageOptions={[10, 20, 30]}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onChangePage={onChangePage}
+                    onChangeRowsPerPage={onChangeRowsPerPage}
                 />
             </Card>
         </Styled>

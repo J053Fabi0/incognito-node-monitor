@@ -9,6 +9,7 @@ export const Styled = styled.div`
     .table-cell {
     }
     .table-row {
+        cursor: pointer;
         :hover {
             background-color: ${({ theme }: { theme: ITheme }) => theme.hoverRow};
         }

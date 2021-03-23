@@ -2,16 +2,25 @@ import React from 'react';
 import ErrorBoundary from 'src/components/ErrorBoundary';
 
 interface IProps {
-    page: number;
+    currentPage: number;
+    handleFetchData: () => void;
 }
 
 const withFetch = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const { page } = props;
+    const { currentPage } = props;
     const handleFetchData = () => {};
-    React.useEffect(() => {}, []);
+    React.useEffect(() => {
+        handleFetchData();
+    }, []);
+
     return (
         <ErrorBoundary>
-            <WrappedComponent {...props} />
+            <WrappedComponent
+                {...{
+                    ...props,
+                    handleFetchData,
+                }}
+            />
         </ErrorBoundary>
     );
 };

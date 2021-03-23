@@ -11,6 +11,9 @@ export interface Colors {
     hoverRow: Color;
     darkRow: Color;
     lightRow: Color;
+
+    // modal
+    modalBg: Color;
 }
 
 export interface Grids {

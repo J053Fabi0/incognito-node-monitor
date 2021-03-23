@@ -2,10 +2,12 @@ import { persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { ITableReducer } from './Table.interface';
-import { ACTION_CHANGE_PAGE } from './Table.actionsName'; // defaults to localStorage for web
+import { ACTION_CHANGE_LIMIT_PAGE, ACTION_CHANGE_LIMIT_ROW_PER_PAGE, ACTION_CHANGE_PAGE } from './Table.actionsName'; // defaults to localStorage for web
 
 const initialState: ITableReducer = {
     currentPage: 0,
+    limitRowPerPage: 15,
+    limitPage: 0,
 };
 
 const tableReducer = (
@@ -17,7 +19,16 @@ const tableReducer = (
 ) => {
     switch (action.type) {
         case ACTION_CHANGE_PAGE: {
-            return { ...state };
+            const { page } = action.payload;
+            return { ...state, currentPage: page };
+        }
+        case ACTION_CHANGE_LIMIT_PAGE: {
+            const { limitPage } = action.payload;
+            return { ...state, limitPage };
+        }
+        case ACTION_CHANGE_LIMIT_ROW_PER_PAGE: {
+            const { limitRowPerPage } = action.payload;
+            return { ...state, limitRowPerPage };
         }
         default:
             return state;

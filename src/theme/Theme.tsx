@@ -38,10 +38,14 @@ export function colors(darkMode: boolean): Colors {
         white,
         black,
 
+        // table
         headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
         hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
         darkRow: darkMode ? '#fafafa' : '#fafafa',
         lightRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+
+        // modal
+        modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
     };
 }
 
