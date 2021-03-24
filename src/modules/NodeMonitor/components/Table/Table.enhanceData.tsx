@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { tableSelector } from './Table.selector';
 
 const withData = (WrappedComponent: React.FunctionComponent) => (props: any) => {
-    const { currentPage, limitPage, rowsPerPage, data, fetching } = useSelector(tableSelector);
+    const { currentPage, limitPage, rowsPerPage, data, fetching, isSearching } = useSelector(tableSelector);
 
     return (
         <ErrorBoundary>
@@ -17,6 +17,7 @@ const withData = (WrappedComponent: React.FunctionComponent) => (props: any) => 
 
                     data,
                     fetching,
+                    isSearching,
                 }}
             />
         </ErrorBoundary>

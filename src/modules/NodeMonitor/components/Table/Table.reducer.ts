@@ -59,10 +59,11 @@ const tableReducer = (
             };
         }
         case ACTION_FETCHING_TABLE_DATA: {
-            const { fetching } = action.payload;
+            const { fetching, isSearching: searching } = action.payload;
             return {
                 ...state,
                 fetching,
+                isSearching: searching || state?.isSearching,
             };
         }
         case ACTION_UPDATE_SEARCH_VALUE: {

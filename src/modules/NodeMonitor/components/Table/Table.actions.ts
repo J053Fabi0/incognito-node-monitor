@@ -28,12 +28,17 @@ export const actionChangeLimitPage = (payload: { limitPage: number }) => ({
     payload,
 });
 
-export const actionFetchingTableData = (payload: { fetching: boolean }) => ({
+export const actionFetchingTableData = (payload: { fetching: boolean; isSearching?: boolean }) => ({
     type: ACTION_FETCHING_TABLE_DATA,
     payload,
 });
 
-export const actionUpdateTableData = (payload: { data: ITableData[]; currentPage?: number; limitPage?: number }) => ({
+export const actionUpdateTableData = (payload: {
+    data: ITableData[];
+    currentPage?: number;
+    limitPage?: number;
+    isSearching?: boolean;
+}) => ({
     type: ACTION_UPDATE_TABLE_DATA,
     payload,
 });
@@ -60,7 +65,7 @@ export const actionUpdateSearchValue = (payload: { search: ISearch[] }) => ({
 
 export const actionSearch = () => (dispatch: Dispatch, getState: IRootState) => {
     try {
-        dispatch(actionFetchingTableData({ fetching: true }));
+        dispatch(actionFetchingTableData({ fetching: true, isSearching: true }));
         setTimeout(() => {
             const data = makeData(1);
             dispatch(actionUpdateTableData({ data, currentPage: 0, limitPage: 0 }));

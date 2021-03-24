@@ -10,8 +10,6 @@ const withPagination = (WrappedComponent: React.FunctionComponent) => (props: IP
     const { handleFetchData } = props;
     const handleChangePage = async (page: number) => {
         /** Change number page */
-        // dispatch(actionChangePage({ page }));
-        console.log('SANG TEST: ', handleFetchData, page);
         handleFetchData && handleFetchData(page);
     };
     const handleChangeRowsPerPage = () => {};

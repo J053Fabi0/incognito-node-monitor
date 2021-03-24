@@ -19,12 +19,23 @@ interface IProps {
     limitPage: number;
     rowsPerPage: number;
     fetching: boolean;
+    isSearching: boolean;
 
     handleChangePage: (page: number) => void;
     handleChangeRowsPerPage: () => void;
 }
 const Table = (props: IProps & any) => {
-    const { currentPage, limitPage, rowsPerPage, handleChangePage, handleChangeRowsPerPage, data, fetching } = props;
+    const {
+        currentPage,
+        limitPage,
+        rowsPerPage,
+        handleChangePage,
+        handleChangeRowsPerPage,
+        data,
+        fetching,
+        isSearching,
+    } = props;
+
     const columns = MockupColumns;
     const { getTableProps, headerGroups, rows, prepareRow } = useTable({
         columns,
@@ -71,7 +82,7 @@ const Table = (props: IProps & any) => {
     );
 
     const renderPagination = () => {
-        if (!limitPage) return null;
+        if (!limitPage || isSearching) return null;
         return (
             <TablePagination
                 component="div"
