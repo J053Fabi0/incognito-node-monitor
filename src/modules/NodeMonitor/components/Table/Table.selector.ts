@@ -6,3 +6,5 @@ export const tableSelector = createSelector(
     (state: IRootState) => state.table,
     (table: ITableReducer) => table,
 );
+
+export const searchSelector = createSelector(tableSelector, (table) => table.search);

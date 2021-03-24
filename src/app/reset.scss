@@ -133,3 +133,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+div,
+button,
+p,
+a,
+input {
+  box-sizing: border-box;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  display: block;
+  outline: none;
+  :focus {
+    outline: none;
+  }
+}

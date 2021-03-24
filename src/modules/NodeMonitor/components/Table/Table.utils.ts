@@ -8,7 +8,7 @@ export const makeData = (page: number): ITableData[] => {
         data.push({
             id: `${index}`,
             name: `LienMinh${index}`,
-            publicKey: '123-123',
+            publicKey: '123-123-123-123-123-123-123-123',
             status: 'Waiting',
             committeeChainId: '1',
             syncState: 'Beacon Synced',

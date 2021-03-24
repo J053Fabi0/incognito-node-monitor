@@ -7,9 +7,12 @@ export interface IConfigsReducer {
         deviceId: string;
         deviceToken: string;
     };
+    language: string;
 }
 
-const initialState: IConfigsReducer = {};
+const initialState: IConfigsReducer = {
+    language: 'en',
+};
 
 const configReducer = (
     state = initialState,

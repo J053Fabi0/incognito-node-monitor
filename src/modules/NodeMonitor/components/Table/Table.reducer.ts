@@ -8,6 +8,8 @@ import {
     ACTION_CHANGE_PAGE,
     ACTION_UPDATE_TABLE_DATA,
     ACTION_FETCHING_TABLE_DATA,
+    ACTION_UPDATE_SEARCH_VALUE,
+    ACTION_CLEAR_SEARCH,
 } from './Table.actionsName';
 import { DEFAULT_LIMIT_ROWS } from './Table.constants'; // defaults to localStorage for web
 
@@ -17,6 +19,8 @@ const initialState: ITableReducer = {
     limitPage: 0,
     data: [],
     fetching: false,
+    isSearching: false,
+    search: [],
 };
 
 const tableReducer = (
@@ -59,6 +63,20 @@ const tableReducer = (
             return {
                 ...state,
                 fetching,
+            };
+        }
+        case ACTION_UPDATE_SEARCH_VALUE: {
+            const { search } = action.payload;
+            return {
+                ...state,
+                search,
+            };
+        }
+        case ACTION_CLEAR_SEARCH: {
+            return {
+                ...state,
+                search: [],
+                isSearching: false,
             };
         }
         default:

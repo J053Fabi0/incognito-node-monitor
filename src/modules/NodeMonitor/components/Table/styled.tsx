@@ -1,17 +1,20 @@
 import styled, { ITheme } from 'styled-components';
 
 export const Styled = styled.div`
-    padding: 30px;
     .card {
         height: 100%;
         overflow: auto;
     }
     .table-cell {
+        min-width: 100px;
     }
     .table-row {
         cursor: pointer;
         :hover {
             background-color: ${({ theme }: { theme: ITheme }) => theme.hoverRow};
+        }
+        > td {
+            text-align: center;
         }
     }
     .dark-row {
@@ -19,6 +22,10 @@ export const Styled = styled.div`
     }
     .header-row {
         background-color: ${({ theme }: { theme: ITheme }) => theme.headerRow};
+        th {
+            font-weight: bold;
+            text-align: center;
+        }
     }
     .wrap-loading {
         height: 100px;

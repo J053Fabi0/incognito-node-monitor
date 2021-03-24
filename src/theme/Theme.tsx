@@ -46,6 +46,8 @@ export function colors(darkMode: boolean): Colors {
 
         // modal
         modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
+
+        border1: darkMode ? '#CBCBCB' : '#CBCBCB',
     };
 }
 
@@ -138,5 +140,6 @@ export const ThemedGlobalStyle = createGlobalStyle`
     body {
       min-height: 100vh;
       box-sizing: border-box;
+      padding: 30px;
     }
 `;
