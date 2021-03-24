@@ -1,7 +1,7 @@
 import styled, { ITheme } from 'styled-components';
 
 export const Styled = styled.div`
-    margin: 30px;
+    padding: 30px;
     .card {
         height: 100%;
         overflow: auto;
@@ -22,5 +22,10 @@ export const Styled = styled.div`
     }
     .wrap-loading {
         height: 100px;
+    }
+    .pagination {
+        padding-left: 0;
+        position: absolute;
+        right: 15px;
     }
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MockupColumns, MockupData } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
+import { MockupColumns } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
 import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
 import { useTable } from 'react-table';
 import Card from '@material-ui/core/Card';
@@ -30,6 +30,11 @@ const Table = (props: IProps & any) => {
         columns,
         data,
     });
+
+    const onChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, page: number) =>
+        handleChangePage && handleChangePage(page);
+
+    const onChangeRowsPerPage = () => handleChangeRowsPerPage && handleChangeRowsPerPage();
 
     const renderHeader = () => (
         <TableHead>
@@ -65,10 +70,21 @@ const Table = (props: IProps & any) => {
         </TableBody>
     );
 
-    const onChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, page: number) =>
-        handleChangePage && handleChangePage(page);
-
-    const onChangeRowsPerPage = () => handleChangeRowsPerPage && handleChangeRowsPerPage();
+    const renderPagination = () => {
+        if (!limitPage) return null;
+        return (
+            <TablePagination
+                component="div"
+                count={limitPage}
+                page={currentPage}
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOptions={[]}
+                onChangePage={onChangePage}
+                onChangeRowsPerPage={onChangeRowsPerPage}
+                className="pagination"
+            />
+        );
+    };
 
     return (
         <Styled>
@@ -78,17 +94,7 @@ const Table = (props: IProps & any) => {
                     {!fetching && renderBody()}
                 </MaUTable>
                 {!!fetching && <LoadingOverlay />}
-                {!!limitPage && (
-                    <TablePagination
-                        component="div"
-                        count={limitPage}
-                        page={currentPage}
-                        rowsPerPage={rowsPerPage}
-                        rowsPerPageOptions={[10, 20, 30]}
-                        onChangePage={onChangePage}
-                        onChangeRowsPerPage={onChangeRowsPerPage}
-                    />
-                )}
+                {renderPagination()}
             </Card>
         </Styled>
     );

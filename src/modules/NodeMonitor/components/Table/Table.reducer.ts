@@ -8,11 +8,12 @@ import {
     ACTION_CHANGE_PAGE,
     ACTION_UPDATE_TABLE_DATA,
     ACTION_FETCHING_TABLE_DATA,
-} from './Table.actionsName'; // defaults to localStorage for web
+} from './Table.actionsName';
+import { DEFAULT_LIMIT_ROWS } from './Table.constants'; // defaults to localStorage for web
 
 const initialState: ITableReducer = {
     currentPage: 0,
-    rowsPerPage: 15,
+    rowsPerPage: DEFAULT_LIMIT_ROWS,
     limitPage: 0,
     data: [],
     fetching: false,

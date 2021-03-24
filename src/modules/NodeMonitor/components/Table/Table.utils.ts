@@ -1,9 +1,10 @@
 import { ITableData } from './Table.interface';
+import { DEFAULT_LIMIT_ROWS } from './Table.constants';
 
 export const makeData = (page: number): ITableData[] => {
-    const start: number = page * 15;
+    const start: number = page * DEFAULT_LIMIT_ROWS;
     const data = [];
-    for (let index = start; index < start + 15; index += 1) {
+    for (let index = start; index < start + DEFAULT_LIMIT_ROWS; index += 1) {
         data.push({
             id: `${index}`,
             name: `LienMinh${index}`,
