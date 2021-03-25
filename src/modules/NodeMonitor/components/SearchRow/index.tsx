@@ -14,7 +14,7 @@ import {
 
 const Wrapper = styled(Row)`
     position: relative;
-    max-width: 350px;
+    max-width: 400px;
     height: 35px;
     .close-icon {
         position: absolute;

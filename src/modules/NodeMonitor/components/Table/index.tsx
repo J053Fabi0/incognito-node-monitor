@@ -64,13 +64,11 @@ const Table = (props: IProps & any) => {
             {rows.map((row, index) => {
                 prepareRow(row);
                 return (
-                    <TableRow className="table-row" {...row.getRowProps()}>
+                    <TableRow className={`table-row ${index % 2 !== 0 ? 'dark-row' : ''}`} {...row.getRowProps()}>
                         {row.cells.map((cell) => {
+                            console.log('SANG TEST: ', cell.getCellProps());
                             return (
-                                <TableCell
-                                    className={`table-cell ${index % 2 !== 0 && 'dark-row'}`}
-                                    {...cell.getCellProps()}
-                                >
+                                <TableCell className="table-cell" {...cell.getCellProps()}>
                                     {cell.render('Cell')}
                                 </TableCell>
                             );

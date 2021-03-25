@@ -7,6 +7,12 @@ export const Styled = styled.div`
     }
     .table-cell {
         min-width: 100px;
+        :hover {
+            background-color: ${({ theme }: { theme: ITheme }) => theme.hoverRow};
+        }
+    }
+    .dark-row {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
     }
     .table-row {
         cursor: pointer;
@@ -16,9 +22,6 @@ export const Styled = styled.div`
         > td {
             text-align: center;
         }
-    }
-    .dark-row {
-        background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
     }
     .header-row {
         background-color: ${({ theme }: { theme: ITheme }) => theme.headerRow};

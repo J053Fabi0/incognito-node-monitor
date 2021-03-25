@@ -17,3 +17,17 @@ export const makeData = (page: number): ITableData[] => {
     }
     return data;
 };
+
+export const getURLSearchParams = (search?: string) => {
+    if (typeof window === 'undefined') {
+        return {};
+    }
+    return new URLSearchParams(search || window.location.search);
+};
+
+export const getURLPathname = () => {
+    if (typeof window === 'undefined') {
+        return '';
+    }
+    return window.location.pathname;
+};
