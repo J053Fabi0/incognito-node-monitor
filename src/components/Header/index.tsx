@@ -11,7 +11,7 @@ import PATH from 'src/modules/routesPathName';
 
 const HeaderFrame = styled(Row)`
     justify-content: space-between;
-    margin-bottom: 30px;
+    padding: 30px 30px 0 30px;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
         justify-content: space-between;

@@ -6,6 +6,7 @@ export interface ITableReducer {
     fetching: boolean;
     isSearching: boolean;
     search: ISearch[];
+    visibleModal: boolean;
 }
 
 export interface ITableData {

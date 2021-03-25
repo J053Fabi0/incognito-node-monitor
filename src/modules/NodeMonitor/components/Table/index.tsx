@@ -1,6 +1,6 @@
 import React from 'react';
 import { MockupColumns } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
-import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
+import { Styled, ModalWrapper, CloseWrapper } from 'src/modules/NodeMonitor/components/Table/styled';
 import { useTable } from 'react-table';
 import Card from '@material-ui/core/Card';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -10,8 +10,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import LoadingOverlay from 'src/components/LoadingOverlay';
-import withTable from './Table.enhance';
-import { ITableData } from './Table.interface';
+import Modal from 'src/components/Modal';
+import MonitorDetail from 'src/modules/NodeMonitor/components/MonitorDetail';
+import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
+import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
+import { CloseIcon } from 'src/components/Icons';
 
 interface IProps {
     data: ITableData[];
@@ -20,20 +23,26 @@ interface IProps {
     rowsPerPage: number;
     fetching: boolean;
     isSearching: boolean;
+    visibleModal: boolean;
 
     handleChangePage: (page: number) => void;
     handleChangeRowsPerPage: () => void;
+    handleClickTableCell: (item: ITableData) => void;
+    handleCloseMonitorModal: () => void;
 }
 const Table = (props: IProps & any) => {
     const {
         currentPage,
         limitPage,
         rowsPerPage,
-        handleChangePage,
-        handleChangeRowsPerPage,
         data,
         fetching,
         isSearching,
+        visibleModal,
+        handleChangePage,
+        handleChangeRowsPerPage,
+        handleClickTableCell,
+        handleCloseMonitorModal,
     } = props;
 
     const columns = MockupColumns;
@@ -46,6 +55,15 @@ const Table = (props: IProps & any) => {
         handleChangePage && handleChangePage(page);
 
     const onChangeRowsPerPage = () => handleChangeRowsPerPage && handleChangeRowsPerPage();
+
+    const onClickTableCell = (item: ITableData) => {
+        if (!item) return;
+        handleClickTableCell && handleClickTableCell(item);
+    };
+
+    const onCloseModal = () => {
+        handleCloseMonitorModal && handleCloseMonitorModal();
+    };
 
     const renderHeader = () => (
         <TableHead>
@@ -66,9 +84,13 @@ const Table = (props: IProps & any) => {
                 return (
                     <TableRow className={`table-row ${index % 2 !== 0 ? 'dark-row' : ''}`} {...row.getRowProps()}>
                         {row.cells.map((cell) => {
-                            console.log('SANG TEST: ', cell.getCellProps());
+                            const value: any = cell.row.original;
                             return (
-                                <TableCell className="table-cell" {...cell.getCellProps()}>
+                                <TableCell
+                                    onClick={() => onClickTableCell(value)}
+                                    className="table-cell"
+                                    {...cell.getCellProps()}
+                                >
                                     {cell.render('Cell')}
                                 </TableCell>
                             );
@@ -105,6 +127,14 @@ const Table = (props: IProps & any) => {
                 {!!fetching && <LoadingOverlay />}
                 {renderPagination()}
             </Card>
+            <Modal isOpen={visibleModal} onDismiss={onCloseModal}>
+                <ModalWrapper>
+                    <CloseWrapper onClick={onCloseModal}>
+                        <CloseIcon width="20" height="20" />
+                    </CloseWrapper>
+                    <MonitorDetail />
+                </ModalWrapper>
+            </Modal>
         </Styled>
     );
 };

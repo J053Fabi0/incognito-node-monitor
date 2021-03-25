@@ -10,6 +10,7 @@ import {
     ACTION_FETCHING_TABLE_DATA,
     ACTION_UPDATE_SEARCH_VALUE,
     ACTION_CLEAR_SEARCH,
+    ACTION_CHANGE_VISIBLE_MODAL,
 } from './Table.actionsName';
 import { DEFAULT_LIMIT_ROWS } from './Table.constants'; // defaults to localStorage for web
 
@@ -21,6 +22,7 @@ const initialState: ITableReducer = {
     fetching: false,
     isSearching: false,
     search: [],
+    visibleModal: false,
 };
 
 const tableReducer = (
@@ -78,6 +80,13 @@ const tableReducer = (
                 ...state,
                 search: [],
                 isSearching: false,
+            };
+        }
+        case ACTION_CHANGE_VISIBLE_MODAL: {
+            const { visible } = action.payload;
+            return {
+                ...state,
+                visibleModal: visible || !state?.visibleModal,
             };
         }
         default:

@@ -140,6 +140,5 @@ export const ThemedGlobalStyle = createGlobalStyle`
     body {
       min-height: 100vh;
       box-sizing: border-box;
-      padding: 30px;
     }
 `;

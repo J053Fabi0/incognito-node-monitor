@@ -1,6 +1,5 @@
 import { IRootState } from 'src/redux/interface';
 import { Dispatch } from 'redux';
-import { debounce } from 'lodash';
 import {
     ACTION_CHANGE_LIMIT_PAGE,
     ACTION_CHANGE_ROWS_PER_PAGE,
@@ -9,6 +8,7 @@ import {
     ACTION_FETCHING_TABLE_DATA,
     ACTION_UPDATE_SEARCH_VALUE,
     ACTION_CLEAR_SEARCH,
+    ACTION_CHANGE_VISIBLE_MODAL,
 } from './Table.actionsName';
 import { ISearch, ITableData } from './Table.interface';
 import { makeData } from './Table.utils';
@@ -88,3 +88,8 @@ export const actionHandleClearSearch = () => (dispatch: Dispatch, getState: IRoo
         console.debug('Clear search error', e);
     }
 };
+
+export const actionUpdateVisibleModal = (payload: { visible?: boolean }) => ({
+    type: ACTION_CHANGE_VISIBLE_MODAL,
+    payload,
+});

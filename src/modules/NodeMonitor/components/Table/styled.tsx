@@ -39,3 +39,20 @@ export const Styled = styled.div`
         right: 15px;
     }
 `;
+
+export const ModalWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const CloseWrapper = styled.div`
+    width: 55px;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-top: 15px;
+`;
