@@ -5,6 +5,10 @@ const language: ILanguage = {
         company: 'Incognito',
     },
     nodeMonitor: {},
+    reuse: {
+        search: 'Search',
+        colon: ':',
+    },
 };
 
 export default language;

@@ -15,6 +15,7 @@ import MonitorDetail from 'src/modules/NodeMonitor/components/MonitorDetail';
 import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 import { CloseIcon } from 'src/components/Icons';
+import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
 
 interface IProps {
     data: ITableData[];
@@ -117,8 +118,20 @@ const Table = (props: IProps & any) => {
         );
     };
 
+    const renderModal = () => (
+        <Modal isOpen={visibleModal} onDismiss={onCloseModal}>
+            <ModalWrapper>
+                <CloseWrapper onClick={onCloseModal}>
+                    <CloseIcon width="18" height="18" />
+                </CloseWrapper>
+                <MonitorDetail />
+            </ModalWrapper>
+        </Modal>
+    );
+
     return (
         <Styled>
+            <SearchRow />
             <Card className="card">
                 <MaUTable {...getTableProps()}>
                     {renderHeader()}
@@ -127,14 +140,7 @@ const Table = (props: IProps & any) => {
                 {!!fetching && <LoadingOverlay />}
                 {renderPagination()}
             </Card>
-            <Modal isOpen={visibleModal} onDismiss={onCloseModal}>
-                <ModalWrapper>
-                    <CloseWrapper onClick={onCloseModal}>
-                        <CloseIcon width="20" height="20" />
-                    </CloseWrapper>
-                    <MonitorDetail />
-                </ModalWrapper>
-            </Modal>
+            {renderModal()}
         </Styled>
     );
 };

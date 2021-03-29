@@ -1,5 +1,6 @@
 import React from 'react';
 import ErrorBoundary from 'src/components/ErrorBoundary';
+import { useDispatch } from 'react-redux';
 import { actionChangePage } from './Table.actions';
 
 interface IProps {
@@ -7,10 +8,10 @@ interface IProps {
 }
 
 const withPagination = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const { handleFetchData } = props;
+    const dispatch = useDispatch();
     const handleChangePage = async (page: number) => {
         /** Change number page */
-        handleFetchData && handleFetchData(page);
+        dispatch(actionChangePage(page));
     };
     const handleChangeRowsPerPage = () => {};
 

@@ -10,9 +10,6 @@ interface IProps {
 const withFetch = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
     const dispatch = useDispatch();
     const handleFetchData = async (page: number) => dispatch(actionFetchTableData(page));
-    React.useEffect(() => {
-        handleFetchData(0).then();
-    }, []);
 
     return (
         <ErrorBoundary>

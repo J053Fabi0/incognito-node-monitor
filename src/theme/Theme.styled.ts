@@ -16,6 +16,11 @@ export interface Colors {
     modalBg: Color;
 
     border1: Color;
+    border2: Color;
+
+    // Text
+    text1: Color;
+    text2: Color;
 }
 
 export interface Grids {

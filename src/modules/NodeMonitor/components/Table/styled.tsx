@@ -53,6 +53,6 @@ export const CloseWrapper = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-top: 13px;
 `;

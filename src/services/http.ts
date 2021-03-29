@@ -1,24 +1,22 @@
 import axios from 'axios';
-import { API_BASE_URL } from './configs';
-import { getDeviceId } from '../configs/Configs.utils';
-import { fetchAccessToken, getAccessToken, setAccessToken } from '../configs/Configs.services';
+import { getAccessToken } from 'src/configs/Configs.services';
+import { API_NODE_BASE_URL } from './configs';
 
 let currentAccessToken = getAccessToken();
 
 const TIMEOUT = 20000;
 const instance = axios.create({
     timeout: TIMEOUT,
-    headers: {
-        'Content-Type': 'application/json',
-    },
 });
+
+const HEADERS = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
 instance.interceptors.request.use(
     (req) => {
-        req.baseURL = API_BASE_URL;
+        req.baseURL = API_NODE_BASE_URL;
         req.headers = {
+            ...HEADERS,
             ...req.headers,
-            Authorization: `Bearer ${currentAccessToken}`,
         };
         return req;
     },
@@ -27,20 +25,9 @@ instance.interceptors.request.use(
     },
 );
 
-export const setTokenHeader = async () => {
-    const deviceId = getDeviceId();
-    const accessToken = await fetchAccessToken(deviceId);
-    if (!accessToken) {
-        throw new Error('Can not set token request');
-    }
-    setAccessToken(accessToken);
-    currentAccessToken = accessToken;
-    axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
-};
-
 instance.interceptors.response.use(
     (res) => {
-        const result = res?.data?.Result;
+        const result = res?.data;
         const error = res?.data?.Error;
         if (error) {
             return Promise.reject(error);
@@ -48,12 +35,6 @@ instance.interceptors.response.use(
         return Promise.resolve(result);
     },
     async (error) => {
-        const originalRequest = error?.config;
-        if (error?.response?.status === 401) {
-            console.debug('Token was expired!');
-            await setTokenHeader();
-            return instance(originalRequest);
-        }
         if (error?.isAxiosError && !error?.response) {
             throw new Error('Send request API failed');
         }

@@ -9,7 +9,6 @@ import {
     ACTION_UPDATE_TABLE_DATA,
     ACTION_FETCHING_TABLE_DATA,
     ACTION_UPDATE_SEARCH_VALUE,
-    ACTION_CLEAR_SEARCH,
     ACTION_CHANGE_VISIBLE_MODAL,
 } from './Table.actionsName';
 import { DEFAULT_LIMIT_ROWS } from './Table.constants'; // defaults to localStorage for web
@@ -21,7 +20,7 @@ const initialState: ITableReducer = {
     data: [],
     fetching: false,
     isSearching: false,
-    search: [],
+    search: '',
     visibleModal: false,
 };
 
@@ -75,13 +74,6 @@ const tableReducer = (
                 search,
             };
         }
-        case ACTION_CLEAR_SEARCH: {
-            return {
-                ...state,
-                search: [],
-                isSearching: false,
-            };
-        }
         case ACTION_CHANGE_VISIBLE_MODAL: {
             const { visible } = action.payload;
             return {
@@ -97,7 +89,7 @@ const tableReducer = (
 const persistConfig = {
     key: 'tableNodeMonitor',
     storage,
-    whitelist: ['storage'],
+    whitelist: [''],
     stateReconciler: autoMergeLevel2,
 };
 

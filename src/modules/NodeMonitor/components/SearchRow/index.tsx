@@ -1,86 +1,61 @@
 import React, { memo } from 'react';
 import styled, { ITheme } from 'styled-components';
-import Row from 'src/components/Row';
-import { TextBold } from 'src/components';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchSelector } from 'src/modules/NodeMonitor/components/Table/Table.selector';
-import { isEmpty } from 'lodash';
-import { CloseIcon } from 'src/components/Icons';
-import {
-    actionHandleClearSearch,
-    actionSearch,
-    actionUpdateSearchValue,
-} from 'src/modules/NodeMonitor/components/Table/Table.actions';
+import { actionSubmitSearch, actionUpdateSearchValue } from 'src/modules/NodeMonitor/components/Table/Table.actions';
+import { TextareaAutosize, Button } from '@material-ui/core';
 
-const Wrapper = styled(Row)`
-    position: relative;
-    max-width: 400px;
-    height: 35px;
-    .close-icon {
-        position: absolute;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-    }
-`;
-
-const InputSearch = styled.input`
+const Wrapper = styled.div`
     display: flex;
-    flex: 1;
-    height: 100%;
-    font-size: 16px;
-    padding: 5px 30px 5px 10px;
-    font-weight: 500;
-    border-radius: 5px;
-    border: 1px solid ${({ theme }: { theme: ITheme }) => `${theme.border1}`};
+    flex-direction: column;
+    .text-area {
+        width: 100%;
+        height: 120px !important;
+        font-size: 18px;
+        padding: 10px;
+        border: 1px solid ${({ theme }: { theme: ITheme }) => theme.border2};
+    }
+    .btn-submit {
+        text-transform: none;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        width: 80px;
+        align-self: flex-end;
+        background-color: black;
+        color: white;
+        border-radius: 8px;
+        :hover {
+            background-color: black;
+            opacity: 0.8;
+        }
+    }
 `;
 
 const SearchRow = () => {
     const dispatch = useDispatch();
     const search = useSelector(searchSelector);
 
-    const inputValue = React.useMemo(() => {
-        if (isEmpty(search) || search.length > 1) return '';
-        const value = search[0];
-        return value.publicKey || '';
-    }, [search]);
-
     const onKeyChange = React.useCallback(
         (e) => {
             if (!e || !e.target || !dispatch) return;
             const { value } = e.target;
-            dispatch(actionUpdateSearchValue({ search: [{ publicKey: value }] }));
+            dispatch(actionUpdateSearchValue({ search: value }));
         },
         [dispatch],
     );
 
-    const onKeyDown = React.useCallback(
-        (e) => {
-            if (e.code !== 'Enter') return;
-            dispatch(actionSearch());
-        },
-        [dispatch],
-    );
-
-    const handleClearSearch = () => {
-        dispatch(actionHandleClearSearch());
+    const onSubmitPress = () => {
+        dispatch(actionSubmitSearch());
     };
 
     return (
         <Wrapper>
-            <TextBold fontSize={16} marginRight={10}>
-                Search:
-            </TextBold>
-            <InputSearch value={inputValue} onChange={onKeyChange} onKeyDown={onKeyDown} />
-            {!isEmpty(inputValue) && <CloseIcon onClick={handleClearSearch} />}
+            <TextareaAutosize className="text-area" value={search} onChange={onKeyChange} />
+            <Button className="btn-submit" variant="contained" onClick={onSubmitPress}>
+                Submit
+            </Button>
         </Wrapper>
     );
 };
-
-SearchRow.propTypes = {};
 
 export default memo(SearchRow);

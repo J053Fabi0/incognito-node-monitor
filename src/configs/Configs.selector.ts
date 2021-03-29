@@ -13,3 +13,5 @@ export const translateSelector = createSelector(configsSelector, (configs) => tr
 export const appTranslateSelector = createSelector(translateSelector, (translate) => translate.app);
 
 export const nodeMonitorTranslateSelector = createSelector(translateSelector, (translate) => translate.nodeMonitor);
+
+export const reuseTranslateSelector = createSelector(translateSelector, (translate) => translate.reuse);
