@@ -15,6 +15,7 @@
     "@types/react-table": "^7.0.29",
     "axios": "^0.21.1",
     "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "node-sass": "4.14.1",
     "papp-sdk": "https://github.com/incognitochain/sdk#papp-client-sdk",
     "polished": "^4.1.1",

@@ -55,10 +55,10 @@ export const getParamsNodesInfo = (search: string, currentPage: number, rowPerPa
     const totalRows = listNodes.length;
     listNodes = listNodes.slice(startIndex, endIndex);
     const result = listNodes.reduce(
-        (prevValue: any, element: any) => {
+        (prevValue: any, element: any, index) => {
             let { strKeys, mapper } = prevValue;
             const { name, publicKey } = element;
-            strKeys += `${publicKey},`;
+            strKeys += publicKey + (index === listNodes.length - 1 ? '' : ',');
             mapper = mapper.concat([
                 {
                     name,

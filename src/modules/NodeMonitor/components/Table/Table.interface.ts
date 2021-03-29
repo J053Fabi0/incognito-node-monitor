@@ -7,16 +7,16 @@ export interface ITableReducer {
     isSearching: boolean;
     search: string;
     visibleModal: boolean;
-    role?: string;
 }
 
 export interface ITableData {
-    name: string;
+    name?: string;
     publicKey: string;
     status: string;
     committeeChain: string;
     syncState: string;
     voteStats: string;
+    role?: string;
 }
 
 export interface INodeName {
