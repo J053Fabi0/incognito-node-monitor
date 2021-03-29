@@ -11,6 +11,11 @@ const withFetch = (WrappedComponent: React.FunctionComponent) => (props: IProps 
     const dispatch = useDispatch();
     const handleFetchData = async (page: number) => dispatch(actionFetchTableData(page));
 
+    const firstTimeFetchData = () => handleFetchData(0);
+
+    React.useEffect(() => {
+        firstTimeFetchData().then();
+    }, []);
     return (
         <ErrorBoundary>
             <WrappedComponent

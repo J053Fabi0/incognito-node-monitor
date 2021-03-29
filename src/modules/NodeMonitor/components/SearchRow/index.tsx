@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     .text-area {
         width: 100%;
-        height: 120px !important;
+        height: 140px !important;
         font-size: 18px;
         padding: 10px;
         border: 1px solid ${({ theme }: { theme: ITheme }) => theme.border2};

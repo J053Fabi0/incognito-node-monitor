@@ -89,7 +89,7 @@ const tableReducer = (
 const persistConfig = {
     key: 'tableNodeMonitor',
     storage,
-    whitelist: [''],
+    whitelist: ['search'],
     stateReconciler: autoMergeLevel2,
 };
 

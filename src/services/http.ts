@@ -9,7 +9,7 @@ const instance = axios.create({
     timeout: TIMEOUT,
 });
 
-const HEADERS = { 'Content-Type': 'application/x-www-form-urlencoded' };
+const HEADERS = { 'Content-Type': 'application/json' };
 
 instance.interceptors.request.use(
     (req) => {

@@ -1,1 +1,1 @@
-export const DEFAULT_LIMIT_ROWS = 10;
+export const DEFAULT_LIMIT_ROWS = 7;

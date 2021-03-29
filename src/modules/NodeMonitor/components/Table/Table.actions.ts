@@ -1,5 +1,6 @@
 import { IRootState } from 'src/redux/interface';
 import { Dispatch } from 'redux';
+import { isEmpty } from 'lodash';
 import {
     ACTION_CHANGE_LIMIT_PAGE,
     ACTION_CHANGE_ROWS_PER_PAGE,
@@ -9,8 +10,9 @@ import {
     ACTION_CHANGE_VISIBLE_MODAL,
 } from './Table.actionsName';
 import { ITableData } from './Table.interface';
-import { getParamsNodesInfo, makeData } from './Table.utils';
+import { getParamsNodesInfo } from './Table.utils';
 import { getListNodesInfo } from './Table.services';
+import { NodesListBuilder } from './Table.builder';
 
 export const actionChangeRowsPerPage = (payload: { rowsPerPage: number }) => ({
     type: ACTION_CHANGE_ROWS_PER_PAGE,
@@ -44,16 +46,12 @@ export const actionUpdateSearchValue = (payload: { search: string }) => ({
 
 export const actionFetchTableData = (page: number) => async (dispatch: Dispatch, getState: () => IRootState) => {
     try {
-        const { rowsPerPage, search } = getState().table;
-        const { publicKeys, formatData } = getParamsNodesInfo(search);
+        const { search, rowsPerPage, fetching } = getState().table;
+        if (fetching || isEmpty(search)) return;
+        const { strKeys, mapper, totalRows } = getParamsNodesInfo(search, page, rowsPerPage);
         dispatch(actionFetchingTableData({ fetching: true }));
-        const listNodes = await getListNodesInfo(publicKeys);
-        console.log('SANG TEST: ', listNodes);
-        // setTimeout(() => {
-        //     const data = makeData(page);
-        //     const limitPage = data.length / rowsPerPage;
-        //     dispatch(actionUpdateTableData({ data, currentPage: page, limitPage }));
-        // }, 2000);
+        const listNodes = NodesListBuilder(await getListNodesInfo(strKeys), mapper);
+        dispatch(actionUpdateTableData({ data: listNodes, currentPage: page, limitPage: totalRows }));
     } catch (e) {
         console.debug('Fetch table data with error: ', e);
     } finally {
@@ -69,9 +67,9 @@ export const actionSubmitSearch = () => (dispatch: Dispatch, getState: () => IRo
     }
 };
 
-export const actionChangePage = (page: number) => async (dispatch: Dispatch, getState: () => IRootState) => {
+export const actionChangePage = (page: number) => (dispatch: Dispatch, getState: () => IRootState) => {
     try {
-        console.log('SANG TEST');
+        actionFetchTableData(page)(dispatch, getState);
     } catch (e) {
         console.debug('Clear search error', e);
     }
