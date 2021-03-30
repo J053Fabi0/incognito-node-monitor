@@ -5,6 +5,7 @@ import { AppLogo } from 'src/components/Icons';
 import { TextBold } from 'src/components';
 import { useSelector } from 'react-redux';
 import { appTranslateSelector } from 'src/configs';
+import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
 
 const HeaderFrame = styled(Row)`
     justify-content: space-between;
@@ -23,6 +24,7 @@ const WrapLogo = styled(Row)`
 
 const Header = React.memo(() => {
     const appTranslate = useSelector(appTranslateSelector);
+    if (getMiningPublicKey()) return null;
     return (
         <HeaderFrame>
             <WrapLogo>

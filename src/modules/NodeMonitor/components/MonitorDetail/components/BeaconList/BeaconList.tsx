@@ -8,8 +8,10 @@ import { isEmpty } from 'lodash';
 import enhance from './BeaconList.enhance';
 
 const Styled = styled.div`
+    width: 100%;
     > div:last-child {
         border-bottom-width: 0;
+        margin-bottom: 10px;
     }
 `;
 
@@ -23,6 +25,9 @@ const RowWrapper = styled(Row)<{ isEven: boolean }>`
     padding: 10px;
     background-color: ${({ theme, isEven }: { theme: ITheme; isEven: boolean }) =>
         isEven ? 'transparent' : theme.darkRow};
+    > div {
+        min-width: 100px;
+    }
 `;
 
 interface IProps {
@@ -34,20 +39,25 @@ const BeaconList = memo((props: IProps & any) => {
     const { beacon, shards } = props;
     const renderItem = (item: any, index: number) => {
         return (
-            <RowWrapper isEven={index % 2 === 0}>
-                <TextBold>{item?.name}</TextBold>
-                <TextMedium>{item?.blockHeight}</TextMedium>
-                <TextMedium>{item?.message}</TextMedium>
+            <RowWrapper isEven={index % 2 !== 0} key={item?.name}>
+                <TextBold style={{ flex: 2 }}>{item?.name}</TextBold>
+                <TextMedium style={{ flex: 2 }}>{item?.blockHeight}</TextMedium>
+                <TextMedium style={{ flex: 3 }} color={item?.isSync ? 'green1' : 'text1'}>
+                    {item?.message}
+                </TextMedium>
             </RowWrapper>
         );
     };
     if (isEmpty(beacon) || isEmpty(shards)) return null;
+    const renderContent = () => (
+        <>
+            {renderItem(beacon, 1)}
+            {shards.map(renderItem)}
+        </>
+    );
     return (
         <Card>
-            <Styled>
-                {renderItem(beacon, 0)}
-                {shards.map(renderItem)}
-            </Styled>
+            <Styled>{renderContent()}</Styled>
         </Card>
     );
 });

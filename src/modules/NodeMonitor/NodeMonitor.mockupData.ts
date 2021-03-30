@@ -6,3 +6,9 @@ export const MockupColumns: any = [
     { accessor: 'syncState', Header: 'Sync State' },
     { accessor: 'voteStats', Header: 'Vote Stats' },
 ];
+
+export const MockupColumnsCommittee: any = [
+    { accessor: 'epoch', Header: 'Epoch' },
+    { accessor: 'reward', Header: 'Reward' },
+    { accessor: 'voteCount', Header: 'Vote Count' },
+];

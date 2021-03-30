@@ -21,6 +21,8 @@ export const Styled = styled.div`
         }
         > td {
             text-align: center;
+            line-break: anywhere;
+            max-width: 200px;
         }
     }
     .header-row {

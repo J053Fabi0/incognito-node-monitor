@@ -48,11 +48,14 @@ export function colors(darkMode: boolean): Colors {
         modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
 
         border1: darkMode ? '#CBCBCB' : '#CBCBCB',
-        border2: darkMode ? '#D3D3D3' : '#D3D3D3',
+        border2: darkMode ? '#E0E0E0' : '#E0E0E0',
 
         // text
         text1: darkMode ? white : black,
         text2: darkMode ? '#9e9e9e' : '#9e9e9e',
+        text3: darkMode ? '#616161' : '#616161',
+
+        green1: darkMode ? '#34C759' : '#34C759',
     };
 }
 

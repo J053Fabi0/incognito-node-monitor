@@ -3,6 +3,8 @@ import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.inter
 export interface IMonitorDetailReducer {
     node?: ITableData;
     syncStat?: ISyncStat;
+    fetching: boolean;
+    committee?: any;
 }
 
 export interface IBeacon {
@@ -29,4 +31,12 @@ export interface IShard {
 export interface ISyncStat {
     beacon: IBeacon;
     shards: IShard[];
+}
+
+export interface ICommittee {
+    epoch: string;
+    reward: string;
+    time: Date;
+    totalPropose: string;
+    totalVote: string;
 }

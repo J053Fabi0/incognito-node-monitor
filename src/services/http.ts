@@ -1,8 +1,5 @@
 import axios from 'axios';
-import { getAccessToken } from 'src/configs/Configs.services';
 import { API_NODE_BASE_URL } from './configs';
-
-let currentAccessToken = getAccessToken();
 
 const TIMEOUT = 20000;
 const instance = axios.create({

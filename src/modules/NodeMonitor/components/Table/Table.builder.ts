@@ -1,26 +1,39 @@
-import { isEmpty } from 'lodash';
+import { isEmpty, isArray } from 'lodash';
 import moment from 'moment';
 import { INodeName, ITableData } from './Table.interface';
-import { ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
+import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
+import { getVoteStat } from './Table.utils';
 
 export const NodesListBuilder = (data: any, dataMapper: INodeName[]): ITableData[] => {
     if (isEmpty(data)) return [];
-    return data.map((item: any) => {
-        const { name: nodeName, publicKey } = dataMapper.find((value) => value.publicKey === item.MiningPubkey) || {};
+    return data.map((node: any) => {
+        const { name: nodeName, publicKey } = dataMapper.find((value) => value.publicKey === node.MiningPubkey) || {};
         return {
             name: nodeName,
             publicKey,
-            status: item?.Status,
-            committeeChain: item?.CommitteeChain,
-            syncState: item?.SyncState,
-            voteStats: item?.VoteStat,
+            status: node?.Status,
+            committeeChain: node?.CommitteeChain,
+            syncState: node?.SyncState,
+            voteStats: getVoteStat(node?.VoteStat),
         };
     });
 };
 
+export const NodesInfoBuilder = (data: any): ITableData | undefined => {
+    if (isEmpty(data) || !isArray(data)) return;
+    const node = data[0];
+    return {
+        publicKey: node?.MiningPubkey,
+        status: node?.Status,
+        committeeChain: node?.CommitteeChain,
+        syncState: node?.SyncState,
+        voteStats: getVoteStat(node?.VoteStat),
+    };
+};
+
 export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
-    if (isEmpty(data) || isEmpty(data.SyncState)) return undefined;
-    const { Shard, Beacon } = data.SyncState;
+    if (isEmpty(data)) return undefined;
+    const { Shard, Beacon } = data;
     let beaconMessage = '';
     if (Beacon?.BlockTime) {
         beaconMessage += `${moment(Beacon?.BlockTime).fromNow()} `;
@@ -68,4 +81,18 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
         }),
     };
     return result;
+};
+
+export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined => {
+    if (isEmpty(data)) return undefined;
+    return data.map((item: any) => {
+        return {
+            epoch: item?.Epoch,
+            reward: item?.Reward,
+            time: item?.Time,
+            totalPropose: item?.TotalPropose,
+            totalVote: item?.TotalVote,
+            voteCount: '',
+        };
+    });
 };

@@ -26,6 +26,13 @@ export const getURLPathname = () => {
     return window.location.pathname;
 };
 
+export const getURLSearchParams = (search?: string) => {
+    if (typeof window === 'undefined') {
+        return {};
+    }
+    return new URLSearchParams(search || window.location.search);
+};
+
 export const splitLines = (t: string) => {
     return t.split(/\r\n|\r|\n/);
 };
@@ -73,4 +80,26 @@ export const getParamsNodesInfo = (search: string, currentPage: number, rowPerPa
         ...result,
         totalRows,
     };
+};
+
+export const getMiningPublicKey = () => {
+    let mpk = '';
+    try {
+        const urlParams: any = getURLSearchParams();
+        mpk = urlParams.get('mpk');
+    } catch (e) {
+        console.debug('Cant get mpk');
+    }
+    return mpk;
+};
+
+export const getVoteStat = (votes: any) => {
+    const voteStats = votes || [];
+    return voteStats.reduce((prevValue: string, element: string, index: number) => {
+        let result = prevValue;
+        if (element) {
+            result += element + (index !== voteStats.length - 1 ? '-' : '');
+        }
+        return result;
+    }, '');
 };

@@ -2,11 +2,18 @@ import { persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { IMonitorDetailReducer, ISyncStat } from './MonitorDetail.interface';
-import { ACTION_UPDATE_MONITOR_DETAIL, ACTION_UPDATE_SYNC_STAT } from './MonitorDetail.actionsName';
+import {
+    ACTION_UPDATE_COMMITTEE_INFO,
+    ACTION_UPDATE_MONITOR_DETAIL,
+    ACTION_UPDATE_STATUS_FETCHING,
+    ACTION_UPDATE_SYNC_STAT,
+} from './MonitorDetail.actionsName';
 
 const initialState: IMonitorDetailReducer = {
     node: undefined,
     syncStat: undefined,
+    fetching: false,
+    committee: undefined,
 };
 
 const monitorDetailReducer = (
@@ -29,6 +36,20 @@ const monitorDetailReducer = (
             return {
                 ...state,
                 syncStat,
+            };
+        }
+        case ACTION_UPDATE_STATUS_FETCHING: {
+            const { fetching } = action.payload;
+            return {
+                ...state,
+                fetching,
+            };
+        }
+        case ACTION_UPDATE_COMMITTEE_INFO: {
+            const { committeeInfo } = action.payload;
+            return {
+                ...state,
+                committee: committeeInfo,
             };
         }
         default:
