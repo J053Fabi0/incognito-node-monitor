@@ -23,6 +23,7 @@ export interface Colors {
     text2: Color;
     text3: Color;
     green1: Color;
+    red1: Color;
 }
 
 export interface Grids {

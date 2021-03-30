@@ -16,7 +16,8 @@ export interface ITableData {
     committeeChain: string;
     syncState: string;
     voteStats: string;
-    role?: string;
+    role: string;
+    ellipsisMpk: string;
 }
 
 export interface INodeName {

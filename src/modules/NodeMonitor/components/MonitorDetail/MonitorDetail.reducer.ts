@@ -3,6 +3,7 @@ import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { IMonitorDetailReducer, ISyncStat } from './MonitorDetail.interface';
 import {
+    ACTION_CLEAR_MONITOR_DETAIL,
     ACTION_UPDATE_COMMITTEE_INFO,
     ACTION_UPDATE_MONITOR_DETAIL,
     ACTION_UPDATE_STATUS_FETCHING,
@@ -50,6 +51,12 @@ const monitorDetailReducer = (
             return {
                 ...state,
                 committee: committeeInfo,
+            };
+        }
+        case ACTION_CLEAR_MONITOR_DETAIL: {
+            return {
+                ...state,
+                ...initialState,
             };
         }
         default:

@@ -70,9 +70,9 @@ const Table = (props: IProps & any) => {
         <TableHead>
             {headerGroups.map((headerGroup) => (
                 <TableRow className="header-row" {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                        <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
-                    ))}
+                    {headerGroup.headers.map((column) => {
+                        return <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>;
+                    })}
                 </TableRow>
             ))}
         </TableHead>

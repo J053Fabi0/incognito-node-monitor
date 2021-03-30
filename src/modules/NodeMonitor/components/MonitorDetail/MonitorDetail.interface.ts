@@ -26,6 +26,7 @@ export interface IShard {
     chainId: string;
     name: string;
     message: string;
+    color: string;
 }
 
 export interface ISyncStat {

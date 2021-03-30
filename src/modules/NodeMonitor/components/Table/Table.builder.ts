@@ -1,20 +1,28 @@
-import { isEmpty, isArray } from 'lodash';
+import { isEmpty, isArray, capitalize } from 'lodash';
 import moment from 'moment';
+import { ellipsisCenter } from 'src/utils/ellipsis';
 import { INodeName, ITableData } from './Table.interface';
 import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
 import { getVoteStat } from './Table.utils';
+import { EMPTY_CELL } from './Table.constants';
+
+const formatNodeInfo = (node: any) => ({
+    publicKey: node?.MiningPubkey || EMPTY_CELL,
+    status: capitalize(node?.Status) || EMPTY_CELL,
+    committeeChain: node?.CommitteeChain || EMPTY_CELL,
+    syncState: capitalize(node?.SyncState) || EMPTY_CELL,
+    voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
+    ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 20 }) || EMPTY_CELL,
+    role: capitalize(node?.Role) || EMPTY_CELL,
+});
 
 export const NodesListBuilder = (data: any, dataMapper: INodeName[]): ITableData[] => {
     if (isEmpty(data)) return [];
     return data.map((node: any) => {
-        const { name: nodeName, publicKey } = dataMapper.find((value) => value.publicKey === node.MiningPubkey) || {};
+        const { name: nodeName } = dataMapper.find((value) => value.publicKey === node.MiningPubkey) || {};
         return {
-            name: nodeName,
-            publicKey,
-            status: node?.Status,
-            committeeChain: node?.CommitteeChain,
-            syncState: node?.SyncState,
-            voteStats: getVoteStat(node?.VoteStat),
+            name: nodeName || EMPTY_CELL,
+            ...formatNodeInfo(node),
         };
     });
 };
@@ -22,27 +30,30 @@ export const NodesListBuilder = (data: any, dataMapper: INodeName[]): ITableData
 export const NodesInfoBuilder = (data: any): ITableData | undefined => {
     if (isEmpty(data) || !isArray(data)) return;
     const node = data[0];
-    return {
-        publicKey: node?.MiningPubkey,
-        status: node?.Status,
-        committeeChain: node?.CommitteeChain,
-        syncState: node?.SyncState,
-        voteStats: getVoteStat(node?.VoteStat),
-    };
+    return formatNodeInfo(node);
+};
+
+const getStatusMessage = (item: any) => {
+    let prefix = '';
+    let suffix = item.IsSync ? 'syncing' : 'not syncing';
+    let color = item.IsSync ? 'green1' : 'text1';
+    if (item?.BlockTime) {
+        prefix += `${moment(item?.BlockTime).fromNow()} `;
+    }
+    if ((!item?.LastInsert && !item.IsSync) || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5) {
+        suffix = 'standing';
+        color = 'red1';
+    }
+    const message = `${prefix}${prefix ? ' (' : ''}${suffix}${prefix ? ')' : ''}`;
+    return { message, color };
 };
 
 export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
     if (isEmpty(data)) return undefined;
     const { Shard, Beacon } = data;
-    let beaconMessage = '';
-    if (Beacon?.BlockTime) {
-        beaconMessage += `${moment(Beacon?.BlockTime).fromNow()} `;
-    }
-    if (isEmpty(beaconMessage)) {
-        beaconMessage += Beacon.IsSync ? 'syncing' : 'not syncing';
-    } else {
-        beaconMessage += `(${Beacon.IsSync ? 'syncing' : 'not syncing'})`;
-    }
+
+    const { message: beaconMessage, color: beaconColor } = getStatusMessage(Beacon);
+
     let result: any;
     result = {
         beacon: {
@@ -53,21 +64,14 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
             blockTime: Beacon?.BlockTime,
             blockHash: Beacon?.BlockHash,
             message: beaconMessage,
+            color: beaconColor,
         },
     };
     result = {
         ...result,
         shards: Object.keys(Shard).map((key: string) => {
             const item = Shard[key];
-            let shardMessage = '';
-            if (item?.BlockTime) {
-                shardMessage += `${moment(item?.BlockTime).fromNow()} `;
-            }
-            if (isEmpty(shardMessage)) {
-                shardMessage += item.IsSync ? 'syncing' : 'not syncing';
-            } else {
-                shardMessage += `(${item.IsSync ? 'syncing' : 'not syncing'})`;
-            }
+            const { message: shardMessage, color: shardStatusColor } = getStatusMessage(item);
             return {
                 name: `Shard ${key}`,
                 isSync: item?.IsSync,
@@ -77,6 +81,7 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
                 blockHash: item?.BlockHash,
                 chainId: item?.ChainId,
                 message: shardMessage,
+                color: shardStatusColor,
             };
         }),
     };
@@ -86,13 +91,17 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
 export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined => {
     if (isEmpty(data)) return undefined;
     return data.map((item: any) => {
+        let voteCount = 0;
+        if (item?.TotalPropose && item?.TotalVote) {
+            voteCount = Math.round((item?.TotalVote / item?.TotalPropose) * 100);
+        }
         return {
-            epoch: item?.Epoch,
-            reward: item?.Reward,
-            time: item?.Time,
-            totalPropose: item?.TotalPropose,
-            totalVote: item?.TotalVote,
-            voteCount: '',
+            epoch: item?.Epoch || EMPTY_CELL,
+            reward: item?.Reward || EMPTY_CELL,
+            time: item?.Time || EMPTY_CELL,
+            totalPropose: item?.TotalPropose || EMPTY_CELL,
+            totalVote: item?.TotalVote || EMPTY_CELL,
+            voteCount: voteCount || EMPTY_CELL,
         };
     });
 };

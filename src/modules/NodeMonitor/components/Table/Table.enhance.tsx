@@ -7,7 +7,7 @@ import withFetch from './Table.enhanceFetch';
 import withPagination from './Table.enhancePagination';
 import { actionUpdateVisibleModal as updateVisibleModal } from './Table.actions';
 import { ITableData } from './Table.interface';
-import { actionUpdateMonitorDetail } from '../MonitorDetail/MonitorDetail.actions';
+import { actionUpdateMonitorDetail, actionClearMonitorDetail } from '../MonitorDetail/MonitorDetail.actions';
 
 interface IProps {}
 
@@ -20,7 +20,7 @@ const withTable = (WrappedComponent: React.FunctionComponent) => (props: IProps 
 
     const handleCloseMonitorModal = () => {
         dispatch(updateVisibleModal({ visible: false }));
-        dispatch(actionUpdateMonitorDetail({ node: undefined }));
+        dispatch(actionClearMonitorDetail());
     };
     return (
         <ErrorBoundary>

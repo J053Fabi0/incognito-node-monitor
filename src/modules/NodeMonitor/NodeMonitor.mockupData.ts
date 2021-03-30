@@ -1,6 +1,7 @@
 export const MockupColumns: any = [
     { accessor: 'name', Header: 'Name' },
-    { accessor: 'publicKey', Header: 'Public Key' },
+    { accessor: 'ellipsisMpk', Header: 'Public Key' },
+    { accessor: 'role', Header: 'Role' },
     { accessor: 'committeeChain', Header: 'Committee Chain' },
     { accessor: 'status', Header: 'Status' },
     { accessor: 'syncState', Header: 'Sync State' },

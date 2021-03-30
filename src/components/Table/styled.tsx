@@ -13,14 +13,14 @@ export const Styled = styled.div`
     .table-row {
         cursor: pointer;
         > td {
-            text-align: left;
+            text-align: center;
         }
     }
     .header-row {
         background-color: ${({ theme }: { theme: ITheme }) => theme.headerRow};
         th {
             font-weight: bold;
-            text-align: left;
+            text-align: center;
         }
     }
 `;

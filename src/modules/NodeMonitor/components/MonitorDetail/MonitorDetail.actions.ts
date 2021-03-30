@@ -6,6 +6,7 @@ import {
     ACTION_UPDATE_MONITOR_DETAIL,
     ACTION_UPDATE_STATUS_FETCHING,
     ACTION_UPDATE_SYNC_STAT,
+    ACTION_CLEAR_MONITOR_DETAIL,
 } from './MonitorDetail.actionsName';
 import { getCommitteeInfo, getListNodesInfo, getSyncStatInfo } from '../Table/Table.services';
 import { NodesCommitteeInfoBuilder, NodesInfoBuilder, NodesSyncStatBuilder } from '../Table/Table.builder';
@@ -14,6 +15,10 @@ import { ISyncStat } from './MonitorDetail.interface';
 export const actionUpdateMonitorDetail = (payload: { node?: ITableData }) => ({
     type: ACTION_UPDATE_MONITOR_DETAIL,
     payload,
+});
+
+export const actionClearMonitorDetail = () => ({
+    type: ACTION_CLEAR_MONITOR_DETAIL,
 });
 
 export const actionUpdateSyncStat = (payload: { syncStat?: ISyncStat }) => ({

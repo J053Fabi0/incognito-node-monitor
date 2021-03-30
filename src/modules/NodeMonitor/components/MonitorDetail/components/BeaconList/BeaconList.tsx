@@ -42,7 +42,7 @@ const BeaconList = memo((props: IProps & any) => {
             <RowWrapper isEven={index % 2 !== 0} key={item?.name}>
                 <TextBold style={{ flex: 2 }}>{item?.name}</TextBold>
                 <TextMedium style={{ flex: 2 }}>{item?.blockHeight}</TextMedium>
-                <TextMedium style={{ flex: 3 }} color={item?.isSync ? 'green1' : 'text1'}>
+                <TextMedium style={{ flex: 3 }} color={item?.color}>
                     {item?.message}
                 </TextMedium>
             </RowWrapper>
