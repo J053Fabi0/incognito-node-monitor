@@ -1,23 +1,4 @@
 import { trim, uniqBy } from 'lodash';
-import { ITableData } from './Table.interface';
-import { DEFAULT_LIMIT_ROWS } from './Table.constants';
-
-export const makeData = (page: number): ITableData[] => {
-    const start: number = page * DEFAULT_LIMIT_ROWS;
-    const data = [];
-    for (let index = start; index < 120; index += 1) {
-        data.push({
-            id: `${index}`,
-            name: `LienMinh${index}`,
-            publicKey: '123-123-123-123-123-123-123-123',
-            status: 'Waiting',
-            committeeChain: '1',
-            syncState: 'Beacon Synced',
-            voteStats: '100',
-        });
-    }
-    return data;
-};
 
 export const getURLPathname = () => {
     if (typeof window === 'undefined') {
