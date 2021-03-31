@@ -56,7 +56,7 @@ export function colors(darkMode: boolean): Colors {
         text3: darkMode ? '#616161' : '#616161',
 
         green1: darkMode ? '#34C759' : '#34C759',
-        red1: darkMode ? 'red' : 'red',
+        red1: darkMode ? '#FE4D4D' : '#FE4D4D',
     };
 }
 
