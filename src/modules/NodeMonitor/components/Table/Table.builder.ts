@@ -6,23 +6,36 @@ import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface'
 import { getVoteStat } from './Table.utils';
 import { EMPTY_CELL } from './Table.constants';
 
-const formatNodeInfo = (node: any) => ({
-    publicKey: node?.MiningPubkey || EMPTY_CELL,
-    status: capitalize(node?.Status) || EMPTY_CELL,
-    committeeChain: node?.CommitteeChain || EMPTY_CELL,
-    syncState: capitalize(node?.SyncState) || EMPTY_CELL,
-    voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
-    ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 20 }) || EMPTY_CELL,
-    role: capitalize(node?.Role) || EMPTY_CELL,
-});
+const formatNodeInfo = (node: any) => {
+    let committeeChain = node?.CommitteeChain;
+    if (isEmpty(node?.Role)) committeeChain = 'Not Stake';
+    console.log('SANG TEST: ', node);
+    return {
+        publicKey: node?.MiningPubkey || EMPTY_CELL,
+        status: capitalize(node?.Status) || EMPTY_CELL,
+        committeeChain,
+        syncState: capitalize(node?.SyncState) || EMPTY_CELL,
+        voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
+        ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 20 }) || EMPTY_CELL,
+        role: capitalize(node?.Role) || EMPTY_CELL,
+        autoStake: node?.AutoStake,
+    };
+};
 
 export const NodesListBuilder = (data: any, dataMapper: INodeName[]): ITableData[] => {
     if (isEmpty(data)) return [];
-    return data.map((node: any) => {
-        const { name: nodeName } = dataMapper.find((value) => value.publicKey === node.MiningPubkey) || {};
+    return dataMapper.map((mapper: any) => {
+        const { name: nodeName, publicKey } = mapper;
+        const node = data.find((element: any) => publicKey === element.MiningPubkey) || {};
+        if (isEmpty(node)) {
+            return {
+                name: nodeName || EMPTY_CELL,
+                ...formatNodeInfo({ ...node, MiningPubkey: publicKey }),
+            };
+        }
         return {
             name: nodeName || EMPTY_CELL,
-            ...formatNodeInfo(node),
+            ...formatNodeInfo({ ...node }),
         };
     });
 };
@@ -40,8 +53,8 @@ const getStatusMessage = (item: any) => {
     if (item?.BlockTime) {
         prefix += `${moment(item?.BlockTime).fromNow()} `;
     }
-    if ((!item?.LastInsert && !item.IsSync) || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5) {
-        suffix = 'standing';
+    if (!item?.LastInsert || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5 || !item?.IsSync) {
+        suffix = 'stalling';
         color = 'red1';
     }
     const message = `${prefix}${prefix ? ' (' : ''}${suffix}${prefix ? ')' : ''}`;

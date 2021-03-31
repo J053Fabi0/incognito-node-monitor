@@ -11,5 +11,5 @@ export const MockupColumns: any = [
 export const MockupColumnsCommittee: any = [
     { accessor: 'epoch', Header: 'Epoch' },
     { accessor: 'reward', Header: 'Reward' },
-    { accessor: 'voteCount', Header: 'Vote Count' },
+    { accessor: 'voteCount', Header: 'Vote Count (%)' },
 ];

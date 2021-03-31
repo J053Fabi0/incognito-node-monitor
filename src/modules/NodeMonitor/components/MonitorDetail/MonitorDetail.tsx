@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { BeaconList, CommitteeActivity } from 'src/modules/NodeMonitor/components/MonitorDetail/components';
 import { useSelector } from 'react-redux';
 import LoadingOverlay from 'src/components/LoadingOverlay';
+import { isEmpty } from 'lodash';
 import { Styled } from './MonitorDetail.styled';
 import ColumnText from '../ColumnText';
 import { monitorDetailSelector } from './MonitorDetail.selector';
@@ -19,15 +20,23 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
             <CommitteeActivity />
         </>
     );
+
+    const getStatus = () => {
+        if (!node) return '';
+        if (isEmpty(node?.role) || node?.role === '-' || node.committeeChain === 'Not Stake') return 'Not Stake';
+        let shardName = `${node?.role} Shard ${node.committeeChain}`;
+        if (node?.autoStake) {
+            shardName += ` (unstaking)`;
+        }
+        return shardName;
+    };
+
     return (
         <Styled isWebview={isWebview}>
             {!!node && (
                 <>
                     <ColumnText title="Public key" content={node.publicKey} />
-                    <ColumnText
-                        title="Status"
-                        content={`${node.role ? `${node.role} ` : ''} Shard ${node.committeeChain}`}
-                    />
+                    <ColumnText title="Status" content={getStatus()} />
                 </>
             )}
             {fetching ? <LoadingOverlay /> : renderContent()}

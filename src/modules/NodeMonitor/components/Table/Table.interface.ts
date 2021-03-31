@@ -18,6 +18,7 @@ export interface ITableData {
     voteStats: string;
     role: string;
     ellipsisMpk: string;
+    autoStake: boolean;
 }
 
 export interface INodeName {
