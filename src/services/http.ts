@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_NODE_BASE_URL } from './configs';
+import { API_NODE_MONITOR_URL } from './configs';
 
 const TIMEOUT = 20000;
 const instance = axios.create({
@@ -10,7 +10,7 @@ const HEADERS = { 'Content-Type': 'application/json' };
 
 instance.interceptors.request.use(
     (req) => {
-        req.baseURL = API_NODE_BASE_URL;
+        req.baseURL = API_NODE_MONITOR_URL;
         req.headers = {
             ...HEADERS,
             ...req.headers,
