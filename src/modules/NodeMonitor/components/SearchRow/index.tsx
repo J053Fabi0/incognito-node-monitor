@@ -17,6 +17,7 @@ const Wrapper = styled.div`
         color: ${({ theme }: { theme: ITheme }) => theme.text3};
         resize: none;
         border-radius: 8px;
+        line-height: 21px;
     }
     .btn-submit {
         text-transform: none;
@@ -53,7 +54,12 @@ const SearchRow = () => {
 
     return (
         <Wrapper>
-            <textarea className="text-area" value={search} onChange={onKeyChange} />
+            <textarea
+                className="text-area"
+                value={search}
+                onChange={onKeyChange}
+                placeholder={`Node1 ValidatorPublicKey1\nNode2 ValidatorPublicKey2`}
+            />
             <Button className="btn-submit" variant="contained" onClick={onSubmitPress}>
                 Submit
             </Button>
