@@ -15,6 +15,7 @@ import MonitorDetail from 'src/modules/NodeMonitor/components/MonitorDetail';
 import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 import { CloseIcon } from 'src/components/Icons';
+import { isEmpty } from 'lodash';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
 
 interface IProps {
@@ -134,14 +135,16 @@ const Table = (props: IProps & any) => {
     return (
         <Styled>
             <SearchRow />
-            <Card className="card">
-                <MaUTable {...getTableProps()}>
-                    {renderHeader()}
-                    {!fetching && renderBody()}
-                </MaUTable>
-                {!!fetching && <LoadingOverlay />}
-                {renderPagination()}
-            </Card>
+            {!isEmpty(data) && (
+                <Card className="card">
+                    <MaUTable {...getTableProps()}>
+                        {renderHeader()}
+                        {!fetching && renderBody()}
+                    </MaUTable>
+                    {!!fetching && <LoadingOverlay />}
+                    {renderPagination()}
+                </Card>
+            )}
             {renderModal()}
         </Styled>
     );
