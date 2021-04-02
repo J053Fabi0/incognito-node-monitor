@@ -1,6 +1,6 @@
 export const MockupColumns: any = [
     { accessor: 'name', Header: 'Name' },
-    { accessor: 'ellipsisMpk', Header: 'Public Key' },
+    { accessor: 'ellipsisMpk', Header: 'Validator Public key' },
     { accessor: 'role', Header: 'Role' },
     { accessor: 'committeeChain', Header: 'Committee Chain' },
     { accessor: 'status', Header: 'Status' },
@@ -10,6 +10,13 @@ export const MockupColumns: any = [
 
 export const MockupColumnsCommittee: any = [
     { accessor: 'epoch', Header: 'Epoch' },
+    { accessor: 'chainId', Header: 'Chain Id' },
     { accessor: 'reward', Header: 'Reward' },
     { accessor: 'voteCount', Header: 'Vote Count (%)' },
+];
+
+export const MockupColumnsBeacon: any = [
+    { accessor: 'name', Header: 'Shard' },
+    { accessor: 'blockHeight', Header: 'Block Height' },
+    { accessor: 'lastInsert', Header: 'Last Insert' },
 ];

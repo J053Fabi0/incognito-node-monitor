@@ -86,10 +86,12 @@ const Table = (props: IProps & any) => {
                     <TableRow className={`table-row ${index % 2 !== 0 ? 'dark-row' : ''}`} {...row.getRowProps()}>
                         {row.cells.map((cell) => {
                             const value: any = cell.row.original;
+                            const header = cell.column.Header;
+                            const className = header === 'Vote Stats' ? 'break-line' : '';
                             return (
                                 <TableCell
                                     onClick={() => onClickTableCell(value)}
-                                    className="table-cell"
+                                    className={`table-cell ${className}`}
                                     {...cell.getCellProps()}
                                 >
                                     {cell.render('Cell')}

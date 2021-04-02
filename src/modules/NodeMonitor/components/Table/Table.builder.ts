@@ -7,9 +7,16 @@ import { getVoteStat } from './Table.utils';
 import { EMPTY_CELL } from './Table.constants';
 
 const formatNodeInfo = (node: any) => {
+    let role = node?.Role;
     let committeeChain = node?.CommitteeChain;
-    if (isEmpty(node?.Role)) committeeChain = 'Not Stake';
-    console.log('SANG TEST: ', node);
+    if (committeeChain === '-1') {
+        committeeChain = 'beacon';
+    }
+    if (isEmpty(node?.Role)) {
+        role = 'Not stake';
+        committeeChain = EMPTY_CELL;
+    }
+
     return {
         publicKey: node?.MiningPubkey || EMPTY_CELL,
         status: capitalize(node?.Status) || EMPTY_CELL,
@@ -17,7 +24,7 @@ const formatNodeInfo = (node: any) => {
         syncState: capitalize(node?.SyncState) || EMPTY_CELL,
         voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
         ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 20 }) || EMPTY_CELL,
-        role: capitalize(node?.Role) || EMPTY_CELL,
+        role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
     };
 };
@@ -50,10 +57,10 @@ const getStatusMessage = (item: any) => {
     let prefix = '';
     let suffix = item.IsSync ? 'syncing' : 'not syncing';
     let color = item.IsSync ? 'green1' : 'text1';
-    if (item?.BlockTime) {
-        prefix += `${moment(item?.BlockTime).fromNow()} `;
+    if (item?.LastInsert) {
+        prefix += `${moment(item?.LastInsert).fromNow()} `;
     }
-    if (!item?.LastInsert || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5 || !item?.IsSync) {
+    if (item.IsSync && (!item?.LastInsert || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5)) {
         suffix = 'stalling';
         color = 'red1';
     }
@@ -104,8 +111,8 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
 export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined => {
     if (isEmpty(data)) return undefined;
     return data.map((item: any) => {
-        let voteCount = 0;
-        if (item?.TotalPropose && item?.TotalVote) {
+        let voteCount: any = EMPTY_CELL;
+        if (item?.TotalPropose) {
             voteCount = Math.round((item?.TotalVote / item?.TotalPropose) * 100);
         }
         return {
@@ -114,7 +121,8 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
             time: item?.Time || EMPTY_CELL,
             totalPropose: item?.TotalPropose || EMPTY_CELL,
             totalVote: item?.TotalVote || EMPTY_CELL,
-            voteCount: voteCount || EMPTY_CELL,
+            voteCount,
+            chainId: item?.ChainID || EMPTY_CELL,
         };
     });
 };

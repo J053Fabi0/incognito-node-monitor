@@ -40,6 +40,9 @@ export const Styled = styled.div`
         position: absolute;
         right: 15px;
     }
+    .break-line {
+        white-space: pre;
+    }
 `;
 
 export const ModalWrapper = styled.div`

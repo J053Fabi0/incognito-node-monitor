@@ -77,6 +77,6 @@ export const actionFetchNodeSyncInfo = (publicKey: string) => async (
         await actionFetchSyncStat()(dispatch, getState);
         await actionFetchCommitteeActivity()(dispatch, getState);
     } catch (e) {
-        console.log('SANG');
+        console.debug('Fetch node info error: ', e);
     }
 };

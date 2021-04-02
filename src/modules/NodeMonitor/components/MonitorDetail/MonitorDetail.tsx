@@ -7,6 +7,7 @@ import { Styled } from './MonitorDetail.styled';
 import ColumnText from '../ColumnText';
 import { monitorDetailSelector } from './MonitorDetail.selector';
 import enhance from './MonitorDetail.enhance';
+import RowText from '../RowText';
 
 interface IProps {
     isWebview: boolean;
@@ -23,7 +24,13 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
 
     const getStatus = () => {
         if (!node) return '';
-        if (isEmpty(node?.role) || node?.role === '-' || node.committeeChain === 'Not Stake') return 'Not Stake';
+        if (
+            isEmpty(node?.role) ||
+            node?.role === '-' ||
+            node.role === 'Not stake' ||
+            node.committeeChain === 'Not stake'
+        )
+            return 'Not stake';
         let shardName = `${node?.role} Shard ${node.committeeChain}`;
         if (node?.autoStake) {
             shardName += ` (unstaking)`;
@@ -35,8 +42,10 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         <Styled isWebview={isWebview}>
             {!!node && (
                 <>
-                    <ColumnText title="Public key" content={node.publicKey} />
+                    {!!node.name && <ColumnText title="Name" content={node.name} />}
+                    <ColumnText title="Validator Public key" content={node.publicKey} />
                     <ColumnText title="Status" content={getStatus()} />
+                    <RowText title="Sync state:" content={node.status === 'Offline' ? 'Offline' : node.syncState} />
                 </>
             )}
             {fetching ? <LoadingOverlay /> : renderContent()}

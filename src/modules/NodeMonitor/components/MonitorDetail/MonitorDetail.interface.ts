@@ -40,4 +40,5 @@ export interface ICommittee {
     time: Date;
     totalPropose: string;
     totalVote: string;
+    chainId: string;
 }

@@ -1,4 +1,4 @@
-import { trim, uniqBy } from 'lodash';
+import { trim, uniqBy, isEmpty } from 'lodash';
 
 export const getURLPathname = () => {
     if (typeof window === 'undefined') {
@@ -22,20 +22,22 @@ export const getParamsNodesInfo = (search: string, currentPage: number, rowPerPa
     const startIndex = currentPage * rowPerPage;
     const endIndex = startIndex + rowPerPage;
     let listNodes = uniqBy(
-        splitLines(search).map((item: string) => {
-            const rawValue = trim(item);
-            const arrayRaw = rawValue.split(' ');
-            let publicKey = '';
-            let name = '';
-            if (arrayRaw.length === 1) {
-                publicKey = `${arrayRaw[0]}`;
-            }
-            if (arrayRaw.length === 2) {
-                publicKey = `${arrayRaw[1]}`;
-                name = `${arrayRaw[0]}`;
-            }
-            return { name, publicKey };
-        }),
+        splitLines(search)
+            .filter((value) => !isEmpty(value))
+            .map((item: string) => {
+                const rawValue = trim(item);
+                const arrayRaw = rawValue.split(' ');
+                let publicKey = '';
+                let name = '';
+                if (arrayRaw.length === 1) {
+                    publicKey = `${arrayRaw[0]}`;
+                }
+                if (arrayRaw.length === 2) {
+                    publicKey = `${arrayRaw[1]}`;
+                    name = `${arrayRaw[0]}`;
+                }
+                return { name, publicKey };
+            }),
         (element) => {
             return element.publicKey;
         },
@@ -74,13 +76,4 @@ export const getMiningPublicKey = () => {
     return mpk;
 };
 
-export const getVoteStat = (votes: any) => {
-    const voteStats = votes || [];
-    return voteStats.reduce((prevValue: string, element: string, index: number) => {
-        let result = prevValue;
-        if (element) {
-            result += element + (index !== voteStats.length - 1 ? '-' : '');
-        }
-        return result;
-    }, '');
-};
+export const getVoteStat = (votes: any) => (votes || []).join('\n');
