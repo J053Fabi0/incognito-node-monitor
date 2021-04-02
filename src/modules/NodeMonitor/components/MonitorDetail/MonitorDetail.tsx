@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { BeaconList, CommitteeActivity } from 'src/modules/NodeMonitor/components/MonitorDetail/components';
 import { useSelector } from 'react-redux';
 import LoadingOverlay from 'src/components/LoadingOverlay';
@@ -32,7 +32,7 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         )
             return 'Not stake';
         let shardName = `${node?.role} Shard ${node.committeeChain}`;
-        if (node?.autoStake) {
+        if (!node?.autoStake) {
             shardName += ` (unstaking)`;
         }
         return shardName;
