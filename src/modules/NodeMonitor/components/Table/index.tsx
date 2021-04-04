@@ -17,6 +17,7 @@ import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.inter
 import { CloseIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
+import MonitorDetailModal from '../MonitorDetail/components/MonitorDetailModal';
 
 interface IProps {
     data: ITableData[];
@@ -121,17 +122,6 @@ const Table = (props: IProps & any) => {
         );
     };
 
-    const renderModal = () => (
-        <Modal isOpen={visibleModal} onDismiss={onCloseModal}>
-            <ModalWrapper>
-                <CloseWrapper onClick={onCloseModal}>
-                    <CloseIcon width="18" height="18" />
-                </CloseWrapper>
-                <MonitorDetail />
-            </ModalWrapper>
-        </Modal>
-    );
-
     return (
         <Styled>
             <SearchRow />
@@ -145,7 +135,7 @@ const Table = (props: IProps & any) => {
                     {renderPagination()}
                 </Card>
             )}
-            {renderModal()}
+            <MonitorDetailModal visible={visibleModal} onClose={onCloseModal} />
         </Styled>
     );
 };
