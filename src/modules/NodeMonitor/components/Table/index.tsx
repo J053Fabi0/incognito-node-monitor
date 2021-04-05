@@ -1,6 +1,6 @@
 import React from 'react';
 import { MockupColumns } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
-import { Styled, ModalWrapper, CloseWrapper } from 'src/modules/NodeMonitor/components/Table/styled';
+import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
 import { useTable } from 'react-table';
 import Card from '@material-ui/core/Card';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -10,16 +10,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import LoadingOverlay from 'src/components/LoadingOverlay';
-import Modal from 'src/components/Modal';
-import MonitorDetail from 'src/modules/NodeMonitor/components/MonitorDetail';
 import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
-import { CloseIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
 import MonitorDetailModal from '../MonitorDetail/components/MonitorDetailModal';
 
-interface IProps {
+export interface ITableNodeProps {
     data: ITableData[];
     currentPage: number;
     limitPage: number;
@@ -33,7 +30,8 @@ interface IProps {
     handleClickTableCell: (item: ITableData) => void;
     handleCloseMonitorModal: () => void;
 }
-const Table = (props: IProps & any) => {
+
+const Table = (props: ITableNodeProps & any) => {
     const {
         currentPage,
         limitPage,

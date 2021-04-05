@@ -1,6 +1,6 @@
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 
-export interface ITableRedListReducer {
+export interface ITableValidatorReducer {
     currentPage: number;
     rowsPerPage: number;
     limitPage: number;
