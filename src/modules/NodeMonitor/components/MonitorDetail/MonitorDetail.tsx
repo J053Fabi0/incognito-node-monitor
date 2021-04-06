@@ -33,7 +33,7 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
             return 'Not stake';
 
         const isBeacon = node.committeeChain !== 'beacon';
-        let shardName = `${node?.role}${isBeacon ? 'Shard' : ''} ${node.committeeChain}`;
+        let shardName = `${node?.role}${isBeacon ? ' Shard' : ''} ${node.committeeChain}`;
         if (!node?.autoStake) {
             shardName += ` (unstaking)`;
         }
