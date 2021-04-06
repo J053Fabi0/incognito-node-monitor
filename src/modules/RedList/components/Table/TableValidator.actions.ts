@@ -40,7 +40,7 @@ export const actionGetRedList = (payload: { page: number }) => async (
         if (fetching) return;
         dispatch(actionFetchingTableData({ fetching: true }));
         let { page } = payload;
-        page = page || 1;
+        page += 1;
         const nodeIndex = (page - 1) * ROWS_PER_PAGE;
         const { data, total } = (await getRedList(page)) as any;
         const mapper: INodeName[] = data.map((publicKey: string, index: number) => ({
