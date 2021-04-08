@@ -8,6 +8,7 @@ import ColumnText from '../ColumnText';
 import { monitorDetailSelector } from './MonitorDetail.selector';
 import enhance from './MonitorDetail.enhance';
 import RowText from '../RowText';
+import { EMPTY_CELL } from '../Table/Table.constants';
 
 interface IProps {
     isWebview: boolean;
@@ -32,11 +33,12 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         )
             return 'Not stake';
 
-        const isBeacon = node.committeeChain !== 'beacon';
-        let shardName = `${node?.role}${isBeacon ? ' Shard' : ''} ${node.committeeChain}`;
+        const isBeacon = node.committeeChain === 'beacon';
+        let shardName = `${node?.role}${isBeacon ? '' : ' Shard'} ${node.committeeChain}`;
         if (!node?.autoStake) {
             shardName += ` (unstaking)`;
         }
+        if (node.committeeChain === EMPTY_CELL) return node?.role;
         return shardName;
     };
 

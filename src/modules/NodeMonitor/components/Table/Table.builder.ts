@@ -12,6 +12,9 @@ const formatNodeInfo = (node: any) => {
     if (committeeChain === '-1') {
         committeeChain = 'beacon';
     }
+    if (committeeChain === '') {
+        committeeChain = EMPTY_CELL;
+    }
     if (isEmpty(node?.Role)) {
         role = 'Not stake';
         committeeChain = EMPTY_CELL;
@@ -122,7 +125,7 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
             totalPropose: item?.TotalPropose || EMPTY_CELL,
             totalVote: item?.TotalVote || EMPTY_CELL,
             voteCount,
-            chainId: item?.ChainID || EMPTY_CELL,
+            chainId: item?.ChainID === '' ? EMPTY_CELL : item?.ChainID,
         };
     });
 };
