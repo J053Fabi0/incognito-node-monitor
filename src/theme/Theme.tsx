@@ -37,6 +37,26 @@ export function colors(darkMode: boolean): Colors {
         // base
         white,
         black,
+
+        // table
+        headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
+        hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+        darkRow: darkMode ? '#fafafa' : '#fafafa',
+        lightRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+
+        // modal
+        modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
+
+        border1: darkMode ? '#CBCBCB' : '#CBCBCB',
+        border2: darkMode ? '#E0E0E0' : '#E0E0E0',
+
+        // text
+        text1: darkMode ? white : black,
+        text2: darkMode ? '#9e9e9e' : '#9e9e9e',
+        text3: darkMode ? '#616161' : '#616161',
+
+        green1: darkMode ? '#34C759' : '#34C759',
+        red1: darkMode ? '#FE4D4D' : '#FE4D4D',
     };
 }
 
@@ -122,14 +142,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-feature-settings: 'ss01' on, 'ss02' on, 'cv01' on, 'cv03' on;
-  
 }
 `;
 
 export const ThemedGlobalStyle = createGlobalStyle`
-body {
-  min-height: 100vh;
-  background-position: 0 -30vh;
-  background-repeat: no-repeat;
-}
+    body {
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
 `;
