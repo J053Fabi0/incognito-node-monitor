@@ -1,10 +1,11 @@
-import { isEmpty, isArray, capitalize } from 'lodash';
+import { isEmpty, isArray, capitalize, isNumber } from 'lodash';
 import moment from 'moment';
 import { ellipsisCenter } from 'src/utils/ellipsis';
 import { INodeName, ITableData } from './Table.interface';
 import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
 import { getVoteStat } from './Table.utils';
 import { EMPTY_CELL } from './Table.constants';
+import convert from '../../../../utils/convert';
 
 const formatNodeInfo = (node: any) => {
     let role = node?.Role;
@@ -118,9 +119,14 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
         if (item?.TotalPropose) {
             voteCount = Math.round((item?.TotalVote / item?.TotalPropose) * 100);
         }
+        let reward = isNumber(item?.Reward) ? item?.Reward : EMPTY_CELL;
+        if (reward !== EMPTY_CELL) {
+            /** always PRV */
+            reward = convert.toHumanAmount({ originalAmount: reward, decimals: 9 });
+        }
         return {
             epoch: item?.Epoch || EMPTY_CELL,
-            reward: item?.Reward || EMPTY_CELL,
+            reward,
             time: item?.Time || EMPTY_CELL,
             totalPropose: item?.TotalPropose || EMPTY_CELL,
             totalVote: item?.TotalVote || EMPTY_CELL,
