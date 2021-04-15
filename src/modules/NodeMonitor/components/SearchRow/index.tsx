@@ -60,7 +60,7 @@ const SearchRow = () => {
                 onChange={onKeyChange}
                 placeholder={`Node1 ValidatorPublicKey1\nNode2 ValidatorPublicKey2`}
             />
-            <Button className="btn-submit" variant="contained" onClick={onSubmitPress}>
+            <Button className="button btn-submit" variant="contained" onClick={onSubmitPress}>
                 Submit
             </Button>
         </Wrapper>
