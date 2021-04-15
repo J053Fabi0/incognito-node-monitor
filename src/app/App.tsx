@@ -6,6 +6,7 @@ import { ThemeProvider, ThemedGlobalStyle } from 'src/theme';
 import Header from 'src/components/Header';
 import withApp from './App.enhance';
 import './reset.scss';
+import 'antd/dist/antd.css';
 
 const history = createBrowserHistory();
 

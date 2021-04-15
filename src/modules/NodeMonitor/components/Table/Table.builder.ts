@@ -1,11 +1,11 @@
 import { isEmpty, isArray, capitalize, isNumber } from 'lodash';
 import moment from 'moment';
 import { ellipsisCenter } from 'src/utils/ellipsis';
+import convert from 'src/utils/convert';
 import { INodeName, ITableData } from './Table.interface';
 import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
 import { getVoteStat } from './Table.utils';
 import { EMPTY_CELL } from './Table.constants';
-import convert from '../../../../utils/convert';
 
 const formatNodeInfo = (node: any) => {
     let role = node?.Role;
@@ -27,7 +27,7 @@ const formatNodeInfo = (node: any) => {
         committeeChain,
         syncState: capitalize(node?.SyncState) || EMPTY_CELL,
         voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
-        ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 20 }) || EMPTY_CELL,
+        ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 10 }) || EMPTY_CELL,
         role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
     };

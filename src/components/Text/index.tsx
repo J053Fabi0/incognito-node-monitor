@@ -7,7 +7,7 @@ const TextWrapper = styled(Text)<{ color: keyof Colors }>`
     color: ${({ color, theme }) => (theme as any)[color]};
 `;
 
-export const TextRegular = (props: TextProps) => (
+export const TextRegular = (props: TextProps & any) => (
     <TextWrapper fontSize={15} fontWeight={400} color="text1" {...props} />
 );
 

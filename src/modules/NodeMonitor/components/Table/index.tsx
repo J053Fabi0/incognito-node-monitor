@@ -14,6 +14,9 @@ import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 import { isEmpty } from 'lodash';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
+import SelectionTable from 'src/components/SelectionTable';
+import { Table, Tag, Space, Breadcrumb } from 'antd';
+import { getColumnsNodeMonitor } from 'src/modules/NodeMonitor/NodeMonitor.data';
 import MonitorDetailModal from '../MonitorDetail/components/MonitorDetailModal';
 
 export interface ITableNodeProps {
@@ -31,7 +34,7 @@ export interface ITableNodeProps {
     handleCloseMonitorModal: () => void;
 }
 
-const Table = (props: ITableNodeProps & any) => {
+const TableNodeMonitor = (props: ITableNodeProps & any) => {
     const {
         currentPage,
         limitPage,
@@ -46,16 +49,9 @@ const Table = (props: ITableNodeProps & any) => {
         handleCloseMonitorModal,
     } = props;
 
-    const columns = MockupColumns;
-    const { getTableProps, headerGroups, rows, prepareRow } = useTable({
-        columns,
-        data,
-    });
+    const { Column, ColumnGroup } = Table;
 
-    const onChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, page: number) =>
-        handleChangePage && handleChangePage(page);
-
-    const onChangeRowsPerPage = () => handleChangeRowsPerPage && handleChangeRowsPerPage();
+    const onChangePage = (page: number) => handleChangePage && handleChangePage(page);
 
     const onClickTableCell = (item: ITableData) => {
         if (!item) return;
@@ -66,76 +62,38 @@ const Table = (props: ITableNodeProps & any) => {
         handleCloseMonitorModal && handleCloseMonitorModal();
     };
 
-    const renderHeader = () => (
-        <TableHead>
-            {headerGroups.map((headerGroup) => (
-                <TableRow className="header-row" {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => {
-                        return <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>;
-                    })}
-                </TableRow>
-            ))}
-        </TableHead>
-    );
-
-    const renderBody = () => (
-        <TableBody>
-            {rows.map((row, index) => {
-                prepareRow(row);
-                return (
-                    <TableRow className={`table-row ${index % 2 !== 0 ? 'dark-row' : ''}`} {...row.getRowProps()}>
-                        {row.cells.map((cell) => {
-                            const value: any = cell.row.original;
-                            const header = cell.column.Header;
-                            const className = header === 'Vote Stats' ? 'break-line' : '';
-                            return (
-                                <TableCell
-                                    onClick={() => onClickTableCell(value)}
-                                    className={`table-cell ${className}`}
-                                    {...cell.getCellProps()}
-                                >
-                                    {cell.render('Cell')}
-                                </TableCell>
-                            );
-                        })}
-                    </TableRow>
-                );
-            })}
-        </TableBody>
-    );
-
-    const renderPagination = () => {
-        if (!limitPage || isSearching) return null;
-        return (
-            <TablePagination
-                component="div"
-                count={limitPage}
-                page={currentPage}
-                rowsPerPage={rowsPerPage}
-                rowsPerPageOptions={[]}
-                onChangePage={onChangePage}
-                onChangeRowsPerPage={onChangeRowsPerPage}
-                className="pagination"
-            />
-        );
-    };
+    const columns = getColumnsNodeMonitor({
+        deleteCell: () => {},
+    });
 
     return (
         <Styled>
             <SearchRow />
-            {!isEmpty(data) && (
-                <Card className="card">
-                    <MaUTable {...getTableProps()}>
-                        {renderHeader()}
-                        {!fetching && renderBody()}
-                    </MaUTable>
-                    {!!fetching && <LoadingOverlay />}
-                    {renderPagination()}
-                </Card>
-            )}
+            <SelectionTable />
+            <Card className="card">
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    loading={!!fetching || isEmpty(data)}
+                    pagination={{
+                        current: currentPage + 1,
+                        pageSize: rowsPerPage,
+                        total: limitPage,
+                    }}
+                    onRow={(record) => ({
+                        onClick: () => {
+                            onClickTableCell && onClickTableCell(record);
+                        },
+                    })}
+                    onChange={(pagination: any) => {
+                        const { current } = pagination;
+                        onChangePage(current - 1);
+                    }}
+                />
+            </Card>
             <MonitorDetailModal visible={visibleModal} onClose={onCloseModal} />
         </Styled>
     );
 };
 
-export default withTable(Table);
+export default withTable(TableNodeMonitor);
