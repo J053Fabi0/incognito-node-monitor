@@ -11,6 +11,17 @@ import { NavLink } from 'react-router-dom';
 const HeaderFrame = styled(Row)`
     justify-content: space-between;
     padding: 30px 30px 0 30px;
+    dislay: flex-root;
+    ${({ theme }) => theme.mediaWidth.upToSmall`
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    `}
+`;
+
+const HeaderFrameRow = styled(Row)`
+    justify-content: space-between;
+    padding: 30px 30px 0 30px;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
         justify-content: space-between;
@@ -35,9 +46,10 @@ const StyledNavLink = styled(NavLink).attrs({
     width: fit-content;
     margin: 0 12px;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 15px;
     padding: 5px 15px;
-    border: 1px solid ${({ theme }: { theme: ITheme }) => theme.border2};
+    border: none;
+    background: #d8d8d8;
 
     &.${activeClassName} {
         font-weight: 600;
@@ -56,20 +68,21 @@ const Header = React.memo(() => {
     if (getMiningPublicKey()) return null;
     return (
         <HeaderFrame>
-            <WrapLogo>
-                <AppLogo />
-                <TextBold fontSize={20} marginLeft={10}>
-                    {appTranslate.company}
-                </TextBold>
-            </WrapLogo>
-            <WrapLink>
-                <StyledNavLink id="stake-nav-link" to="/node-monitor">
-                    Monitor
-                </StyledNavLink>
-                <StyledNavLink id="stake-nav-1" to="/red-list">
-                    Red list
-                </StyledNavLink>
-            </WrapLink>
+            <HeaderFrameRow>
+                <WrapLogo>
+                    <AppLogo />
+                </WrapLogo>
+            </HeaderFrameRow>
+            <HeaderFrameRow>
+                <WrapLink>
+                    <StyledNavLink id="stake-nav-link" to="/node-monitor">
+                        Monitor
+                    </StyledNavLink>
+                    <StyledNavLink id="stake-nav-1" to="/red-list">
+                        Red list
+                    </StyledNavLink>
+                </WrapLink>
+            </HeaderFrameRow>
         </HeaderFrame>
     );
 });
