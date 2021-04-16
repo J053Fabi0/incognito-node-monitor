@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import styled, { ITheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchSelector } from 'src/modules/NodeMonitor/components/Table/Table.selector';
+import { listNodeSelector } from 'src/modules/NodeMonitor/components/Table/Table.selector';
 import { actionSubmitSearch, actionUpdateSearchValue } from 'src/modules/NodeMonitor/components/Table/Table.actions';
 import Row from 'src/components/Row';
 import Button from 'src/components/Button';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import { isEmpty } from 'lodash';
 
 function Alert(props: any) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -59,28 +60,42 @@ const WrapperInput = styled(Row)`
 
 const SearchRow = () => {
     const dispatch = useDispatch();
-    const search = useSelector(searchSelector);
+    const listNode = useSelector(listNodeSelector);
     const [open, setOpen] = React.useState(false);
+    const [nodeName, setNodeName] = React.useState('');
+    const [miningKey, setMiningKey] = React.useState('');
 
-    const onKeyChange = React.useCallback(
-        (e) => {
-            if (!e || !e.target || !dispatch) return;
-            const { value } = e.target;
-            dispatch(actionUpdateSearchValue({ search: value }));
-        },
-        [dispatch],
-    );
+    const onChangeName = React.useCallback((e) => {
+        if (!e || !e.target) return;
+        const { value } = e.target;
+        setNodeName(value);
+    }, []);
 
-    const onChangeName = () => {};
-
-    const onChangeMiningKey = () => {};
+    const onChangeMiningKey = React.useCallback((e) => {
+        if (!e || !e.target) return;
+        const { value } = e.target;
+        setMiningKey(value);
+    }, []);
 
     const onSubmitPress = () => {
-        setOpen(true);
-        setTimeout(() => {
-            setOpen(false);
-        }, 2000);
-        dispatch(actionSubmitSearch());
+        const hasNode =
+            listNode.some((node) => node.name === nodeName || node.publicKey === miningKey) ||
+            isEmpty(nodeName) ||
+            isEmpty(miningKey);
+        if (hasNode) {
+            setOpen(true);
+            return setTimeout(() => {
+                setOpen(false);
+            }, 2000);
+        }
+
+        const newListNode = [
+            {
+                name: nodeName,
+                publicKey: miningKey,
+            },
+        ].concat(listNode);
+        dispatch(actionSubmitSearch(newListNode));
     };
 
     return (
@@ -93,15 +108,15 @@ const SearchRow = () => {
                     onChange={onChangeMiningKey}
                 />
             </WrapperInput>
-            <Button title="Check" disabled={false} onClick={onSubmitPress} />
+            <Button title="Check" disabled={isEmpty(nodeName) || isEmpty(miningKey)} onClick={onSubmitPress} />
             <Snackbar open={open}>
                 <Alert
                     onClose={() => {
                         setOpen(false);
                     }}
-                    severity="success"
+                    severity="error"
                 >
-                    Add node success!
+                    The node name or validate public key is exist!
                 </Alert>
             </Snackbar>
         </Wrapper>

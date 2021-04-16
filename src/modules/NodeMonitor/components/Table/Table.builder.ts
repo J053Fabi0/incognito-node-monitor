@@ -22,6 +22,7 @@ const formatNodeInfo = (node: any) => {
     }
 
     return {
+        key: node?.MiningPubkey,
         publicKey: node?.MiningPubkey || EMPTY_CELL,
         status: capitalize(node?.Status) || EMPTY_CELL,
         committeeChain,

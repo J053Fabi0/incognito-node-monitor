@@ -1,4 +1,5 @@
 import { trim, uniqBy, isEmpty } from 'lodash';
+import { INodeName } from './Table.interface';
 
 export const getURLPathname = () => {
     if (typeof window === 'undefined') {
@@ -18,30 +19,10 @@ export const splitLines = (t: string) => {
     return t.split(/\r\n|\r|\n/);
 };
 
-export const getParamsNodesInfo = (search: string, currentPage: number, rowPerPage: number) => {
+export const getParamsNodesInfo = (nodes: INodeName[], currentPage: number, rowPerPage: number) => {
     const startIndex = currentPage * rowPerPage;
     const endIndex = startIndex + rowPerPage;
-    let listNodes = uniqBy(
-        splitLines(search)
-            .filter((value) => !isEmpty(value))
-            .map((item: string) => {
-                const rawValue = trim(item);
-                const arrayRaw = rawValue.split(' ');
-                let publicKey = '';
-                let name = '';
-                if (arrayRaw.length === 1) {
-                    publicKey = `${arrayRaw[0]}`;
-                }
-                if (arrayRaw.length === 2) {
-                    publicKey = `${arrayRaw[1]}`;
-                    name = `${arrayRaw[0]}`;
-                }
-                return { name, publicKey };
-            }),
-        (element) => {
-            return element.publicKey;
-        },
-    );
+    let listNodes = nodes || [];
     const totalRows = listNodes.length;
     listNodes = listNodes.slice(startIndex, endIndex);
     const result = listNodes.reduce(

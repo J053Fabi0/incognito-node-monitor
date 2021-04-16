@@ -1,23 +1,14 @@
 import React from 'react';
-import { MockupColumns } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
 import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
-import { useTable } from 'react-table';
-import Card from '@material-ui/core/Card';
-import TablePagination from '@material-ui/core/TablePagination';
-import MaUTable from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import LoadingOverlay from 'src/components/LoadingOverlay';
 import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
-import { isEmpty } from 'lodash';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
 import SelectionTable from 'src/components/SelectionTable';
-import { Table, Tag, Space, Breadcrumb } from 'antd';
+import { Table } from 'antd';
 import { getColumnsNodeMonitor } from 'src/modules/NodeMonitor/NodeMonitor.data';
+import { useDispatch } from 'react-redux';
 import MonitorDetailModal from '../MonitorDetail/components/MonitorDetailModal';
+import { actionDeleteNode } from './Table.actions';
 
 export interface ITableNodeProps {
     data: ITableData[];
@@ -25,11 +16,9 @@ export interface ITableNodeProps {
     limitPage: number;
     rowsPerPage: number;
     fetching: boolean;
-    isSearching: boolean;
     visibleModal: boolean;
 
     handleChangePage: (page: number) => void;
-    handleChangeRowsPerPage: () => void;
     handleClickTableCell: (item: ITableData) => void;
     handleCloseMonitorModal: () => void;
 }
@@ -41,15 +30,13 @@ const TableNodeMonitor = (props: ITableNodeProps & any) => {
         rowsPerPage,
         data,
         fetching,
-        isSearching,
         visibleModal,
         handleChangePage,
-        handleChangeRowsPerPage,
         handleClickTableCell,
         handleCloseMonitorModal,
     } = props;
 
-    const { Column, ColumnGroup } = Table;
+    const dispatch = useDispatch();
 
     const onChangePage = (page: number) => handleChangePage && handleChangePage(page);
 
@@ -63,22 +50,26 @@ const TableNodeMonitor = (props: ITableNodeProps & any) => {
     };
 
     const columns = getColumnsNodeMonitor({
-        deleteCell: () => {},
+        deleteCell: (node) => {
+            dispatch(actionDeleteNode(node));
+        },
     });
 
     return (
         <Styled>
             <SearchRow />
             <SelectionTable />
-            <Card className="card">
+            <div className="card">
                 <Table
                     columns={columns}
                     dataSource={data}
-                    loading={!!fetching || isEmpty(data)}
+                    loading={!!fetching}
                     pagination={{
                         current: currentPage + 1,
                         pageSize: rowsPerPage,
                         total: limitPage,
+                        showSizeChanger: false,
+                        showQuickJumper: true,
                     }}
                     onRow={(record) => ({
                         onClick: () => {
@@ -89,8 +80,11 @@ const TableNodeMonitor = (props: ITableNodeProps & any) => {
                         const { current } = pagination;
                         onChangePage(current - 1);
                     }}
+                    rowClassName={(record, index) =>
+                        `table-row ${index % 2 !== 0 ? 'table-row-dark' : 'table-row-light'}`
+                    }
                 />
-            </Card>
+            </div>
             <MonitorDetailModal visible={visibleModal} onClose={onCloseModal} />
         </Styled>
     );

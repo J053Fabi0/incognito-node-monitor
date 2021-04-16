@@ -6,12 +6,12 @@ const activeClassName = 'ACTIVE';
 
 export const Wrapper = styled(Row)`
     justify-content: flex-end;
-    margin-top: 68px;
+    margin-top: 70px;
     margin-bottom: 20px;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
         align-items: flex-end;
-        margin-top: 20px;
+        margin-top: 40px;
         margin-bottom: 20px;
     `}
 `;
@@ -28,7 +28,7 @@ export const StyledNavLink = styled(NavLink).attrs({
     margin-left: 12px;
     font-weight: 500;
     border-radius: 18px;
-    padding: 11px 39px;
+    padding: 9px 39px;
     border: none;
     background: ${({ theme }) => theme.gray1};
     &.${activeClassName} {
@@ -37,7 +37,7 @@ export const StyledNavLink = styled(NavLink).attrs({
         color: ${({ theme }) => theme.white};
     }
     ${({ theme }) => theme.mediaWidth.upToSmall`
-        padding: 11px 14px;
+        padding: 7px 14px;
     `}
 `;
 

@@ -2,47 +2,91 @@ import React from 'react';
 import { Button } from 'antd';
 import { TrashIcon } from 'src/components/Icons';
 
-export const getColumnsNodeMonitor = ({ deleteCell }: { deleteCell: () => void }) => [
-    {
-        dataIndex: 'name',
-        title: 'Name',
+const TableMonitorKey = {
+    name: {
         key: 'name',
+        title: 'Name',
     },
-    { dataIndex: 'ellipsisMpk', title: 'Validator Public key', key: 'ellipsisMpk' },
-    { dataIndex: 'role', title: 'Role', key: 'role' },
-    {
-        dataIndex: 'committeeChain',
-        title: 'Committee Chain',
+    shortMpk: {
+        key: 'ellipsisMpk',
+        title: 'Validator Public key',
+    },
+    role: {
+        key: 'role',
+        title: 'Role',
+    },
+    committeeChain: {
         key: 'committeeChain',
+        title: 'Committee Chain',
     },
-    {
-        dataIndex: 'status',
-        title: 'Status',
+    status: {
         key: 'status',
+        title: 'Status',
     },
-    {
-        dataIndex: 'syncState',
-        title: 'Sync State',
+    syncState: {
         key: 'syncState',
+        title: 'Sync State',
+    },
+    voteStats: {
+        key: 'voteStats',
+        title: 'Vote Stats',
+    },
+    delete: {
+        key: 'delete',
+        title: 'Delete',
+    },
+};
+
+const DEFAULT_COLUMN_TABLE_MONITOR: any = [
+    {
+        dataIndex: TableMonitorKey.name.key,
+        title: TableMonitorKey.name.title,
+        key: TableMonitorKey.name.key,
     },
     {
-        dataIndex: 'voteStats',
-        title: 'Vote Stats',
-        key: 'voteStats',
+        dataIndex: TableMonitorKey.shortMpk.key,
+        title: TableMonitorKey.shortMpk.title,
+        key: TableMonitorKey.shortMpk.key,
+    },
+    {
+        dataIndex: TableMonitorKey.role.key,
+        title: TableMonitorKey.role.title,
+        key: TableMonitorKey.role.key,
+    },
+    {
+        dataIndex: TableMonitorKey.status.key,
+        title: TableMonitorKey.status.title,
+        key: TableMonitorKey.status.key,
+    },
+    {
+        dataIndex: TableMonitorKey.syncState.key,
+        title: TableMonitorKey.syncState.title,
+        key: TableMonitorKey.syncState.key,
+    },
+    {
+        dataIndex: TableMonitorKey.voteStats.key,
+        title: TableMonitorKey.voteStats.title,
+        key: TableMonitorKey.voteStats.key,
         render: (text: string) => <div style={{ whiteSpace: 'pre' }}>{text}</div>,
     },
-    {
-        dataIndex: 'delete',
-        key: 'delete',
-        render: (text: any, record: any) => (
-            <Button
-                onClick={(e: any) => {
-                    e.stopPropagation();
-                    console.log(record);
-                }}
-            >
-                <TrashIcon />
-            </Button>
-        ),
-    },
 ];
+
+export const getColumnsNodeMonitor = ({ deleteCell }: { deleteCell: (item: any) => void }) =>
+    DEFAULT_COLUMN_TABLE_MONITOR.concat([
+        {
+            dataIndex: TableMonitorKey.delete.key,
+            key: TableMonitorKey.delete.key,
+            render: (text: any, record: any) => (
+                <Button
+                    onClick={(e: any) => {
+                        e.stopPropagation();
+                        deleteCell && deleteCell(record);
+                    }}
+                >
+                    <TrashIcon />
+                </Button>
+            ),
+        },
+    ]);
+
+export const getColumnsRedList = () => DEFAULT_COLUMN_TABLE_MONITOR;

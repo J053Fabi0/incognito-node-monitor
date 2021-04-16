@@ -9,7 +9,7 @@ const SelectionTable = () => {
                     Monitor a Node
                 </StyledNavLink>
                 <StyledNavLink id="stake-nav-1" to="/red-list">
-                    Inactive List
+                    Inactive nodes
                 </StyledNavLink>
             </WrapLink>
         </Wrapper>

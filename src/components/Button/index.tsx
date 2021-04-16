@@ -14,7 +14,7 @@ const Styled = styled.button`
     align-items: center;
     border-radius: 18px;
     font-size: 14px;
-    height: 40px;
+    height: 37px;
     margin: auto;
     padding: 0 11px;
     color: ${({ theme }) => theme.white};

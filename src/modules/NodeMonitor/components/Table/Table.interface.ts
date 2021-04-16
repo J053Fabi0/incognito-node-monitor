@@ -7,9 +7,11 @@ export interface ITableReducer {
     isSearching: boolean;
     search: string;
     visibleModal: boolean;
+    listNode: INodeName[];
 }
 
 export interface ITableData {
+    key: string;
     name?: string;
     publicKey: string;
     status: string;

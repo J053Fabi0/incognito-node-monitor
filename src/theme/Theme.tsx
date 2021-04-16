@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { Text, TextProps } from 'rebass';
 import { Colors } from './Theme.styled';
 import { darkModeSelector } from './Theme.selector';
+import { appDomain } from '../configs/Configs.Envs';
 
 const MEDIA_WIDTHS = {
     upToExtraSmall: 500,
@@ -41,8 +42,8 @@ export function colors(darkMode: boolean): Colors {
         // table
         headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
         hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
-        darkRow: darkMode ? '#fafafa' : '#fafafa',
-        lightRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+        darkRow: darkMode ? '#F5F5F5' : '#F5F5F5',
+        lightRow: darkMode ? white : white,
 
         // modal
         modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -109,16 +110,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const FixedGlobalStyle = createGlobalStyle`
-html, input, textarea, button {
-  font-family: 'Inter', sans-serif;
-  font-display: fallback;
-}
-@supports (font-variation-settings: normal) {
-  html, input, textarea, button {
-    font-family: 'Inter var', sans-serif;
-  }
-}
-
 html,
 body {
   margin: 0;
@@ -148,8 +139,49 @@ html {
 `;
 
 export const ThemedGlobalStyle = createGlobalStyle`
+    * {
+        font-family: 'SF-Pro-Display';
+        font-display: swap;
+    }
     body {
       min-height: 100vh;
       box-sizing: border-box;
+    }
+
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Bold.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+    }
+
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Medium.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+    }
+    
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Regular.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+    }
+
+    .table-row {
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    .table-row-light {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.lightRow};
+    }
+    
+    .table-row-dark {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
     }
 `;
