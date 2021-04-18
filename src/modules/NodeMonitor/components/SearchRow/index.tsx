@@ -104,7 +104,7 @@ const SearchRow = () => {
                 <input className="inputName" placeholder="Node name" onChange={onChangeName} />
                 <input
                     className="inputMiningKey"
-                    placeholder="Enter your validator public key "
+                    placeholder="Enter public key associated with your node"
                     onChange={onChangeMiningKey}
                 />
             </WrapperInput>

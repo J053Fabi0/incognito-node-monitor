@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import withEnhance from 'src/modules/RedList/components/Table/TableValidator.enhance';
-import Card from '@material-ui/core/Card';
 import { ITableNodeProps } from 'src/modules/NodeMonitor/components/Table';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';

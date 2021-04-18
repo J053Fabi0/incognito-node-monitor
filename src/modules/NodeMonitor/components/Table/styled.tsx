@@ -27,6 +27,14 @@ export const ModalWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    .header-row {
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 20px;
+        align-items: center;
+        margin-top: 15px;
+        margin-bottom: 8px;
+    }
 `;
 
 export const CloseWrapper = styled.div`

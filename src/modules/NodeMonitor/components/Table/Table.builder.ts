@@ -28,7 +28,7 @@ const formatNodeInfo = (node: any) => {
         committeeChain,
         syncState: capitalize(node?.SyncState) || EMPTY_CELL,
         voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
-        ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 10 }) || EMPTY_CELL,
+        ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 6 }) || EMPTY_CELL,
         role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
     };

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import { TrashIcon } from 'src/components/Icons';
+import { isEmpty } from 'lodash';
+import { getNodeRoleStatus } from './components/Table/Table.utils';
 
-const TableMonitorKey = {
+export const TableMonitorKey = {
     name: {
         key: 'name',
         title: 'Name',
@@ -17,7 +19,7 @@ const TableMonitorKey = {
     },
     committeeChain: {
         key: 'committeeChain',
-        title: 'Committee Chain',
+        title: 'Committee shard',
     },
     status: {
         key: 'status',
@@ -29,7 +31,7 @@ const TableMonitorKey = {
     },
     voteStats: {
         key: 'voteStats',
-        title: 'Vote Stats',
+        title: 'Vote Stats (%)',
     },
     delete: {
         key: 'delete',
@@ -52,6 +54,12 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         dataIndex: TableMonitorKey.role.key,
         title: TableMonitorKey.role.title,
         key: TableMonitorKey.role.key,
+        render: (text: string, record: any) => {
+            const { colorRole, nodeRole, committee } = getNodeRoleStatus(record) as any;
+            return (
+                <div style={{ color: colorRole }}>{`${nodeRole} ${!isEmpty(committee) ? `\n${committee}` : ''}`}</div>
+            );
+        },
     },
     {
         dataIndex: TableMonitorKey.status.key,

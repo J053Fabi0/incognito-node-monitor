@@ -119,6 +119,10 @@ body {
  a {
    color: ${colors(false).black}; 
  }
+.modified-item:hover {
+    border-bottom: 2px solid transparent !important;
+    color: inherit !important;
+}
 
 * {
   box-sizing: border-box;

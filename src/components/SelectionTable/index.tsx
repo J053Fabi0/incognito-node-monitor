@@ -6,7 +6,7 @@ const SelectionTable = () => {
         <Wrapper>
             <WrapLink>
                 <StyledNavLink id="stake-nav-link" to="/node-monitor">
-                    Monitor a Node
+                    My nodes
                 </StyledNavLink>
                 <StyledNavLink id="stake-nav-1" to="/red-list">
                     Inactive nodes

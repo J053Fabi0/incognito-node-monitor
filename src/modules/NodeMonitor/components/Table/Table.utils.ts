@@ -1,5 +1,6 @@
 import { trim, uniqBy, isEmpty } from 'lodash';
-import { INodeName } from './Table.interface';
+import { INodeName, ITableData } from './Table.interface';
+import { EMPTY_CELL } from './Table.constants';
 
 export const getURLPathname = () => {
     if (typeof window === 'undefined') {
@@ -58,3 +59,30 @@ export const getMiningPublicKey = () => {
 };
 
 export const getVoteStat = (votes: any) => (votes || []).join('\n');
+
+export const getNodeRoleStatus = (node: ITableData) => {
+    if (!node) return '';
+    if (isEmpty(node?.role) || node?.role === '-' || node.role === 'Not stake' || node.committeeChain === 'Not stake')
+        return {
+            nodeRole: 'Not stake',
+            committee: '',
+            unStakeStatus: '',
+        };
+
+    const isBeacon = node.committeeChain === 'beacon';
+    const nodeRole = node?.role;
+    const committee = `${isBeacon ? '' : ' Shard'} ${node.committeeChain}`;
+    const unStakeStatus = !node?.autoStake ? 'unstaking' : '';
+    if (node.committeeChain === EMPTY_CELL)
+        return {
+            nodeRole,
+            committee: '',
+            unStakeStatus: '',
+        };
+    return {
+        nodeRole,
+        colorRole: nodeRole?.toLowerCase() === 'committee' ? '#34C759' : 'black',
+        committee,
+        unStakeStatus,
+    };
+};

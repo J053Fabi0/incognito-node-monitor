@@ -1,9 +1,12 @@
 import React, { memo } from 'react';
-import { TextMedium, TextBold } from 'src/components';
+import { TextMedium, TextRegular } from 'src/components';
 import styled from 'styled-components';
+import Row from 'src/components/Row';
 
-const Styled = styled.div`
+const Wrapper = styled(Row)`
     display: inline-flex;
+    justify-content: space-between;
+    margin-top: 11px;
     div:last-child {
         line-break: anywhere;
     }
@@ -11,18 +14,21 @@ const Styled = styled.div`
 
 interface IProps {
     title: string;
-    content: string;
+    content?: string;
+    rightComponent?: any;
 }
 
 const RowText = (props: IProps) => {
-    const { title, content } = props;
+    const { title, content, rightComponent } = props;
     return (
-        <Styled>
-            <TextBold fontSize={16}>{title}</TextBold>
-            <TextMedium fontSize={16} ml="8px" color="text2">
-                {content}
-            </TextMedium>
-        </Styled>
+        <Wrapper>
+            <TextMedium fontSize={15}>{title}</TextMedium>
+            {rightComponent || (
+                <TextRegular fontSize={15} ml="8px" color="text4">
+                    {content}
+                </TextRegular>
+            )}
+        </Wrapper>
     );
 };
 
