@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { CircularProgress } from '@material-ui/core';
 import styled from 'styled-components';
+import { Spin } from 'antd';
 
 const Styled = styled.div`
     justify-content: center;
@@ -11,7 +11,7 @@ const Styled = styled.div`
 const LoadingOverlay = () => {
     return (
         <Styled className="wrap-loading">
-            <CircularProgress color="primary" />
+            <Spin />
         </Styled>
     );
 };

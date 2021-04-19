@@ -1,32 +1,49 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ITheme } from 'styled-components';
 import Row from 'src/components/Row';
 import { AppLogo } from 'src/components/Icons';
 import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
 import SelectedList, { ItemSelectedProps } from 'src/components/SelectedList';
 import { isEmpty } from 'lodash';
+import MobileDrawer from 'src/components/Drawer';
+import MenuIcon from 'src/components/Icons/Menu/index';
+import CloseIcon from 'src/components/Icons/Close/index';
 import HeaderTitle from '../HeaderTitle';
 
 export const HeaderFrame = styled(Row)`
     justify-content: space-between;
     align-items: center;
-    ${({ theme }) => theme.mediaWidth.upToSmall`
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
+    .small-screen-right {
+        display: none;
+    }
+    .wrapper-selection-list {
+        display: flex;
+    }
+    ${({ theme }: { theme: ITheme }) => theme.mediaWidth.upToSmall`
+        .small-screen-right {
+            display: flex;
+        }
+        .wrapper-selection-list {
+           display: none;
+        }
     `}
     .wrapper-selection-list {
         padding: 30px 0 0;
+    }
+    .menu-icon {
+        margin-top: 22px;
+        padding: 20px 0 20px 10px;
+    }
+    .close-icon {
+        margin-top: 22px;
+        padding: 20px 0 20px 10px;
     }
 `;
 
 export const HeaderFrameRow = styled(Row)<{ displayEnd?: boolean }>`
     justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : 'space-between')};
+    width: fit-content;
     padding: 30px 0 0;
-    ${({ theme }) => theme.mediaWidth.upToSmall`
-        flex-direction: column;
-        align-items: flex-start;
-    `}
 `;
 
 const WrapLogo = styled(Row)`
@@ -34,7 +51,7 @@ const WrapLogo = styled(Row)`
     width: fit-content;
 `;
 
-const HeaderTabs: ItemSelectedProps[] = [
+export const HeaderTabs: ItemSelectedProps[] = [
     { title: 'Validator' },
     { title: 'Wallet', link: 'https://incognito.org' },
     { title: 'FAQs', link: 'https://incognito.org/faq' },
@@ -43,13 +60,33 @@ const HeaderTabs: ItemSelectedProps[] = [
 ];
 
 const Header = React.memo(() => {
-    if (getMiningPublicKey()) return null;
-    const selectedIndex = 0;
+    const [selectedIndex] = React.useState(0);
+    const [visibleModal, setVisibleModal] = React.useState(false);
 
     const onSelectedHeaderTab = (item: ItemSelectedProps) => {
-        if (window && !isEmpty(item.link)) window.open(item.link);
+        if (window && !isEmpty(item.link)) return window.open(item.link);
+        setVisibleModal(false);
     };
 
+    const onChangeModalState = () => setVisibleModal(!visibleModal);
+
+    const renderMenuList = () => {
+        return (
+            <>
+                <div className="small-screen-right">
+                    {visibleModal ? (
+                        <CloseIcon onClick={onChangeModalState} />
+                    ) : (
+                        <MenuIcon onClick={onChangeModalState} />
+                    )}
+                    <MobileDrawer visible={visibleModal} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+                </div>
+                <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+            </>
+        );
+    };
+
+    if (getMiningPublicKey()) return null;
     return (
         <div style={{ marginLeft: 30, marginRight: 30 }}>
             <HeaderFrame>
@@ -58,7 +95,7 @@ const Header = React.memo(() => {
                         <AppLogo />
                     </WrapLogo>
                 </HeaderFrameRow>
-                <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+                {renderMenuList()}
             </HeaderFrame>
             <HeaderTitle />
         </div>

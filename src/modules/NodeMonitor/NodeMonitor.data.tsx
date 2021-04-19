@@ -4,6 +4,7 @@ import { TrashIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
 import { getNodeRoleStatus } from './components/Table/Table.utils';
 import { TextRegular } from '../../components';
+import { ellipsisRight } from '../../utils/ellipsis';
 
 export const TableMonitorKey = {
     name: {
@@ -73,6 +74,9 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         dataIndex: TableMonitorKey.name.key,
         title: TableMonitorKey.name.title,
         key: TableMonitorKey.name.key,
+        render: (text: string) => {
+            return <TextRegular>{ellipsisRight({ str: text, limit: 15 })}</TextRegular>;
+        },
     },
     {
         dataIndex: TableMonitorKey.shortMpk.key,

@@ -7,6 +7,7 @@ import { Row } from 'antd';
 import { TextMedium } from 'src/components';
 import { useSelector } from 'react-redux';
 import { monitorDetailSelector } from 'src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.selector';
+import { ellipsisRight } from '../../../../../../utils/ellipsis';
 
 interface IProps {
     visible: boolean;
@@ -20,7 +21,7 @@ const MonitorDetailModal = ({ visible, onClose }: IProps) => {
             <ModalWrapper>
                 <Row className="header-row">
                     <TextMedium color="text1" fontSize="18px">
-                        {node?.name || ''}
+                        {ellipsisRight({ str: node?.name || '', limit: 15 })}
                     </TextMedium>
                     <CloseWrapper onClick={onClose}>
                         <CloseIcon width="16" height="16" />
