@@ -5,6 +5,7 @@ import { AppLogo } from 'src/components/Icons';
 import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
 import SelectedList, { ItemSelectedProps } from 'src/components/SelectedList';
 import { isEmpty } from 'lodash';
+import HeaderTitle from '../HeaderTitle';
 
 export const HeaderFrame = styled(Row)`
     justify-content: space-between;
@@ -15,13 +16,13 @@ export const HeaderFrame = styled(Row)`
         align-items: flex-start;
     `}
     .wrapper-selection-list {
-        padding: 30px 30px 0 30px;
+        padding: 30px 0 0;
     }
 `;
 
 export const HeaderFrameRow = styled(Row)<{ displayEnd?: boolean }>`
     justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : 'space-between')};
-    padding: 30px 30px 0 30px;
+    padding: 30px 0 0;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
         align-items: flex-start;
@@ -48,15 +49,19 @@ const Header = React.memo(() => {
     const onSelectedHeaderTab = (item: ItemSelectedProps) => {
         if (window && !isEmpty(item.link)) window.open(item.link);
     };
+
     return (
-        <HeaderFrame>
-            <HeaderFrameRow>
-                <WrapLogo>
-                    <AppLogo />
-                </WrapLogo>
-            </HeaderFrameRow>
-            <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
-        </HeaderFrame>
+        <div style={{ marginLeft: 30, marginRight: 30 }}>
+            <HeaderFrame>
+                <HeaderFrameRow>
+                    <WrapLogo>
+                        <AppLogo />
+                    </WrapLogo>
+                </HeaderFrameRow>
+                <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+            </HeaderFrame>
+            <HeaderTitle />
+        </div>
     );
 });
 

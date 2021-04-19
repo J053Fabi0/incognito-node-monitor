@@ -35,7 +35,8 @@ const WrapperLink = styled.div<{ selected: boolean }>`
         selected ? theme.white : 'rgba(0, 0, 0, 0.65)'};
     ${({ theme }) => theme.mediaWidth.upToSmall`
         padding: 4px 10px;
-        font-size: 13px;
+        font-size: 11px;
+        text-align: center;
     `}
 `;
 

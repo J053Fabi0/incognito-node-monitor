@@ -191,4 +191,13 @@ export const ThemedGlobalStyle = createGlobalStyle`
     .table-row-dark {
         background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
     }
+    
+    .ant-pagination-item-active {
+        border-color: black;
+    }
+    
+    .ant-pagination-item-active a {
+        color: black;
+    }
+    
 `;

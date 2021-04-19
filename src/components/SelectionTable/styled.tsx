@@ -6,7 +6,7 @@ const activeClassName = 'ACTIVE';
 
 export const Wrapper = styled(Row)`
     justify-content: flex-end;
-    margin-top: 70px;
+    margin-top: 50px;
     margin-bottom: 20px;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
@@ -28,7 +28,7 @@ export const StyledNavLink = styled(NavLink).attrs({
     margin-left: 12px;
     font-weight: 500;
     border-radius: 18px;
-    padding: 9px 39px;
+    padding: 8px 25px;
     border: none;
     background: ${({ theme }) => theme.gray1};
     :hover {

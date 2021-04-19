@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { TrashIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
 import { getNodeRoleStatus } from './components/Table/Table.utils';
+import { TextRegular } from '../../components';
 
 export const TableMonitorKey = {
     name: {
@@ -36,6 +37,34 @@ export const TableMonitorKey = {
     delete: {
         key: 'delete',
         title: 'Delete',
+    },
+    epoch: {
+        key: 'epoch',
+        title: 'Epoch',
+    },
+    chainId: {
+        key: 'chainId',
+        title: 'Chain Id',
+    },
+    reward: {
+        key: 'reward',
+        title: 'Reward',
+    },
+    voteCount: {
+        key: 'voteCount',
+        title: 'Vote Count (%)',
+    },
+    shardName: {
+        key: 'name',
+        title: 'Shard',
+    },
+    blockHeight: {
+        key: 'blockHeight',
+        title: 'Block Height',
+    },
+    lastInsert: {
+        key: 'message',
+        title: 'Last Insert',
     },
 };
 
@@ -98,3 +127,48 @@ export const getColumnsNodeMonitor = ({ deleteCell }: { deleteCell: (item: any) 
     ]);
 
 export const getColumnsRedList = () => DEFAULT_COLUMN_TABLE_MONITOR;
+
+export const COLUMN_TABLE_BEACON = [
+    {
+        dataIndex: TableMonitorKey.shardName.key,
+        title: TableMonitorKey.shardName.title,
+        key: TableMonitorKey.shardName.key,
+    },
+    {
+        dataIndex: TableMonitorKey.blockHeight.key,
+        title: TableMonitorKey.blockHeight.title,
+        key: TableMonitorKey.blockHeight.key,
+    },
+    {
+        dataIndex: TableMonitorKey.lastInsert.key,
+        title: TableMonitorKey.lastInsert.title,
+        key: TableMonitorKey.lastInsert.key,
+        render: (text: string, record: any) => {
+            const { color } = record;
+            return <TextRegular color={color}>{text}</TextRegular>;
+        },
+    },
+];
+
+export const COLUMN_TABLE_COMMITTEE_ACTIVITY = [
+    {
+        dataIndex: TableMonitorKey.epoch.key,
+        title: TableMonitorKey.epoch.title,
+        key: TableMonitorKey.epoch.key,
+    },
+    {
+        dataIndex: TableMonitorKey.chainId.key,
+        title: TableMonitorKey.chainId.title,
+        key: TableMonitorKey.chainId.key,
+    },
+    {
+        dataIndex: TableMonitorKey.reward.key,
+        title: TableMonitorKey.reward.title,
+        key: TableMonitorKey.reward.key,
+    },
+    {
+        dataIndex: TableMonitorKey.voteCount.key,
+        title: TableMonitorKey.voteCount.title,
+        key: TableMonitorKey.voteCount.key,
+    },
+];
