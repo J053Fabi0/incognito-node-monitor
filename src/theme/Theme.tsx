@@ -60,6 +60,9 @@ export function colors(darkMode: boolean): Colors {
         green1: darkMode ? '#34C759' : '#34C759',
         red1: darkMode ? '#FE4D4D' : '#FE4D4D',
         gray1: darkMode ? '#D8D8D8' : '#D8D8D8',
+
+        tooltipBg: black,
+        tooltipText: white,
     };
 }
 

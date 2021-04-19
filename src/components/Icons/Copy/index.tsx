@@ -1,4 +1,13 @@
 import * as React from 'react';
+import copy from 'copy-to-clipboard';
+import { useDispatch } from 'react-redux';
+import { actionShowTooltip } from 'src/modules/Tooltip';
+import { isEmpty } from 'lodash';
+
+interface IProps {
+    value: string;
+    onCopy: () => void;
+}
 
 const CopyIcon = (props: any) => {
     return (
@@ -12,11 +21,32 @@ const CopyIcon = (props: any) => {
     );
 };
 
-const Copy = (props: any) => (
-    <button type="button" className="button-copy" {...props}>
-        <CopyIcon {...props} />
-    </button>
-);
+const Copy = (props: IProps & any) => {
+    const { value, onCopy } = props;
+    const dispatch = useDispatch();
+    const iconRef: any = React.useRef();
+
+    const handleCopy = () => {
+        onCopy && onCopy();
+        if (!isEmpty(value)) {
+            copy(value || '');
+        }
+        dispatch(
+            actionShowTooltip({
+                id: 'copy',
+                text: 'Copied',
+                ref: iconRef ? iconRef.current : null,
+                timeout: 1,
+            }),
+        );
+    };
+
+    return (
+        <button type="button" className="button-copy" {...props} onClick={handleCopy} ref={iconRef}>
+            <CopyIcon {...props} />
+        </button>
+    );
+};
 
 const MemoCopy = React.memo(Copy);
 export default MemoCopy;

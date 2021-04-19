@@ -28,6 +28,9 @@ export interface Colors {
     green1: Color;
     red1: Color;
     gray1: Color;
+
+    tooltipBg: string;
+    tooltipText: string;
 }
 
 export interface Grids {
