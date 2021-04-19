@@ -199,5 +199,4 @@ export const ThemedGlobalStyle = createGlobalStyle`
     .ant-pagination-item-active a {
         color: black;
     }
-    
 `;

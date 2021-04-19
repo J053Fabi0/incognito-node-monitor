@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styled, { ITheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { listNodeSelector } from 'src/modules/NodeMonitor/components/Table/Table.selector';
-import { actionSubmitSearch, actionUpdateSearchValue } from 'src/modules/NodeMonitor/components/Table/Table.actions';
+import { actionSubmitSearch } from 'src/modules/NodeMonitor/components/Table/Table.actions';
 import Row from 'src/components/Row';
 import Button from 'src/components/Button';
 import { Snackbar } from '@material-ui/core';
