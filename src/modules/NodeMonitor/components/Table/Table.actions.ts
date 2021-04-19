@@ -9,7 +9,7 @@ import {
     ACTION_UPDATE_SEARCH_VALUE,
     ACTION_CHANGE_VISIBLE_MODAL,
 } from './Table.actionsName';
-import { ITableData } from './Table.interface';
+import { INodeName, ITableData } from './Table.interface';
 import { getParamsNodesInfo } from './Table.utils';
 import { getListNodesInfo } from './Table.services';
 import { NodesListBuilder } from './Table.builder';
@@ -34,6 +34,7 @@ export const actionUpdateTableData = (payload: {
     currentPage?: number;
     limitPage?: number;
     isSearching?: boolean;
+    listNode?: INodeName[];
 }) => ({
     type: ACTION_UPDATE_TABLE_DATA,
     payload,
@@ -44,14 +45,18 @@ export const actionUpdateSearchValue = (payload: { search: string }) => ({
     payload,
 });
 
-export const actionFetchTableData = (page: number) => async (dispatch: Dispatch, getState: () => IRootState) => {
+export const actionFetchTableData = (page: number, newListNode?: INodeName[]) => async (
+    dispatch: Dispatch,
+    getState: () => IRootState,
+) => {
     try {
-        const { search, rowsPerPage, fetching } = getState().table;
-        if (fetching || isEmpty(search)) return;
-        const { strKeys, mapper, totalRows } = getParamsNodesInfo(search, page, rowsPerPage);
+        const { rowsPerPage, fetching, listNode } = getState().table;
+        if (fetching) return;
+        const allNodes = (!isEmpty(newListNode) ? newListNode : listNode) || [];
+        const { strKeys, mapper, totalRows } = getParamsNodesInfo(allNodes, page, rowsPerPage);
         dispatch(actionFetchingTableData({ fetching: true }));
-        const listNodes = NodesListBuilder(await getListNodesInfo(strKeys), mapper);
-        dispatch(actionUpdateTableData({ data: listNodes, currentPage: page, limitPage: totalRows }));
+        const nodes = NodesListBuilder(await getListNodesInfo(strKeys), mapper);
+        dispatch(actionUpdateTableData({ data: nodes, currentPage: page, limitPage: totalRows, listNode: allNodes }));
     } catch (e) {
         console.debug('Fetch table data with error: ', e);
     } finally {
@@ -59,9 +64,9 @@ export const actionFetchTableData = (page: number) => async (dispatch: Dispatch,
     }
 };
 
-export const actionSubmitSearch = () => (dispatch: Dispatch, getState: () => IRootState) => {
+export const actionSubmitSearch = (newListNode: INodeName[]) => (dispatch: Dispatch, getState: () => IRootState) => {
     try {
-        actionFetchTableData(0)(dispatch, getState);
+        actionFetchTableData(0, newListNode)(dispatch, getState);
     } catch (e) {
         console.debug('Clear search error', e);
     }
@@ -79,3 +84,10 @@ export const actionUpdateVisibleModal = (payload: { visible?: boolean }) => ({
     type: ACTION_CHANGE_VISIBLE_MODAL,
     payload,
 });
+
+export const actionDeleteNode = (node: INodeName) => async (dispatch: Dispatch, getState: () => IRootState) => {
+    const { listNode, data } = getState().table;
+    const newListNode = listNode.filter((item) => item.publicKey !== node.publicKey) || [];
+    const newData = data.filter((item) => item.publicKey !== node.publicKey) || [];
+    dispatch(actionUpdateTableData({ data: newData, listNode: newListNode }));
+};

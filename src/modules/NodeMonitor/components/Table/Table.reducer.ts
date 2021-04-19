@@ -22,6 +22,7 @@ const initialState: ITableReducer = {
     isSearching: false,
     search: '',
     visibleModal: false,
+    listNode: [],
 };
 
 const tableReducer = (
@@ -89,7 +90,7 @@ const tableReducer = (
 const persistConfig = {
     key: 'tableNodeMonitor',
     storage,
-    whitelist: ['search'],
+    whitelist: ['listNode'],
     stateReconciler: autoMergeLevel2,
 };
 

@@ -1,30 +1,30 @@
 import React from 'react';
-import styled, { ITheme } from 'styled-components';
+import styled from 'styled-components';
 import Row from 'src/components/Row';
 import { AppLogo } from 'src/components/Icons';
-import { TextBold } from 'src/components';
-import { useSelector } from 'react-redux';
-import { appTranslateSelector } from 'src/configs';
 import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
-import { NavLink } from 'react-router-dom';
+import SelectedList, { ItemSelectedProps } from 'src/components/SelectedList';
+import { isEmpty } from 'lodash';
+import HeaderTitle from '../HeaderTitle';
 
-const HeaderFrame = styled(Row)`
+export const HeaderFrame = styled(Row)`
     justify-content: space-between;
-    padding: 30px 30px 0 30px;
-    dislay: flex-root;
+    align-items: center;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
     `}
+    .wrapper-selection-list {
+        padding: 30px 0 0;
+    }
 `;
 
-const HeaderFrameRow = styled(Row)`
-    justify-content: space-between;
-    padding: 30px 30px 0 30px;
+export const HeaderFrameRow = styled(Row)<{ displayEnd?: boolean }>`
+    justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : 'space-between')};
+    padding: 30px 0 0;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
-        justify-content: space-between;
         align-items: flex-start;
     `}
 `;
@@ -34,56 +34,34 @@ const WrapLogo = styled(Row)`
     width: fit-content;
 `;
 
-const activeClassName = 'ACTIVE';
-const StyledNavLink = styled(NavLink).attrs({
-    activeClassName,
-})`
-    outline: none;
-    cursor: pointer;
-    text-decoration: none;
-    color: ${({ theme }) => theme.text1};
-    font-size: 15px;
-    width: fit-content;
-    margin: 0 12px;
-    font-weight: 500;
-    border-radius: 15px;
-    padding: 5px 15px;
-    border: none;
-    background: #d8d8d8;
-
-    &.${activeClassName} {
-        font-weight: 600;
-        background-color: ${({ theme }) => theme.black};
-        color: ${({ theme }) => theme.white};
-    }
-`;
-
-const WrapLink = styled(Row)`
-    cursor: pointer;
-    width: fit-content;
-`;
+const HeaderTabs: ItemSelectedProps[] = [
+    { title: 'Validator' },
+    { title: 'Wallet', link: 'https://incognito.org' },
+    { title: 'FAQs', link: 'https://incognito.org/faq' },
+    { title: 'About you', link: 'https://incognito.org/about-you' },
+    { title: 'About us', link: 'https://we.incognito.org/' },
+];
 
 const Header = React.memo(() => {
-    const appTranslate = useSelector(appTranslateSelector);
     if (getMiningPublicKey()) return null;
+    const selectedIndex = 0;
+
+    const onSelectedHeaderTab = (item: ItemSelectedProps) => {
+        if (window && !isEmpty(item.link)) window.open(item.link);
+    };
+
     return (
-        <HeaderFrame>
-            <HeaderFrameRow>
-                <WrapLogo>
-                    <AppLogo />
-                </WrapLogo>
-            </HeaderFrameRow>
-            <HeaderFrameRow>
-                <WrapLink>
-                    <StyledNavLink id="stake-nav-link" to="/node-monitor">
-                        Monitor
-                    </StyledNavLink>
-                    <StyledNavLink id="stake-nav-1" to="/red-list">
-                        Red list
-                    </StyledNavLink>
-                </WrapLink>
-            </HeaderFrameRow>
-        </HeaderFrame>
+        <div style={{ marginLeft: 30, marginRight: 30 }}>
+            <HeaderFrame>
+                <HeaderFrameRow>
+                    <WrapLogo>
+                        <AppLogo />
+                    </WrapLogo>
+                </HeaderFrameRow>
+                <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+            </HeaderFrame>
+            <HeaderTitle />
+        </div>
     );
 });
 

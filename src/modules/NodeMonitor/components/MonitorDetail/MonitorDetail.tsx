@@ -3,12 +3,16 @@ import { BeaconList, CommitteeActivity } from 'src/modules/NodeMonitor/component
 import { useSelector } from 'react-redux';
 import LoadingOverlay from 'src/components/LoadingOverlay';
 import { isEmpty } from 'lodash';
+import { Row } from 'antd';
+import { CopyIcon } from 'src/components/Icons';
+import copy from 'copy-to-clipboard';
+import { TextRegular } from 'src/components';
 import { Styled } from './MonitorDetail.styled';
-import ColumnText from '../ColumnText';
 import { monitorDetailSelector } from './MonitorDetail.selector';
 import enhance from './MonitorDetail.enhance';
 import RowText from '../RowText';
 import { EMPTY_CELL } from '../Table/Table.constants';
+import { getNodeRoleStatus } from '../Table/Table.utils';
 
 interface IProps {
     isWebview: boolean;
@@ -23,34 +27,52 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         </>
     );
 
-    const getStatus = () => {
-        if (!node) return '';
-        if (
-            isEmpty(node?.role) ||
-            node?.role === '-' ||
-            node.role === 'Not stake' ||
-            node.committeeChain === 'Not stake'
-        )
-            return 'Not stake';
+    const renderRightMpk = () => {
+        return (
+            <Row>
+                <TextRegular color="text4">{node?.ellipsisMpk}</TextRegular>
+                <CopyIcon
+                    onClick={() => {
+                        copy(node?.publicKey || '');
+                    }}
+                />
+            </Row>
+        );
+    };
 
-        const isBeacon = node.committeeChain === 'beacon';
-        let shardName = `${node?.role}${isBeacon ? '' : ' Shard'} ${node.committeeChain}`;
-        if (!node?.autoStake) {
-            shardName += ` (unstaking)`;
-        }
-        if (node.committeeChain === EMPTY_CELL) return node?.role;
-        return shardName;
+    const renderRightStatus = () => {
+        const { nodeRole, colorRole, committee, unStakeStatus } = getNodeRoleStatus(node!) as any;
+        return (
+            <Row>
+                <TextRegular color={colorRole || 'text4'}>{nodeRole}</TextRegular>
+                {!isEmpty(committee) && (
+                    <TextRegular color="text4" ml="8px">
+                        {committee}
+                    </TextRegular>
+                )}
+                {!isEmpty(unStakeStatus) && (
+                    <TextRegular color="text4" ml="8px">
+                        {unStakeStatus}
+                    </TextRegular>
+                )}
+            </Row>
+        );
+    };
+
+    const renderRightSyncState = () => {
+        const isOffline = node?.status === 'Offline';
+        const status = isOffline ? 'Offline' : node?.syncState || EMPTY_CELL;
+        return <TextRegular color={`${isOffline ? 'red1' : 'text4'}`}>{status}</TextRegular>;
     };
 
     return (
         <Styled isWebview={isWebview}>
             {!!node && (
-                <>
-                    {!!node.name && <ColumnText title="Name" content={node.name} />}
-                    <ColumnText title="Validator Public key" content={node.publicKey} />
-                    <ColumnText title="Status" content={getStatus()} />
-                    <RowText title="Sync state:" content={node.status === 'Offline' ? 'Offline' : node.syncState} />
-                </>
+                <div style={{ marginBottom: 25 }}>
+                    <RowText title="Validator Public key" rightComponent={renderRightMpk()} />
+                    <RowText title="Status" rightComponent={renderRightStatus()} />
+                    <RowText title="Sync state:" rightComponent={renderRightSyncState()} />
+                </div>
             )}
             {fetching ? <LoadingOverlay /> : renderContent()}
         </Styled>

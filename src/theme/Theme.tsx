@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { Text, TextProps } from 'rebass';
 import { Colors } from './Theme.styled';
 import { darkModeSelector } from './Theme.selector';
+import { appDomain } from '../configs/Configs.Envs';
 
 const MEDIA_WIDTHS = {
     upToExtraSmall: 500,
@@ -41,8 +42,8 @@ export function colors(darkMode: boolean): Colors {
         // table
         headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
         hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
-        darkRow: darkMode ? '#fafafa' : '#fafafa',
-        lightRow: darkMode ? '#e0e0e0' : '#e0e0e0',
+        darkRow: darkMode ? '#F5F5F5' : '#F5F5F5',
+        lightRow: darkMode ? white : white,
 
         // modal
         modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
@@ -54,9 +55,14 @@ export function colors(darkMode: boolean): Colors {
         text1: darkMode ? white : black,
         text2: darkMode ? '#9e9e9e' : '#9e9e9e',
         text3: darkMode ? '#616161' : '#616161',
+        text4: darkMode ? '#797979' : '#797979',
 
         green1: darkMode ? '#34C759' : '#34C759',
         red1: darkMode ? '#FE4D4D' : '#FE4D4D',
+        gray1: darkMode ? '#D8D8D8' : '#D8D8D8',
+
+        tooltipBg: black,
+        tooltipText: white,
     };
 }
 
@@ -107,16 +113,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const FixedGlobalStyle = createGlobalStyle`
-html, input, textarea, button {
-  font-family: 'Inter', sans-serif;
-  font-display: fallback;
-}
-@supports (font-variation-settings: normal) {
-  html, input, textarea, button {
-    font-family: 'Inter var', sans-serif;
-  }
-}
-
 html,
 body {
   margin: 0;
@@ -126,6 +122,10 @@ body {
  a {
    color: ${colors(false).black}; 
  }
+.modified-item:hover {
+    border-bottom: 2px solid transparent !important;
+    color: inherit !important;
+}
 
 * {
   box-sizing: border-box;
@@ -146,8 +146,58 @@ html {
 `;
 
 export const ThemedGlobalStyle = createGlobalStyle`
+    * {
+        font-family: 'SF-Pro-Display';
+        font-display: swap;
+    }
     body {
       min-height: 100vh;
       box-sizing: border-box;
     }
+
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Bold.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 700;
+    }
+
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Medium.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 500;
+    }
+    
+    @font-face {
+        font-family: 'SF-Pro-Display';
+        src: url('${appDomain}/assets/fonts/SF-Pro-Display/SF-Pro-Display-Regular.otf');
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+    }
+
+    .table-row {
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    .table-row-light {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.lightRow};
+    }
+    
+    .table-row-dark {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
+    }
+    
+    .ant-pagination-item-active {
+        border-color: black;
+    }
+    
+    .ant-pagination-item-active a {
+        color: black;
+    }
+    
 `;

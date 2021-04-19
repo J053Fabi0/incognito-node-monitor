@@ -1,47 +1,25 @@
 import styled, { ITheme } from 'styled-components';
 
 export const Styled = styled.div`
+    height: 100%;
+    overflow: auto;
     .card {
         height: 100%;
         overflow: auto;
     }
-    .table-cell {
-        min-width: 100px;
-        :hover {
-            background-color: ${({ theme }: { theme: ITheme }) => theme.hoverRow};
-        }
+    .row {
+        text-align: center;
+        font-weight: 600;
     }
-    .dark-row {
+    .table-row-light {
+        background-color: ${({ theme }: { theme: ITheme }) => theme.lightRow};
+    }
+    .table-row-dark {
         background-color: ${({ theme }: { theme: ITheme }) => theme.darkRow};
     }
-    .table-row {
-        cursor: pointer;
-        :hover {
-            background-color: ${({ theme }: { theme: ITheme }) => theme.hoverRow};
-        }
-        > td {
-            text-align: center;
-            line-break: anywhere;
-            max-width: 200px;
-        }
-    }
-    .header-row {
-        background-color: ${({ theme }: { theme: ITheme }) => theme.headerRow};
-        th {
-            font-weight: bold;
-            text-align: center;
-        }
-    }
-    .wrap-loading {
-        height: 100px;
-    }
-    .pagination {
-        padding-left: 0;
-        position: absolute;
-        right: 15px;
-    }
-    .break-line {
-        white-space: pre;
+    thead > tr > th {
+        text-align: center;
+        font-weight: 600;
     }
 `;
 
@@ -49,6 +27,14 @@ export const ModalWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    .header-row {
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 20px;
+        align-items: center;
+        margin-top: 15px;
+        margin-bottom: 8px;
+    }
 `;
 
 export const CloseWrapper = styled.div`

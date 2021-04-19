@@ -35,11 +35,11 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
         margin: 0 0 2rem 0;
         background-color: ${({ theme }) => theme.white};
         box-shadow: 0 4px 8px 0 ${({ theme }) => transparentize(0.95, '#000')};
-        padding: 0px;
+        padding: 0;
         width: 50vw;
         overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
         overflow-x: hidden;
-        max-width: 600px;
+        max-width: 500px;
         ${({ maxHeight }) =>
             maxHeight &&
             css`

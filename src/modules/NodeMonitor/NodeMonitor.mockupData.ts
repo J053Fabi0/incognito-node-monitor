@@ -2,10 +2,10 @@ export const MockupColumns: any = [
     { accessor: 'name', Header: 'Name' },
     { accessor: 'ellipsisMpk', Header: 'Validator Public key' },
     { accessor: 'role', Header: 'Role' },
-    { accessor: 'committeeChain', Header: 'Committee Chain' },
+    { accessor: 'committeeChain', Header: 'Committee shard' },
     { accessor: 'status', Header: 'Status' },
     { accessor: 'syncState', Header: 'Sync State' },
-    { accessor: 'voteStats', Header: 'Vote Stats' },
+    { accessor: 'voteStats', Header: 'Vote Stats (%)' },
 ];
 
 export const MockupColumnsCommittee: any = [

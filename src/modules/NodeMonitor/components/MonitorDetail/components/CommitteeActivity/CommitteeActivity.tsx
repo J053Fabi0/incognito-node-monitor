@@ -1,19 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { MockupColumnsCommittee } from 'src/modules/NodeMonitor/NodeMonitor.mockupData';
 import { monitorDetailSelector } from 'src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.selector';
-import Table from 'src/components/Table';
 import { isEmpty } from 'lodash';
-import { Styled } from './styled';
+import AntdTable from 'src/components/Table/AntdTable';
+import { COLUMN_TABLE_COMMITTEE_ACTIVITY } from 'src/modules/NodeMonitor/NodeMonitor.data';
 
 const CommitteeActivity = React.memo(() => {
     const { committee } = useSelector(monitorDetailSelector);
     if (isEmpty(committee)) return null;
-    return (
-        <Styled>
-            <Table data={committee} columns={MockupColumnsCommittee} showHeader />
-        </Styled>
-    );
+    return <AntdTable columns={COLUMN_TABLE_COMMITTEE_ACTIVITY} data={committee} />;
 });
 
 export default CommitteeActivity;
