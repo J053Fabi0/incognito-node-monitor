@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Row } from 'antd';
 import { TrashIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
+import { MESSAGE_CONSTANTS } from 'src/constants/App.constants';
+import { TextRegular } from 'src/components';
+import { ellipsisRight } from 'src/utils/ellipsis';
 import { getNodeRoleStatus } from './components/Table/Table.utils';
-import { TextRegular } from '../../components';
-import { ellipsisRight } from '../../utils/ellipsis';
 
 export const TableMonitorKey = {
     name: {
@@ -88,9 +89,16 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         title: TableMonitorKey.role.title,
         key: TableMonitorKey.role.key,
         render: (text: string, record: any) => {
-            const { colorRole, nodeRole, committee } = getNodeRoleStatus(record) as any;
+            const { isCommittee, nodeRole, committee } = getNodeRoleStatus(record) as any;
             return (
-                <div style={{ color: colorRole }}>{`${nodeRole} ${!isEmpty(committee) ? `\n${committee}` : ''}`}</div>
+                <Row style={{ justifyContent: 'center' }}>
+                    <TextRegular style={{ color: isCommittee ? '#34C759' : 'text1' }}>{`${nodeRole}`}</TextRegular>
+                    {!isEmpty(committee) && (
+                        <TextRegular ml="8px" color="text4">
+                            {committee}
+                        </TextRegular>
+                    )}
+                </Row>
             );
         },
     },
@@ -98,6 +106,10 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         dataIndex: TableMonitorKey.status.key,
         title: TableMonitorKey.status.title,
         key: TableMonitorKey.status.key,
+        render: (text: string) => {
+            const color = text === 'Online' ? '#34C759' : text === MESSAGE_CONSTANTS.offline ? 'red1' : 'text1';
+            return <TextRegular color={color}>{`${text}`}</TextRegular>;
+        },
     },
     {
         dataIndex: TableMonitorKey.syncState.key,

@@ -1,4 +1,5 @@
-import { trim, uniqBy, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
+import { MESSAGE_CONSTANTS } from 'src/constants/App.constants';
 import { INodeName, ITableData } from './Table.interface';
 import { EMPTY_CELL } from './Table.constants';
 
@@ -62,26 +63,35 @@ export const getVoteStat = (votes: any) => (votes || []).join('\n');
 
 export const getNodeRoleStatus = (node: ITableData) => {
     if (!node) return '';
-    if (isEmpty(node?.role) || node?.role === '-' || node.role === 'Not stake' || node.committeeChain === 'Not stake')
+    if (
+        isEmpty(node?.role) ||
+        node?.role === EMPTY_CELL ||
+        node.role === MESSAGE_CONSTANTS.notStake ||
+        node.committeeChain === MESSAGE_CONSTANTS.notStake
+    )
         return {
-            nodeRole: 'Not stake',
+            nodeRole: MESSAGE_CONSTANTS.notStake,
             committee: '',
             unStakeStatus: '',
+            isCommittee: false,
         };
 
-    const isBeacon = node.committeeChain === 'beacon';
+    const isBeacon = node.committeeChain === MESSAGE_CONSTANTS.beacon.toLowerCase();
     const nodeRole = node?.role;
-    const committee = `${isBeacon ? '' : ' Shard'} ${node.committeeChain}`;
-    const unStakeStatus = !node?.autoStake ? 'unstaking' : '';
+    const committee = `${isBeacon ? '' : ` ${MESSAGE_CONSTANTS.shard}`} ${node.committeeChain}`;
+    const unStakeStatus = !node?.autoStake ? `${MESSAGE_CONSTANTS.unstaking.toLowerCase()}` : '';
     if (node.committeeChain === EMPTY_CELL)
         return {
             nodeRole,
             committee: '',
             unStakeStatus: '',
+            isCommittee: false,
         };
+    const isCommittee = nodeRole?.toLowerCase() === MESSAGE_CONSTANTS.committee.toLowerCase();
     return {
         nodeRole,
-        colorRole: nodeRole?.toLowerCase() === 'committee' ? '#34C759' : 'black',
+        colorRole: isCommittee ? '#34C759' : 'text4',
+        isCommittee,
         committee,
         unStakeStatus,
     };

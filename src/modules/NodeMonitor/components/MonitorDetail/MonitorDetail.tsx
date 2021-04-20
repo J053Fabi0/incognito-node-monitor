@@ -7,6 +7,7 @@ import { Row } from 'antd';
 import { CopyIcon } from 'src/components/Icons';
 import copy from 'copy-to-clipboard';
 import { TextRegular } from 'src/components';
+import { MESSAGE_CONSTANTS } from 'src/constants/App.constants';
 import { Styled } from './MonitorDetail.styled';
 import { monitorDetailSelector } from './MonitorDetail.selector';
 import enhance from './MonitorDetail.enhance';
@@ -40,7 +41,7 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         );
     };
 
-    const renderRightStatus = () => {
+    const renderRightRole = () => {
         const { nodeRole, colorRole, committee, unStakeStatus } = getNodeRoleStatus(node!) as any;
         return (
             <Row>
@@ -59,10 +60,15 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         );
     };
 
+    const renderRightStatus = () => {
+        const status = node?.status;
+        const color =
+            node?.status === 'Online' ? '#34C759' : node?.status === MESSAGE_CONSTANTS.offline ? 'red1' : 'text4';
+        return <TextRegular color={color}>{status}</TextRegular>;
+    };
+
     const renderRightSyncState = () => {
-        const isOffline = node?.status === 'Offline';
-        const status = isOffline ? 'Offline' : node?.syncState || EMPTY_CELL;
-        return <TextRegular color={`${isOffline ? 'red1' : 'text4'}`}>{status}</TextRegular>;
+        return <TextRegular color="text4">{node?.syncState}</TextRegular>;
     };
 
     return (
@@ -70,8 +76,9 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
             {!!node && (
                 <div style={{ marginBottom: 25 }}>
                     <RowText title="Validator Public key" rightComponent={renderRightMpk()} />
-                    <RowText title="Role" rightComponent={renderRightStatus()} />
-                    <RowText title="Status" rightComponent={renderRightSyncState()} />
+                    <RowText title="Status" rightComponent={renderRightStatus()} />
+                    <RowText title="Role" rightComponent={renderRightRole()} />
+                    <RowText title="Sync state" rightComponent={renderRightSyncState()} />
                 </div>
             )}
             {fetching ? <LoadingOverlay /> : renderContent()}
