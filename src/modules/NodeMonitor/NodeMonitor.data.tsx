@@ -149,6 +149,9 @@ export const COLUMN_TABLE_BEACON = [
         dataIndex: TableMonitorKey.shardName.key,
         title: TableMonitorKey.shardName.title,
         key: TableMonitorKey.shardName.key,
+        render: (text: string) => {
+            return <TextRegular minWidth="70px">{text}</TextRegular>;
+        },
     },
     {
         dataIndex: TableMonitorKey.blockHeight.key,
