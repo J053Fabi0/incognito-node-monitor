@@ -84,7 +84,7 @@ export const getNodeRoleStatus = (node: ITableData) => {
         return {
             nodeRole,
             committee: '',
-            unStakeStatus: '',
+            unStakeStatus,
             isCommittee: false,
         };
     const isCommittee = nodeRole?.toLowerCase() === MESSAGE_CONSTANTS.committee.toLowerCase();
