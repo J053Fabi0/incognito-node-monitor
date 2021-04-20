@@ -16,8 +16,6 @@ const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
         display: flex;
         align-items: center;
         justify-content: center;
-
-        background-color: ${({ theme }) => theme.modalBG};
     }
 `;
 
