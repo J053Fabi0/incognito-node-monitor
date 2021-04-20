@@ -49,6 +49,7 @@ const SelectedList = (props: IProps) => {
                 onClick={() => {
                     onSelect && onSelect(item);
                 }}
+                key={item?.title}
             >
                 {item?.title}
             </WrapperLink>

@@ -24,7 +24,11 @@ const MobileDrawer = (props: IProps) => {
                     {item.title}
                 </TextMedium>
             );
-        return <div onClick={() => onSelect && onSelect(item)}>{component}</div>;
+        return (
+            <div key={item.title} onClick={() => onSelect && onSelect(item)}>
+                {component}
+            </div>
+        );
     };
     return (
         <Drawer
