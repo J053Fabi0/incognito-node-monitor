@@ -3,7 +3,6 @@ import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
 import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
 import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
 import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
-import SelectionTable from 'src/components/SelectionTable';
 import { Table } from 'antd';
 import { getColumnsNodeMonitor } from 'src/modules/NodeMonitor/NodeMonitor.data';
 import { useDispatch } from 'react-redux';
@@ -58,7 +57,6 @@ const TableNodeMonitor = (props: ITableNodeProps & any) => {
     return (
         <Styled>
             <SearchRow />
-            <SelectionTable />
             <div className="card">
                 <Table
                     columns={columns}

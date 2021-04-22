@@ -76,7 +76,7 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         title: TableMonitorKey.name.title,
         key: TableMonitorKey.name.key,
         render: (text: string) => {
-            return <TextRegular>{ellipsisRight({ str: text, limit: 15 })}</TextRegular>;
+            return <TextRegular>{ellipsisRight({ str: text, limit: 22 })}</TextRegular>;
         },
     },
     {

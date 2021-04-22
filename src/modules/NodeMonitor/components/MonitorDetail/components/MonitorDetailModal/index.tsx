@@ -21,7 +21,7 @@ const MonitorDetailModal = ({ visible, onClose }: IProps) => {
             <ModalWrapper>
                 <Row className="header-row">
                     <TextMedium color="text1" fontSize="18px">
-                        {ellipsisRight({ str: node?.name || '', limit: 15 })}
+                        {ellipsisRight({ str: node?.name || '', limit: 22 })}
                     </TextMedium>
                     <CloseWrapper onClick={onClose}>
                         <CloseIcon width="16" height="16" />

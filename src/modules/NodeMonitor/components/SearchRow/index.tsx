@@ -16,8 +16,12 @@ function Alert(props: any) {
 const Wrapper = styled(Row)`
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 50px;
+    margin-top: 30px;
     ${({ theme }) => theme.mediaWidth.upToSmall`
         flex-direction: column;
+        margin-bottom: 20px;
+        margin-top: 0px;
     `}
     .btn-container {
         width: 120px;
