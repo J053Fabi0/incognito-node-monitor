@@ -90,7 +90,7 @@ export const getNodeRoleStatus = (node: ITableData) => {
     const isCommittee = nodeRole?.toLowerCase() === MESSAGE_CONSTANTS.committee.toLowerCase();
     return {
         nodeRole,
-        colorRole: isCommittee ? '#34C759' : 'text4',
+        colorRole: isCommittee ? '#34C759' : 'text1',
         isCommittee,
         committee,
         unStakeStatus,

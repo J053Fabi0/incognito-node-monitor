@@ -8,7 +8,6 @@ import { isEmpty } from 'lodash';
 import MobileDrawer from 'src/components/Drawer';
 import MenuIcon from 'src/components/Icons/Menu/index';
 import CloseIcon from 'src/components/Icons/Close/index';
-import HeaderTitle from '../HeaderTitle';
 
 export const HeaderFrame = styled(Row)`
     justify-content: space-between;
@@ -52,36 +51,33 @@ const WrapLogo = styled(Row)`
 `;
 
 export const HeaderTabs: ItemSelectedProps[] = [
-    { title: 'Validator' },
-    { title: 'Wallet', link: 'https://incognito.org' },
+    { title: 'My nodes', key: '/node-monitor' },
+    { title: 'Inactive nodes', key: '/red-list' },
+    { title: 'User guide', link: 'https://we.incognito.org/t/how-to-use-the-node-monitor/11684' },
     { title: 'FAQs', link: 'https://incognito.org/faq' },
-    { title: 'About you', link: 'https://incognito.org/about-you' },
-    { title: 'About us', link: 'https://we.incognito.org/' },
 ];
 
 const Header = React.memo(() => {
-    const [selectedIndex] = React.useState(0);
     const [visibleModal, setVisibleModal] = React.useState(false);
 
     const onSelectedHeaderTab = (item: ItemSelectedProps) => {
-        if (window && !isEmpty(item.link)) return window.open(item.link);
         setVisibleModal(false);
+        if (window && !isEmpty(item.link)) return window.open(item.link);
     };
 
     const onChangeModalState = () => setVisibleModal(!visibleModal);
+
+    const renderRightIcon = () =>
+        visibleModal ? <CloseIcon onClick={onChangeModalState} /> : <MenuIcon onClick={onChangeModalState} />;
 
     const renderMenuList = () => {
         return (
             <>
                 <div className="small-screen-right">
-                    {visibleModal ? (
-                        <CloseIcon onClick={onChangeModalState} />
-                    ) : (
-                        <MenuIcon onClick={onChangeModalState} />
-                    )}
-                    <MobileDrawer visible={visibleModal} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+                    {renderRightIcon()}
+                    <MobileDrawer visible={visibleModal} onSelect={onSelectedHeaderTab} />
                 </div>
-                <SelectedList data={HeaderTabs} selectedIndex={selectedIndex} onSelect={onSelectedHeaderTab} />
+                <SelectedList data={HeaderTabs} onSelect={onSelectedHeaderTab} />
             </>
         );
     };
@@ -97,7 +93,6 @@ const Header = React.memo(() => {
                 </HeaderFrameRow>
                 {renderMenuList()}
             </HeaderFrame>
-            <HeaderTitle />
         </div>
     );
 });
