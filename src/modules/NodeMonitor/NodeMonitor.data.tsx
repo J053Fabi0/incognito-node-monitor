@@ -14,7 +14,7 @@ export const TableMonitorKey = {
     },
     shortMpk: {
         key: 'ellipsisMpk',
-        title: 'Validator Public key',
+        title: 'Validator public key',
     },
     role: {
         key: 'role',

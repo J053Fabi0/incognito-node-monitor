@@ -76,7 +76,7 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         <Styled isWebview={isWebview}>
             {!!node && (
                 <div style={{ marginBottom: 25 }}>
-                    <RowText title="Validator Public key" rightComponent={renderRightMpk()} />
+                    <RowText title="Validator public key" rightComponent={renderRightMpk()} />
                     <RowText title="Status" rightComponent={renderRightStatus()} />
                     <RowText title="Role" rightComponent={renderRightRole()} />
                     <RowText title="Sync state" rightComponent={renderRightSyncState()} />
