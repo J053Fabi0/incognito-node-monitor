@@ -43,7 +43,6 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
 
     const renderRightRole = () => {
         const { nodeRole, colorRole, committee, unStakeStatus } = getNodeRoleStatus(node!) as any;
-        console.log('SANG TEST: ', colorRole);
         return (
             <Row>
                 <TextRegular color={colorRole}>{nodeRole}</TextRegular>
@@ -79,6 +78,10 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
                     <RowText title="Validator public key" rightComponent={renderRightMpk()} />
                     <RowText title="Status" rightComponent={renderRightStatus()} />
                     <RowText title="Role" rightComponent={renderRightRole()} />
+                    <RowText
+                        title="Next event"
+                        rightComponent={<TextRegular color="text4">{node?.nextEventMsg.toLowerCase()}</TextRegular>}
+                    />
                     <RowText title="Sync state" rightComponent={renderRightSyncState()} />
                 </div>
             )}

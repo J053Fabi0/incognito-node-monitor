@@ -31,6 +31,7 @@ const formatNodeInfo = (node: any) => {
         ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 6 }) || EMPTY_CELL,
         role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
+        nextEventMsg: node?.NextEventMsg || EMPTY_CELL,
     };
 };
 

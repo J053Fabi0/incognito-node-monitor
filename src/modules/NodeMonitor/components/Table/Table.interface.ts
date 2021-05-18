@@ -21,6 +21,7 @@ export interface ITableData {
     role: string;
     ellipsisMpk: string;
     autoStake: boolean;
+    nextEventMsg: string;
 }
 
 export interface INodeName {
