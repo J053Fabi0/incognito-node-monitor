@@ -42,11 +42,11 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
     };
 
     const renderRightRole = () => {
-        const { nodeRole, colorRole, committee, unStakeStatus, slashed } = getNodeRoleStatus(node!) as any;
+        const { nodeRole, colorRole, committee, unStakeStatus } = getNodeRoleStatus(node!) as any;
         return (
             <Row>
                 <TextRegular color={colorRole}>{nodeRole}</TextRegular>
-                {nodeRole === 'Not stake' && slashed && (
+                {nodeRole === 'Not stake' && node?.slashed && (
                     <TextRegular ml="8px" color="red">
                         Slashed
                     </TextRegular>
@@ -72,6 +72,14 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
         return <TextRegular color={color}>{status}</TextRegular>;
     };
 
+    const renderRightVersion = () => {
+        if (node?.status !== 'Online') {
+            return <TextRegular>-</TextRegular>;
+        }
+        let color = node?.oldVersion || !node?.version ? '#ff9500' : '#34C759';
+        return <TextRegular color={color}>{node?.version || '-'}</TextRegular>;
+    };
+
     const renderRightSyncState = () => {
         return <TextRegular color="text4">{node?.syncState}</TextRegular>;
     };
@@ -82,6 +90,7 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
                 <div style={{ marginBottom: 25 }}>
                     <RowText title="Validator public key" rightComponent={renderRightMpk()} />
                     <RowText title="Status" rightComponent={renderRightStatus()} />
+                    <RowText title="Code version" rightComponent={renderRightVersion()} />
                     <RowText title="Role" rightComponent={renderRightRole()} />
                     <RowText
                         title="Next event"

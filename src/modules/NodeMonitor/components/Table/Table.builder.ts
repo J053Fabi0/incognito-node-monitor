@@ -32,7 +32,9 @@ const formatNodeInfo = (node: any) => {
         role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
         nextEventMsg: node?.NextEventMsg || EMPTY_CELL,
-        slashed: node?.slashed,
+        slashed: node?.IsSlashed,
+        oldVersion: node?.IsOldVersion,
+        version: node?.Version,
     };
 };
 
@@ -125,7 +127,7 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
         let reward = isNumber(item?.Reward) ? item?.Reward : EMPTY_CELL;
         if (reward !== EMPTY_CELL) {
             /** always PRV */
-            reward = convert.toHumanAmount({ originalAmount: reward, decimals: 9 });
+            reward = convert.toHumanAmount({ originalAmount: reward, decimals: 9 }).toFixed(4);
         }
         return {
             epoch: item?.Epoch || EMPTY_CELL,
@@ -135,6 +137,7 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
             totalVote: item?.TotalVote || EMPTY_CELL,
             voteCount,
             chainId: item?.ChainID === '' ? EMPTY_CELL : item?.ChainID,
+            slashed: item?.IsSlashed,
         };
     });
 };

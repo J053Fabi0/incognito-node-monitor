@@ -41,4 +41,5 @@ export interface ICommittee {
     totalPropose: string;
     totalVote: string;
     chainId: string;
+    slashed: boolean;
 }

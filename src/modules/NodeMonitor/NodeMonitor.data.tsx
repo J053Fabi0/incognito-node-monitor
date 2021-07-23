@@ -121,9 +121,20 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         dataIndex: TableMonitorKey.status.key,
         title: TableMonitorKey.status.title,
         key: TableMonitorKey.status.key,
-        render: (text: string) => {
+        render: (text: string, record: any) => {
             const color = text === 'Online' ? '#34C759' : text === MESSAGE_CONSTANTS.offline ? 'red1' : 'text1';
-            return <TextRegular color={color}>{`${text}`}</TextRegular>;
+            return (
+                <div>
+                    <Row style={{ justifyContent: 'center' }}>
+                        <TextRegular color={color}>{`${text}`}</TextRegular>
+                    </Row>
+                    {text === 'Online' && record.oldVersion && (
+                        <Row style={{ justifyContent: 'center' }}>
+                            <TextRegular color="#ff9500">Not Latest Version</TextRegular>
+                        </Row>
+                    )}
+                </div>
+            );
         },
     },
     {

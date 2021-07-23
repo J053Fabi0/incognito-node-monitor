@@ -23,6 +23,8 @@ export interface ITableData {
     autoStake: boolean;
     nextEventMsg: string;
     slashed: boolean;
+    oldVersion: boolean;
+    version: string;
 }
 
 export interface INodeName {
