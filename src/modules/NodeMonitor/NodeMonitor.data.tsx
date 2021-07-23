@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Row } from 'antd';
-import { TrashIcon } from 'src/components/Icons';
+import { TrashIcon, CopyIcon } from 'src/components/Icons';
 import { isEmpty } from 'lodash';
 import { MESSAGE_CONSTANTS } from 'src/constants/App.constants';
 import { TextRegular } from 'src/components';
@@ -90,15 +90,30 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
         key: TableMonitorKey.role.key,
         render: (text: string, record: any) => {
             const { isCommittee, nodeRole, committee } = getNodeRoleStatus(record) as any;
+            let timeRegex = /(\d+)/;
+            let match = timeRegex.exec(record.nextEventMsg);
+
             return (
-                <Row style={{ justifyContent: 'center' }}>
-                    <TextRegular style={{ color: isCommittee ? '#34C759' : 'text1' }}>{`${nodeRole}`}</TextRegular>
-                    {!isEmpty(committee) && (
-                        <TextRegular ml="8px" color="text4">
-                            {committee}
-                        </TextRegular>
+                <div>
+                    <Row style={{ justifyContent: 'center' }}>
+                        <TextRegular style={{ color: isCommittee ? '#34C759' : 'text1' }}>{`${nodeRole}`}</TextRegular>
+                        {!isEmpty(committee) && (
+                            <TextRegular ml="8px" color="text4">
+                                {committee}
+                            </TextRegular>
+                        )}
+                    </Row>
+                    {nodeRole === 'Not stake' && record.slashed && (
+                        <Row style={{ justifyContent: 'center' }}>
+                            <TextRegular color="red">Slashed</TextRegular>
+                        </Row>
                     )}
-                </Row>
+                    {match && (
+                        <Row style={{ justifyContent: 'center' }}>
+                            <TextRegular color="text4">for {`${match[1]}`} epochs</TextRegular>
+                        </Row>
+                    )}
+                </div>
             );
         },
     },
@@ -189,5 +204,13 @@ export const COLUMN_TABLE_COMMITTEE_ACTIVITY = [
         dataIndex: TableMonitorKey.voteCount.key,
         title: TableMonitorKey.voteCount.title,
         key: TableMonitorKey.voteCount.key,
+        render: (text: string, record: any) => {
+            return (
+                <div>
+                    {record.voteCount}
+                    {record.slashed && <TextRegular color="red"> Slashed</TextRegular>}
+                </div>
+            );
+        },
     },
 ];

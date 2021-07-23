@@ -22,6 +22,7 @@ export interface ITableData {
     ellipsisMpk: string;
     autoStake: boolean;
     nextEventMsg: string;
+    slashed: boolean;
 }
 
 export interface INodeName {

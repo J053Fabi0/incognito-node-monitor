@@ -42,10 +42,15 @@ const MonitorDetail = React.memo(({ isWebview }: IProps & any) => {
     };
 
     const renderRightRole = () => {
-        const { nodeRole, colorRole, committee, unStakeStatus } = getNodeRoleStatus(node!) as any;
+        const { nodeRole, colorRole, committee, unStakeStatus, slashed } = getNodeRoleStatus(node!) as any;
         return (
             <Row>
                 <TextRegular color={colorRole}>{nodeRole}</TextRegular>
+                {nodeRole === 'Not stake' && slashed && (
+                    <TextRegular ml="8px" color="red">
+                        Slashed
+                    </TextRegular>
+                )}
                 {!isEmpty(committee) && (
                     <TextRegular color="text4" ml="8px">
                         {committee}

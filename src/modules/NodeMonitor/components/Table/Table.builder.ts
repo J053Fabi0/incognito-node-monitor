@@ -32,6 +32,7 @@ const formatNodeInfo = (node: any) => {
         role: capitalize(role) || EMPTY_CELL,
         autoStake: node?.AutoStake,
         nextEventMsg: node?.NextEventMsg || EMPTY_CELL,
+        slashed: node?.slashed,
     };
 };
 
