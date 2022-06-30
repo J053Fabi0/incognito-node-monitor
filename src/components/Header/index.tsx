@@ -12,6 +12,9 @@ import CloseIcon from 'src/components/Icons/Close/index';
 export const HeaderFrame = styled(Row)`
     justify-content: space-between;
     align-items: center;
+    padding: 0 30px 0 30px;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
     .small-screen-right {
         display: none;
     }
@@ -27,7 +30,7 @@ export const HeaderFrame = styled(Row)`
         }
     `}
     .wrapper-selection-list {
-        padding: 30px 0 0;
+        padding: 15px 0 15px 0;
     }
     .menu-icon {
         margin-top: 22px;
@@ -42,7 +45,7 @@ export const HeaderFrame = styled(Row)`
 export const HeaderFrameRow = styled(Row)<{ displayEnd?: boolean }>`
     justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : 'space-between')};
     width: fit-content;
-    padding: 30px 0 0;
+    padding: 15px 15px 0 0;
 `;
 
 const WrapLogo = styled(Row)`
@@ -84,16 +87,14 @@ const Header = React.memo(() => {
 
     if (getMiningPublicKey()) return null;
     return (
-        <div style={{ marginLeft: 30, marginRight: 30 }}>
-            <HeaderFrame>
-                <HeaderFrameRow>
-                    <WrapLogo>
-                        <AppLogo />
-                    </WrapLogo>
-                </HeaderFrameRow>
-                {renderMenuList()}
-            </HeaderFrame>
-        </div>
+        <HeaderFrame>
+            <HeaderFrameRow>
+                <WrapLogo>
+                    <AppLogo />
+                </WrapLogo>
+            </HeaderFrameRow>
+            {renderMenuList()}
+        </HeaderFrame>
     );
 });
 

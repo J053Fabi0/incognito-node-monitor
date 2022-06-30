@@ -37,7 +37,7 @@ const WrapperLink = styled.div<{ selected: boolean }>`
         color: ${({ theme }) => theme.text4};
     }
     background-color: ${({ selected, theme }: { selected: boolean; theme: ITheme }) =>
-        selected ? theme.black : theme.white};
+        selected ? theme.black : 'transparent'};
     color: ${({ selected, theme }: { selected: boolean; theme: ITheme }) => (selected ? theme.white : theme.text5)};
     ${({ theme }) => theme.mediaWidth.upToSmall`
         padding: 4px 10px;
