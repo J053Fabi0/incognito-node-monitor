@@ -122,7 +122,7 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
     return data.map((item: any) => {
         let voteCount: any = EMPTY_CELL;
         if (item?.TotalPropose) {
-            voteCount = Math.round((item?.TotalVote / item?.TotalPropose) * 100);
+            voteCount = Math.floor((item?.TotalVote / item?.TotalPropose) * 100);
         }
         let reward = isNumber(item?.Reward) ? item?.Reward : EMPTY_CELL;
         if (reward !== EMPTY_CELL) {
