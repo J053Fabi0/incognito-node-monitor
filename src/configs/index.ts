@@ -1,2 +1,2 @@
-export * from './Configs.reducer';
-export * from './Configs.selector';
+export * from "./Configs.reducer";
+export * from "./Configs.selector";

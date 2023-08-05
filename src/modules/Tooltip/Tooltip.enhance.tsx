@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { compose } from 'recompose';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { compose } from "recompose";
+import { useDispatch } from "react-redux";
 // import useOutsideRef from 'src/hooks/useDetectClickOutside';
-import { ITooltipProps } from './Tooltip.interface';
-import { actionRemoveTooltip } from './Tooltip.actions';
+import { ITooltipProps } from "./Tooltip.interface";
+import { actionRemoveTooltip } from "./Tooltip.actions";
 
 /**
  * Get first scrollable parent
@@ -13,7 +13,7 @@ import { actionRemoveTooltip } from './Tooltip.actions';
 function getScrollParent(node: any): HTMLElement | null | any {
   const isElement = node instanceof HTMLElement;
   const overflowY = isElement && window.getComputedStyle(node).overflowY;
-  const isScrollable = overflowY !== 'visible' && overflowY !== 'hidden';
+  const isScrollable = overflowY !== "visible" && overflowY !== "hidden";
 
   if (!node) {
     return null;
@@ -45,13 +45,13 @@ const enhance = (WrappedComponent: React.FunctionComponent<ITooltipProps>) => (p
       const handleRemoveTooltipOnScroll = () => {
         dispatch(actionRemoveTooltip(id));
         clearTimeout(timeoutTimer);
-        parentScrollView.removeEventListener('scroll', handleRemoveTooltipOnScroll);
+        parentScrollView.removeEventListener("scroll", handleRemoveTooltipOnScroll);
       };
 
-      parentScrollView.addEventListener('scroll', handleRemoveTooltipOnScroll);
+      parentScrollView.addEventListener("scroll", handleRemoveTooltipOnScroll);
 
       return () => {
-        parentScrollView.removeEventListener('scroll', handleRemoveTooltipOnScroll);
+        parentScrollView.removeEventListener("scroll", handleRemoveTooltipOnScroll);
         clearTimeout(timeoutTimer);
       };
     }

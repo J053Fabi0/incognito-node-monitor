@@ -1,7 +1,7 @@
-import { createSelector } from 'reselect';
-import { IRootState } from 'src/redux/interface';
-import { IConfigsReducer } from 'src/configs';
-import { translateByLanguage } from 'src/i18';
+import { createSelector } from "reselect";
+import { IRootState } from "src/redux/interface";
+import { IConfigsReducer } from "src/configs";
+import { translateByLanguage } from "src/i18";
 
 export const configsSelector = createSelector(
   (state: IRootState) => state.configs,

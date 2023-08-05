@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { TextMedium } from 'src/components';
-import styled from 'styled-components';
+import React, { memo } from "react";
+import { TextMedium } from "src/components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   .header-title {

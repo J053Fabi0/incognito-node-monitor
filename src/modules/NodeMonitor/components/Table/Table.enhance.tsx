@@ -1,13 +1,13 @@
-import React from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { compose } from 'recompose';
-import { useDispatch } from 'react-redux';
-import withData from './Table.enhanceData';
-import withFetch from './Table.enhanceFetch';
-import withPagination from './Table.enhancePagination';
-import { actionUpdateVisibleModal as updateVisibleModal } from './Table.actions';
-import { ITableData } from './Table.interface';
-import { actionUpdateMonitorDetail, actionClearMonitorDetail } from '../MonitorDetail/MonitorDetail.actions';
+import React from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { compose } from "recompose";
+import { useDispatch } from "react-redux";
+import withData from "./Table.enhanceData";
+import withFetch from "./Table.enhanceFetch";
+import withPagination from "./Table.enhancePagination";
+import { actionUpdateVisibleModal as updateVisibleModal } from "./Table.actions";
+import { ITableData } from "./Table.interface";
+import { actionUpdateMonitorDetail, actionClearMonitorDetail } from "../MonitorDetail/MonitorDetail.actions";
 
 interface IProps {}
 

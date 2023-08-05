@@ -1,24 +1,24 @@
-import BigNumber from 'bignumber.js';
-import format from 'src/utils/format';
-import { getDecimalSeparator } from './separator';
+import BigNumber from "bignumber.js";
+import format from "src/utils/format";
+import { getDecimalSeparator } from "./separator";
 
 const checkAmount = (amount: number) => {
-  if (!Number.isFinite(amount)) throw new Error('Can not format invalid amount');
+  if (!Number.isFinite(amount)) throw new Error("Can not format invalid amount");
 };
 
 const replaceDecimals = ({ text, autoCorrect = false }: { text: string; autoCorrect?: boolean }) => {
   let result = text;
   const decimalSeparator = getDecimalSeparator();
-  if (typeof result !== 'string') {
+  if (typeof result !== "string") {
     return result;
   }
-  if (decimalSeparator === ',' && !result?.includes?.('e+') && !result?.includes?.('e-')) {
-    result = result.replace(/\./g, '_');
-    result = result.replace(/,/g, '.');
-    result = result.replace(/_/g, ',');
+  if (decimalSeparator === "," && !result?.includes?.("e+") && !result?.includes?.("e-")) {
+    result = result.replace(/\./g, "_");
+    result = result.replace(/,/g, ".");
+    result = result.replace(/_/g, ",");
   }
   if (autoCorrect) {
-    result = result.replace(/,/g, '');
+    result = result.replace(/,/g, "");
   }
   return result;
 };

@@ -1,12 +1,12 @@
-import React, { PropsWithChildren } from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { compose } from 'recompose';
-import { isEmpty } from 'lodash';
-import { useDispatch } from 'react-redux';
-import withCommittee from './MonitorDetail.enhanceCommittee';
-import withSyncStat from './MonitorDetail.enhanceSyncStat';
-import { getMiningPublicKey } from '../Table/Table.utils';
-import { actionFetchNodeSyncInfo } from './MonitorDetail.actions';
+import React, { PropsWithChildren } from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { compose } from "recompose";
+import { isEmpty } from "lodash";
+import { useDispatch } from "react-redux";
+import withCommittee from "./MonitorDetail.enhanceCommittee";
+import withSyncStat from "./MonitorDetail.enhanceSyncStat";
+import { getMiningPublicKey } from "../Table/Table.utils";
+import { actionFetchNodeSyncInfo } from "./MonitorDetail.actions";
 
 interface IProps {
   isWebview: boolean;

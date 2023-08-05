@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { Table } from 'antd';
-import styled from 'styled-components';
+import React, { memo } from "react";
+import { Table } from "antd";
+import styled from "styled-components";
 
 interface IProps {
   columns: any;
@@ -21,11 +21,11 @@ const AntdTable = (props: IProps) => {
   const { columns, data, loading, renderRow } = props;
 
   const onRenderRow = (record: any, index: number) => {
-    let suffix = '';
+    let suffix = "";
     if (renderRow) {
       suffix = renderRow(record, index);
     }
-    return `${suffix} table-row ${index % 2 !== 0 ? 'table-row-dark' : 'table-row-light'}`;
+    return `${suffix} table-row ${index % 2 !== 0 ? "table-row-dark" : "table-row-light"}`;
   };
 
   return (

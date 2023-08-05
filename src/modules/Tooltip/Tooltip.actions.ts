@@ -1,7 +1,7 @@
-import { ACTION_SHOW_TOOLTIP, ACTION_REMOVE_TOOLTIP } from './Tooltip.constant';
+import { ACTION_SHOW_TOOLTIP, ACTION_REMOVE_TOOLTIP } from "./Tooltip.constant";
 
 export const actionShowTooltip = ({
-  id = '',
+  id = "",
   text,
   timeout = 2,
   ref,

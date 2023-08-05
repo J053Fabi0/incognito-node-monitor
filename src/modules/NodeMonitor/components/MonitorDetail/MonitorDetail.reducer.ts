@@ -1,8 +1,8 @@
-import { PersistConfig, persistReducer } from 'redux-persist';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import storage from 'redux-persist/lib/storage';
-import { Reducer } from 'redux';
-import { IMonitorDetailReducer } from './MonitorDetail.interface';
+import { PersistConfig, persistReducer } from "redux-persist";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import storage from "redux-persist/lib/storage";
+import { Reducer } from "redux";
+import { IMonitorDetailReducer } from "./MonitorDetail.interface";
 import {
   ACTION_CLEAR_MONITOR_DETAIL,
   ACTION_UPDATE_COMMITTEE_INFO,
@@ -10,7 +10,7 @@ import {
   ACTION_UPDATE_STATUS_FETCHING,
   ACTION_UPDATE_SYNC_STAT,
   MonitorDetailActions,
-} from './MonitorDetail.actionsName';
+} from "./MonitorDetail.actionsName";
 
 const initialState: IMonitorDetailReducer = {
   node: undefined,
@@ -65,9 +65,9 @@ const monitorDetailReducer: Reducer<IMonitorDetailReducer, Action> = (state = in
 };
 
 const persistConfig: PersistConfig<IMonitorDetailReducer> = {
-  key: 'monitorDetail',
+  key: "monitorDetail",
   storage,
-  whitelist: [''],
+  whitelist: [""],
   stateReconciler: autoMergeLevel2,
 };
 

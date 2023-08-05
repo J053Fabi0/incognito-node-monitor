@@ -1,19 +1,19 @@
-import React, { memo } from 'react';
-import 'src/components/Drawer/drawer.scss';
-import { Drawer } from 'antd';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { isEmpty } from 'lodash';
-import { HeaderTabs } from '../Header';
-import { ItemSelectedProps } from '../SelectedList';
-import { TextRegular } from '../Text';
+import React, { memo } from "react";
+import "src/components/Drawer/drawer.scss";
+import { Drawer } from "antd";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { isEmpty } from "lodash";
+import { HeaderTabs } from "../Header";
+import { ItemSelectedProps } from "../SelectedList";
+import { TextRegular } from "../Text";
 
 interface IProps {
   visible: boolean;
   onSelect: (item: ItemSelectedProps) => void;
 }
 
-const activeClassName = 'ACTIVE';
+const activeClassName = "ACTIVE";
 
 const StyledNavLink = styled(NavLink).attrs({
   activeClassName,
@@ -42,7 +42,7 @@ const MobileDrawer = (props: IProps) => {
   const { visible, onSelect } = props;
   const renderItem = (item: ItemSelectedProps) => {
     const component = !isEmpty(item?.key) ? (
-      <StyledNavLink id={item?.key} to={item?.key || ''}>
+      <StyledNavLink id={item?.key} to={item?.key || ""}>
         {item?.title}
       </StyledNavLink>
     ) : (
@@ -54,7 +54,7 @@ const MobileDrawer = (props: IProps) => {
       <div
         key={item.title}
         onClick={() => onSelect && onSelect(item)}
-        style={{ display: 'flex', justifyContent: 'center' }}
+        style={{ display: "flex", justifyContent: "center" }}
       >
         {component}
       </div>

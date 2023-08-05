@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
-import styled, { ITheme } from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { isEmpty } from 'lodash';
-import Row from '../Row';
+import React, { memo } from "react";
+import styled, { ITheme } from "styled-components";
+import { NavLink } from "react-router-dom";
+import { isEmpty } from "lodash";
+import Row from "../Row";
 
 export interface ItemSelectedProps {
   title: string;
@@ -10,7 +10,7 @@ export interface ItemSelectedProps {
   key?: string;
 }
 
-const activeClassName = 'ACTIVE';
+const activeClassName = "ACTIVE";
 
 interface IProps {
   data: ItemSelectedProps[];
@@ -37,7 +37,7 @@ const WrapperLink = styled.div<{ selected: boolean }>`
     color: ${({ theme }) => theme.text4};
   }
   background-color: ${({ selected, theme }: { selected: boolean; theme: ITheme }) =>
-    selected ? theme.black : 'transparent'};
+    selected ? theme.black : "transparent"};
   color: ${({ selected, theme }: { selected: boolean; theme: ITheme }) => (selected ? theme.white : theme.text5)};
   ${({ theme }) => theme.mediaWidth.upToSmall`
         padding: 4px 10px;
@@ -79,7 +79,7 @@ const SelectedList = (props: IProps) => {
     return !isEmpty(item?.key) ? (
       <StyledNavLink
         id={item?.key}
-        to={item?.key || ''}
+        to={item?.key || ""}
         onClick={() => {
           onSelect && onSelect(item);
         }}

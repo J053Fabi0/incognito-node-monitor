@@ -1,5 +1,5 @@
-import { v4 } from 'uuid';
-import { ACTION_SHOW_TOOLTIP, ACTION_REMOVE_TOOLTIP } from './Tooltip.constant';
+import { v4 } from "uuid";
+import { ACTION_SHOW_TOOLTIP, ACTION_REMOVE_TOOLTIP } from "./Tooltip.constant";
 
 export interface ITooltipReducer {
   data: Array<any>;

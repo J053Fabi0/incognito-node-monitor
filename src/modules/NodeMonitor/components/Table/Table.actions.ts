@@ -1,6 +1,6 @@
-import { IRootState } from 'src/redux/interface';
-import { Dispatch } from 'redux';
-import { isEmpty } from 'lodash';
+import { IRootState } from "src/redux/interface";
+import { Dispatch } from "redux";
+import { isEmpty } from "lodash";
 import {
   ACTION_CHANGE_LIMIT_PAGE,
   ACTION_CHANGE_ROWS_PER_PAGE,
@@ -8,11 +8,11 @@ import {
   ACTION_FETCHING_TABLE_DATA,
   ACTION_UPDATE_SEARCH_VALUE,
   ACTION_CHANGE_VISIBLE_MODAL,
-} from './Table.actionsName';
-import { INodeName, ITableData } from './Table.interface';
-import { getParamsNodesInfo } from './Table.utils';
-import { getListNodesInfo } from './Table.services';
-import { NodesListBuilder } from './Table.builder';
+} from "./Table.actionsName";
+import { INodeName, ITableData } from "./Table.interface";
+import { getParamsNodesInfo } from "./Table.utils";
+import { getListNodesInfo } from "./Table.services";
+import { NodesListBuilder } from "./Table.builder";
 
 export const actionChangeRowsPerPage = (payload: { rowsPerPage: number }) => ({
   type: ACTION_CHANGE_ROWS_PER_PAGE,
@@ -58,7 +58,7 @@ export const actionFetchTableData = (page: number, newListNode?: INodeName[]) =>
     const nodes = NodesListBuilder(await getListNodesInfo(strKeys), mapper);
     dispatch(actionUpdateTableData({ data: nodes, currentPage: page, limitPage: totalRows, listNode: allNodes }));
   } catch (e) {
-    console.debug('Fetch table data with error: ', e);
+    console.debug("Fetch table data with error: ", e);
   } finally {
     dispatch(actionFetchingTableData({ fetching: false }));
   }
@@ -68,7 +68,7 @@ export const actionSubmitSearch = (newListNode: INodeName[]) => (dispatch: Dispa
   try {
     actionFetchTableData(0, newListNode)(dispatch, getState);
   } catch (e) {
-    console.debug('Clear search error', e);
+    console.debug("Clear search error", e);
   }
 };
 
@@ -76,7 +76,7 @@ export const actionChangePage = (page: number) => (dispatch: Dispatch, getState:
   try {
     actionFetchTableData(page)(dispatch, getState);
   } catch (e) {
-    console.debug('Clear search error', e);
+    console.debug("Clear search error", e);
   }
 };
 

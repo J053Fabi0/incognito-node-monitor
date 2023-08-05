@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { IRouteProps } from 'src/modules';
+import React, { FunctionComponent } from "react";
+import { IRouteProps } from "src/modules";
 
-const context = require.context('src/modules', true, /\.route.tsx?/);
+const context = require.context("src/modules", true, /\.route.tsx?/);
 
 const enhance = (WrappedComponent: FunctionComponent) => (props: any) => {
   const [routes, setRoutes] = React.useState<Array<IRouteProps>>([]);

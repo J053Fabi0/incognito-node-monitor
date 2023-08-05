@@ -1,13 +1,13 @@
-import React, { memo } from 'react';
-import styled, { ITheme } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { listNodeSelector } from 'src/modules/NodeMonitor/components/Table/Table.selector';
-import { actionSubmitSearch } from 'src/modules/NodeMonitor/components/Table/Table.actions';
-import Row from 'src/components/Row';
-import Button from 'src/components/Button';
-import { Snackbar } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
-import { isEmpty } from 'lodash';
+import React, { memo } from "react";
+import styled, { ITheme } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { listNodeSelector } from "src/modules/NodeMonitor/components/Table/Table.selector";
+import { actionSubmitSearch } from "src/modules/NodeMonitor/components/Table/Table.actions";
+import Row from "src/components/Row";
+import Button from "src/components/Button";
+import { Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import { isEmpty } from "lodash";
 
 function Alert(props: any) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -66,8 +66,8 @@ const SearchRow = () => {
   const dispatch = useDispatch();
   const listNode = useSelector(listNodeSelector);
   const [open, setOpen] = React.useState(false);
-  const [nodeName, setNodeName] = React.useState('');
-  const [miningKey, setMiningKey] = React.useState('');
+  const [nodeName, setNodeName] = React.useState("");
+  const [miningKey, setMiningKey] = React.useState("");
 
   const onChangeName = React.useCallback((e) => {
     if (!e || !e.target) return;

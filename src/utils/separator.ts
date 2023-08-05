@@ -1,7 +1,7 @@
-import { getLocalDecimalSeparator, saveLocalDecimalSeparator } from 'src/services/storage';
+import { getLocalDecimalSeparator, saveLocalDecimalSeparator } from "src/services/storage";
 
-export let DECIMAL_SEPARATOR = '.';
-export let GROUP_SEPARATOR = ',';
+export let DECIMAL_SEPARATOR = ".";
+export let GROUP_SEPARATOR = ",";
 
 export function setDecimalSeparator(newSeparator: string) {
   if (DECIMAL_SEPARATOR !== newSeparator) {
@@ -14,14 +14,14 @@ export function setDecimalSeparator(newSeparator: string) {
 export const loadSeparator = () => {
   const savedDecimalSeparator = getLocalDecimalSeparator();
   if (!savedDecimalSeparator) {
-    setDecimalSeparator('.');
-    saveLocalDecimalSeparator('.');
+    setDecimalSeparator(".");
+    saveLocalDecimalSeparator(".");
   } else {
     DECIMAL_SEPARATOR = savedDecimalSeparator;
-    if (savedDecimalSeparator === '.') {
-      GROUP_SEPARATOR = ',';
+    if (savedDecimalSeparator === ".") {
+      GROUP_SEPARATOR = ",";
     } else {
-      GROUP_SEPARATOR = '.';
+      GROUP_SEPARATOR = ".";
     }
   }
 };

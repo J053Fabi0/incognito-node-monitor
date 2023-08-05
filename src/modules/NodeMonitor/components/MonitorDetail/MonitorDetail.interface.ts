@@ -1,4 +1,4 @@
-import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
+import { ITableData } from "src/modules/NodeMonitor/components/Table/Table.interface";
 
 export interface IMonitorDetailReducer {
   node?: ITableData;

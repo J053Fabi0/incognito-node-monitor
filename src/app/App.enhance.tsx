@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { Provider } from 'react-redux';
-import { configStore, IConfigStore } from 'src/redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import styled from 'styled-components';
+import React, { FunctionComponent } from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { Provider } from "react-redux";
+import { configStore, IConfigStore } from "src/redux";
+import { PersistGate } from "redux-persist/integration/react";
+import styled from "styled-components";
 
 const { store, persistor }: IConfigStore = configStore();
 

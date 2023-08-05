@@ -1,11 +1,11 @@
-import { IObject } from 'src/utils';
-import en from './en';
+import { IObject } from "src/utils";
+import en from "./en";
 
-export * from './interface';
+export * from "./interface";
 
 export const translateByLanguage = (language: string) => {
   switch (language) {
-    case 'en':
+    case "en":
       return en;
     default:
       return en;
@@ -16,12 +16,12 @@ export const languages = { en };
 
 export const isoLanguages: IObject = {
   en: {
-    name: 'English',
-    nativeName: 'English',
+    name: "English",
+    nativeName: "English",
   },
   vi: {
-    name: 'Vietnamese',
-    nativeName: 'Tiếng Việt',
+    name: "Vietnamese",
+    nativeName: "Tiếng Việt",
   },
 };
 

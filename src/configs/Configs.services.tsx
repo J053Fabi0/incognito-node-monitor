@@ -1,8 +1,8 @@
-import http from 'src/services/http';
-import { Storage, STORAGE_KEYS } from 'src/services/storage';
+import http from "src/services/http";
+import { Storage, STORAGE_KEYS } from "src/services/storage";
 
 export const getAccessToken = () => {
-  return Storage.getItem(STORAGE_KEYS.TOKEN) || '';
+  return Storage.getItem(STORAGE_KEYS.TOKEN) || "";
 };
 
 export const setAccessToken = (token: string) => {
@@ -10,9 +10,9 @@ export const setAccessToken = (token: string) => {
 };
 
 export const fetchAccessToken = (deviceId: string) => {
-  if (!deviceId) throw new Error('Missing device ID');
+  if (!deviceId) throw new Error("Missing device ID");
   return http
-    .post('/auth/new-token', {
+    .post("/auth/new-token", {
       DeviceID: deviceId,
       DeviceToken: deviceId,
     })

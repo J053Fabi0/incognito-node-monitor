@@ -1,12 +1,12 @@
-import React from 'react';
-import { Card } from '@material-ui/core';
-import { useTable } from 'react-table';
-import MaUTable from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import TableBody from '@material-ui/core/TableBody';
-import { Styled } from './styled';
+import React from "react";
+import { Card } from "@material-ui/core";
+import { useTable } from "react-table";
+import MaUTable from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import { Styled } from "./styled";
 
 interface IProps {
   columns?: any[];
@@ -26,7 +26,7 @@ const Table = React.memo((props: IProps) => {
       {headerGroups.map((headerGroup) => (
         <TableRow className="header-row" {...headerGroup.getHeaderGroupProps()}>
           {headerGroup.headers.map((column) => (
-            <TableCell {...column.getHeaderProps()}>{column.render('Header')}</TableCell>
+            <TableCell {...column.getHeaderProps()}>{column.render("Header")}</TableCell>
           ))}
         </TableRow>
       ))}
@@ -38,11 +38,11 @@ const Table = React.memo((props: IProps) => {
       {rows.map((row, index) => {
         prepareRow(row);
         return (
-          <TableRow className={`table-row ${index % 2 !== 0 ? 'dark-row' : ''}`} {...row.getRowProps()}>
+          <TableRow className={`table-row ${index % 2 !== 0 ? "dark-row" : ""}`} {...row.getRowProps()}>
             {row.cells.map((cell) => {
               return (
                 <TableCell className="table-cell" {...cell.getCellProps()}>
-                  {cell.render('Cell')}
+                  {cell.render("Cell")}
                 </TableCell>
               );
             })}

@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 import styled, {
   ITheme,
   ThemeProvider as StyledComponentsThemeProvider,
   createGlobalStyle,
   css,
-} from 'styled-components';
-import { useSelector } from 'react-redux';
-import { Text, TextProps } from 'rebass';
-import { Colors } from './Theme.styled';
-import { darkModeSelector } from './Theme.selector';
-import { appDomain } from '../configs/Configs.Envs';
+} from "styled-components";
+import { useSelector } from "react-redux";
+import { Text, TextProps } from "rebass";
+import { Colors } from "./Theme.styled";
+import { darkModeSelector } from "./Theme.selector";
+import { appDomain } from "../configs/Configs.Envs";
 
 const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
@@ -30,8 +30,8 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
   {},
 ) as any;
 
-const white = '#FFFFFF';
-const black = '#000000';
+const white = "#FFFFFF";
+const black = "#000000";
 
 export function colors(darkMode: boolean): Colors {
   return {
@@ -40,27 +40,27 @@ export function colors(darkMode: boolean): Colors {
     black,
 
     // table
-    headerRow: darkMode ? '#f5f5f5' : '#f5f5f5',
-    hoverRow: darkMode ? '#e0e0e0' : '#e0e0e0',
-    darkRow: darkMode ? '#F5F5F5' : '#F5F5F5',
+    headerRow: darkMode ? "#f5f5f5" : "#f5f5f5",
+    hoverRow: darkMode ? "#e0e0e0" : "#e0e0e0",
+    darkRow: darkMode ? "#F5F5F5" : "#F5F5F5",
     lightRow: darkMode ? white : white,
 
     // modal
-    modalBg: darkMode ? 'rgba(0,0,0,.425)' : 'rgba(0,0,0,0.3)',
+    modalBg: darkMode ? "rgba(0,0,0,.425)" : "rgba(0,0,0,0.3)",
 
-    border1: darkMode ? '#CBCBCB' : '#CBCBCB',
-    border2: darkMode ? '#E0E0E0' : '#E0E0E0',
+    border1: darkMode ? "#CBCBCB" : "#CBCBCB",
+    border2: darkMode ? "#E0E0E0" : "#E0E0E0",
 
     // text
     text1: darkMode ? white : black,
-    text2: darkMode ? '#9e9e9e' : '#9e9e9e',
-    text3: darkMode ? '#616161' : '#616161',
-    text4: darkMode ? '#797979' : '#797979',
-    text5: darkMode ? '#595959' : '#595959',
+    text2: darkMode ? "#9e9e9e" : "#9e9e9e",
+    text3: darkMode ? "#616161" : "#616161",
+    text4: darkMode ? "#797979" : "#797979",
+    text5: darkMode ? "#595959" : "#595959",
 
-    green1: darkMode ? '#34C759' : '#34C759',
-    red1: darkMode ? '#FE4D4D' : '#FE4D4D',
-    gray1: darkMode ? '#D8D8D8' : '#D8D8D8',
+    green1: darkMode ? "#34C759" : "#34C759",
+    red1: darkMode ? "#FE4D4D" : "#FE4D4D",
+    gray1: darkMode ? "#D8D8D8" : "#D8D8D8",
 
     tooltipBg: black,
     tooltipText: white,

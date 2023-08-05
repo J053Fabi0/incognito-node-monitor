@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { IRouteProps } from 'src/modules';
-import styled from 'styled-components';
-import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
-import enhance from './MainRoute.enhance';
-import { IProps } from './MainRoute.inteface';
+import React, { Suspense } from "react";
+import { Route, Switch } from "react-router-dom";
+import { IRouteProps } from "src/modules";
+import styled from "styled-components";
+import { getMiningPublicKey } from "src/modules/NodeMonitor/components/Table/Table.utils";
+import enhance from "./MainRoute.enhance";
+import { IProps } from "./MainRoute.inteface";
 
 const Styled = styled.div<{ isWebview: boolean }>`
-  margin: ${({ isWebview }: { isWebview: boolean }) => (isWebview ? '3px' : '30px')};
+  margin: ${({ isWebview }: { isWebview: boolean }) => (isWebview ? "3px" : "30px")};
 `;
 
 const MainRoute = (props: IProps & any) => {

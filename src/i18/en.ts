@@ -1,13 +1,13 @@
-import { ILanguage } from './interface';
+import { ILanguage } from "./interface";
 
 const language: ILanguage = {
   app: {
-    company: 'Incognito',
+    company: "Incognito",
   },
   nodeMonitor: {},
   reuse: {
-    search: 'Search',
-    colon: ':',
+    search: "Search",
+    colon: ":",
   },
 };
 

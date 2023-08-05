@@ -1,13 +1,13 @@
-import { persistReducer } from 'redux-persist';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import storage from 'redux-persist/lib/storage';
-import { ROWS_PER_PAGE } from './TableValidator.constants';
+import { persistReducer } from "redux-persist";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import storage from "redux-persist/lib/storage";
+import { ROWS_PER_PAGE } from "./TableValidator.constants";
 import {
   ACTION_CHANGE_VISIBLE_MODAL,
   ACTION_FETCHING_TABLE_DATA,
   ACTION_UPDATE_TABLE_DATA,
-} from './TableValidator.actionsName';
-import { ITableValidatorReducer } from './TableValidator.interface';
+} from "./TableValidator.actionsName";
+import { ITableValidatorReducer } from "./TableValidator.interface";
 
 const initialState: ITableValidatorReducer = {
   currentPage: 0,
@@ -53,9 +53,9 @@ const tableRedListReducer = (
 };
 
 const persistConfig = {
-  key: 'tableRedList',
+  key: "tableRedList",
   storage,
-  whitelist: [''],
+  whitelist: [""],
   stateReconciler: autoMergeLevel2,
 };
 

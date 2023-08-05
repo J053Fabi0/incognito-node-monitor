@@ -1,10 +1,10 @@
-import React from 'react';
-import styled, { css, ITheme } from 'styled-components';
-import { animated, useTransition } from 'react-spring';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
-import { isMobile } from 'react-device-detect';
-import '@reach/dialog/styles.css';
-import { transparentize } from 'polished';
+import React from "react";
+import styled, { css, ITheme } from "styled-components";
+import { animated, useTransition } from "react-spring";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
+import { isMobile } from "react-device-detect";
+import "@reach/dialog/styles.css";
+import { transparentize } from "polished";
 
 const AnimatedDialogOverlay = animated(DialogOverlay);
 const StyledDialogOverlay = styled(AnimatedDialogOverlay)`
@@ -25,17 +25,17 @@ const AnimatedDialogContent = animated(DialogContent);
 const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...rest }) => (
   <AnimatedDialogContent {...rest} />
 )).attrs({
-  'aria-label': 'dialog',
+  "aria-label": "dialog",
 })`
-  overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+  overflow-y: ${({ mobile }) => (mobile ? "scroll" : "hidden")};
 
   &[data-reach-dialog-content] {
     margin: 0 0 2rem 0;
     background-color: ${({ theme }) => theme.white};
-    box-shadow: 0 4px 8px 0 ${() => transparentize(0.95, '#000')};
+    box-shadow: 0 4px 8px 0 ${() => transparentize(0.95, "#000")};
     padding: 0;
     width: 50vw;
-    overflow-y: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+    overflow-y: ${({ mobile }) => (mobile ? "scroll" : "hidden")};
     overflow-x: hidden;
     max-width: 500px;
     ${({ maxHeight }) =>

@@ -1,1 +1,1 @@
-export { default } from './TableValidator';
+export { default } from "./TableValidator";

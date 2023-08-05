@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface IProps {
   customContent?: React.ElementType;
@@ -32,9 +32,9 @@ const Styled = styled.button`
 `;
 
 const Button = (props: IProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const { customContent, title, disabled, className = '', ...rest } = props;
+  const { customContent, title, disabled, className = "", ...rest } = props;
   return (
-    <Styled className={`btn-container ${disabled ? 'btn-disabled' : ''}  ${className}`} disabled={disabled} {...rest}>
+    <Styled className={`btn-container ${disabled ? "btn-disabled" : ""}  ${className}`} disabled={disabled} {...rest}>
       {customContent || title}
     </Styled>
   );

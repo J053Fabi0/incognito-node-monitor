@@ -1,4 +1,4 @@
-import styled, { ITheme } from 'styled-components';
+import styled, { ITheme } from "styled-components";
 
 export const Styled = styled.div`
   .card {

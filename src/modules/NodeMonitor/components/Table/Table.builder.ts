@@ -1,23 +1,23 @@
-import { isEmpty, isArray, capitalize, isNumber } from 'lodash';
-import moment from 'moment';
-import { ellipsisCenter } from 'src/utils/ellipsis';
-import convert from 'src/utils/convert';
-import { INodeName, ITableData } from './Table.interface';
-import { ICommittee, ISyncStat } from '../MonitorDetail/MonitorDetail.interface';
-import { getVoteStat } from './Table.utils';
-import { EMPTY_CELL } from './Table.constants';
+import { isEmpty, isArray, capitalize, isNumber } from "lodash";
+import moment from "moment";
+import { ellipsisCenter } from "src/utils/ellipsis";
+import convert from "src/utils/convert";
+import { INodeName, ITableData } from "./Table.interface";
+import { ICommittee, ISyncStat } from "../MonitorDetail/MonitorDetail.interface";
+import { getVoteStat } from "./Table.utils";
+import { EMPTY_CELL } from "./Table.constants";
 
 const formatNodeInfo = (node: any) => {
   let role = node?.Role;
   let committeeChain = node?.CommitteeChain;
-  if (committeeChain === '-1') {
-    committeeChain = 'beacon';
+  if (committeeChain === "-1") {
+    committeeChain = "beacon";
   }
-  if (committeeChain === '') {
+  if (committeeChain === "") {
     committeeChain = EMPTY_CELL;
   }
   if (isEmpty(node?.Role)) {
-    role = 'Not stake';
+    role = "Not stake";
     committeeChain = EMPTY_CELL;
   }
 
@@ -28,7 +28,7 @@ const formatNodeInfo = (node: any) => {
     committeeChain,
     syncState: capitalize(node?.SyncState) || EMPTY_CELL,
     voteStats: getVoteStat(node?.VoteStat) || EMPTY_CELL,
-    ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || '', limit: 6 }) || EMPTY_CELL,
+    ellipsisMpk: ellipsisCenter({ str: node?.MiningPubkey || "", limit: 6 }) || EMPTY_CELL,
     role: capitalize(role) || EMPTY_CELL,
     autoStake: node?.AutoStake,
     nextEventMsg: node?.NextEventMsg || EMPTY_CELL,
@@ -63,17 +63,17 @@ export const NodesInfoBuilder = (data: any): ITableData | undefined => {
 };
 
 const getStatusMessage = (item: any) => {
-  let prefix = '';
-  let suffix = item.IsSync ? 'syncing' : 'not syncing';
-  let color = item.IsSync ? 'green1' : 'text1';
+  let prefix = "";
+  let suffix = item.IsSync ? "syncing" : "not syncing";
+  let color = item.IsSync ? "green1" : "text1";
   if (item?.LastInsert) {
     prefix += `${moment(item?.LastInsert).fromNow()} `;
   }
   if (item.IsSync && (!item?.LastInsert || Date.now() - new Date(item?.LastInsert).getTime() > 60000 * 5)) {
-    suffix = 'stalling';
-    color = 'red1';
+    suffix = "stalling";
+    color = "red1";
   }
-  const message = `${prefix}${prefix ? ' (' : ''}${suffix}${prefix ? ')' : ''}`;
+  const message = `${prefix}${prefix ? " (" : ""}${suffix}${prefix ? ")" : ""}`;
   return { message, color };
 };
 
@@ -86,7 +86,7 @@ export const NodesSyncStatBuilder = (data: any): ISyncStat | undefined => {
   let result: any;
   result = {
     beacon: {
-      name: 'Beacon',
+      name: "Beacon",
       isSync: Beacon.IsSync,
       lastInsert: Beacon?.LastInsert,
       blockHeight: Beacon?.BlockHeight,
@@ -136,7 +136,7 @@ export const NodesCommitteeInfoBuilder = (data: any): ICommittee[] | undefined =
       totalPropose: item?.TotalPropose || EMPTY_CELL,
       totalVote: item?.TotalVote || EMPTY_CELL,
       voteCount,
-      chainId: item?.ChainID === '' ? EMPTY_CELL : item?.ChainID,
+      chainId: item?.ChainID === "" ? EMPTY_CELL : item?.ChainID,
       slashed: item?.IsSlashed,
     };
   });

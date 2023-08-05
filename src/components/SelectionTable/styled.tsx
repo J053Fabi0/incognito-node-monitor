@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import Row from 'src/components/Row';
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import Row from "src/components/Row";
 
-const activeClassName = 'ACTIVE';
+const activeClassName = "ACTIVE";
 
 export const Wrapper = styled(Row)`
   justify-content: flex-end;

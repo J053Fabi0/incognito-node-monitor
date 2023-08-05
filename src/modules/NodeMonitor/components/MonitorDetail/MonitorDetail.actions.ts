@@ -1,16 +1,16 @@
-import { Dispatch } from 'redux';
-import { IRootState } from 'src/redux/interface';
-import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
+import { Dispatch } from "redux";
+import { IRootState } from "src/redux/interface";
+import { ITableData } from "src/modules/NodeMonitor/components/Table/Table.interface";
 import {
   ACTION_UPDATE_COMMITTEE_INFO,
   ACTION_UPDATE_MONITOR_DETAIL,
   ACTION_UPDATE_STATUS_FETCHING,
   ACTION_UPDATE_SYNC_STAT,
   ACTION_CLEAR_MONITOR_DETAIL,
-} from './MonitorDetail.actionsName';
-import { getCommitteeInfo, getListNodesInfo, getSyncStatInfo } from '../Table/Table.services';
-import { NodesCommitteeInfoBuilder, NodesInfoBuilder, NodesSyncStatBuilder } from '../Table/Table.builder';
-import { ISyncStat } from './MonitorDetail.interface';
+} from "./MonitorDetail.actionsName";
+import { getCommitteeInfo, getListNodesInfo, getSyncStatInfo } from "../Table/Table.services";
+import { NodesCommitteeInfoBuilder, NodesInfoBuilder, NodesSyncStatBuilder } from "../Table/Table.builder";
+import { ISyncStat } from "./MonitorDetail.interface";
 
 export const actionUpdateMonitorDetail = (payload: { node?: ITableData }) => ({
   type: ACTION_UPDATE_MONITOR_DETAIL,
@@ -42,7 +42,7 @@ export const actionFetchSyncStat = () => async (dispatch: Dispatch, getState: ()
     const syncStat = NodesSyncStatBuilder(await getSyncStatInfo(publicKey));
     dispatch(actionUpdateSyncStat({ syncStat }));
   } catch (e) {
-    console.debug('Fetch sync stats with error: ', e);
+    console.debug("Fetch sync stats with error: ", e);
   } finally {
     dispatch(actionUpdateStatusFetching({ fetching: false }));
   }
@@ -61,7 +61,7 @@ export const actionFetchCommitteeActivity = () => async (dispatch: Dispatch, get
     const committeeInfo = NodesCommitteeInfoBuilder(await getCommitteeInfo(publicKey));
     dispatch(actionUpdateCommitteeInfo({ committeeInfo }));
   } catch (e) {
-    console.debug('Fetch sync stats with error: ', e);
+    console.debug("Fetch sync stats with error: ", e);
   } finally {
     dispatch(actionUpdateStatusFetching({ fetching: false }));
   }
@@ -77,6 +77,6 @@ export const actionFetchNodeSyncInfo = (publicKey: string) => async (
     await actionFetchSyncStat()(dispatch, getState);
     await actionFetchCommitteeActivity()(dispatch, getState);
   } catch (e) {
-    console.debug('Fetch node info error: ', e);
+    console.debug("Fetch node info error: ", e);
   }
 };

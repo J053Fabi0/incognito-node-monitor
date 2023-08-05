@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import styled from 'styled-components';
-import { Spin } from 'antd';
+import React, { memo } from "react";
+import styled from "styled-components";
+import { Spin } from "antd";
 
 const Styled = styled.div`
   justify-content: center;

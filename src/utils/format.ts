@@ -1,8 +1,8 @@
-import { BigNumber } from 'bignumber.js';
-import floor from 'lodash/floor';
-import moment from 'moment';
-import convert from './convert';
-import { getGroupSeparator, getDecimalSeparator } from './separator';
+import { BigNumber } from "bignumber.js";
+import floor from "lodash/floor";
+import moment from "moment";
+import convert from "./convert";
+import { getGroupSeparator, getDecimalSeparator } from "./separator";
 
 interface IAmount {
   originalAmount?: number;
@@ -18,7 +18,7 @@ const removeTrailingZeroes = ({ amountString }: { amountString: string }) => {
   const decimalSeparator = getDecimalSeparator();
   while (
     formattedString.length > 0 &&
-    ((formattedString.includes(decimalSeparator) && formattedString[formattedString.length - 1] === '0') ||
+    ((formattedString.includes(decimalSeparator) && formattedString[formattedString.length - 1] === "0") ||
       formattedString[formattedString.length - 1] === decimalSeparator)
   ) {
     formattedString = formattedString.slice(0, formattedString.length - 1);
@@ -69,10 +69,10 @@ const toFixed = (payload: IToFixed) => {
   const { number, decimals } = payload;
   const bigNumber = new BigNumber(number);
   if (bigNumber.isNaN()) {
-    return '0';
+    return "0";
   }
   return removeTrailingZeroes({
-    amountString: bigNumber.toFixed(decimals).replace('.', decimalSeparator),
+    amountString: bigNumber.toFixed(decimals).replace(".", decimalSeparator),
   });
 };
 
@@ -114,13 +114,13 @@ const formatAmount = (payload: IAmount) => {
       amountString,
     });
   } catch (error) {
-    formatedAmount = '0';
+    formatedAmount = "0";
     throw error;
   }
   return formatedAmount;
 };
 
-const formatUnixDateTime = (dateTime: moment.MomentInput, formatPattern = 'DD MMM hh:mm A') =>
+const formatUnixDateTime = (dateTime: moment.MomentInput, formatPattern = "DD MMM hh:mm A") =>
   moment(dateTime).format(formatPattern);
 
 const number = (num: number) => {

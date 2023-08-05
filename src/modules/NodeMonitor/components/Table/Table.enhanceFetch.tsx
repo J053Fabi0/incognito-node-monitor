@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { useDispatch } from 'react-redux';
-import { actionFetchTableData } from './Table.actions';
+import React, { ReactNode } from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { useDispatch } from "react-redux";
+import { actionFetchTableData } from "./Table.actions";
 
 interface IProps {
   handleFetchData: (page: number) => void;

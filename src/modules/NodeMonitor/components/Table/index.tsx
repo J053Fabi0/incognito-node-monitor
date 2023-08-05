@@ -1,13 +1,13 @@
-import React from 'react';
-import { Styled } from 'src/modules/NodeMonitor/components/Table/styled';
-import withTable from 'src/modules/NodeMonitor/components/Table/Table.enhance';
-import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
-import SearchRow from 'src/modules/NodeMonitor/components/SearchRow';
-import { Table } from 'antd';
-import { getColumnsNodeMonitor } from 'src/modules/NodeMonitor/NodeMonitor.data';
-import { useDispatch } from 'react-redux';
-import MonitorDetailModal from '../MonitorDetail/components/MonitorDetailModal';
-import { actionDeleteNode } from './Table.actions';
+import React from "react";
+import { Styled } from "src/modules/NodeMonitor/components/Table/styled";
+import withTable from "src/modules/NodeMonitor/components/Table/Table.enhance";
+import { ITableData } from "src/modules/NodeMonitor/components/Table/Table.interface";
+import SearchRow from "src/modules/NodeMonitor/components/SearchRow";
+import { Table } from "antd";
+import { getColumnsNodeMonitor } from "src/modules/NodeMonitor/NodeMonitor.data";
+import { useDispatch } from "react-redux";
+import MonitorDetailModal from "../MonitorDetail/components/MonitorDetailModal";
+import { actionDeleteNode } from "./Table.actions";
 
 export interface ITableNodeProps {
   data: ITableData[];
@@ -78,7 +78,7 @@ const TableNodeMonitor = (props: ITableNodeProps & any) => {
             const { current } = pagination;
             onChangePage(current - 1);
           }}
-          rowClassName={(record, index) => `table-row ${index % 2 !== 0 ? 'table-row-dark' : 'table-row-light'}`}
+          rowClassName={(record, index) => `table-row ${index % 2 !== 0 ? "table-row-dark" : "table-row-light"}`}
         />
       </div>
       <MonitorDetailModal visible={visibleModal} onClose={onCloseModal} />

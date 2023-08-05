@@ -1,16 +1,16 @@
-import React from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { compose } from 'recompose';
-import { useDispatch } from 'react-redux';
-import withData from 'src/modules/RedList/components/Table/TableValifator.enhanceData';
-import { ITableData } from 'src/modules/NodeMonitor/components/Table/Table.interface';
+import React from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { compose } from "recompose";
+import { useDispatch } from "react-redux";
+import withData from "src/modules/RedList/components/Table/TableValifator.enhanceData";
+import { ITableData } from "src/modules/NodeMonitor/components/Table/Table.interface";
 import {
   actionClearMonitorDetail,
   actionUpdateMonitorDetail,
-} from 'src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.actions';
-import { actionUpdateVisibleModal as updateVisibleModal } from 'src/modules/RedList/components/Table/TableValidator.actions';
-import withFetchData from './TableValidator.enhanceFetchData';
-import withPagination from './TableValidator.enhancePagination';
+} from "src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.actions";
+import { actionUpdateVisibleModal as updateVisibleModal } from "src/modules/RedList/components/Table/TableValidator.actions";
+import withFetchData from "./TableValidator.enhanceFetchData";
+import withPagination from "./TableValidator.enhancePagination";
 
 interface IProps {}
 const enhance = (WrappedComp: React.FunctionComponent) => (props: IProps & any) => {

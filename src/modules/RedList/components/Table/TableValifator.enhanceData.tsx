@@ -1,7 +1,7 @@
-import React from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { useSelector } from 'react-redux';
-import { tableValidatorSelector } from './TableValidator.selector';
+import React from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { useSelector } from "react-redux";
+import { tableValidatorSelector } from "./TableValidator.selector";
 
 interface IProps {}
 

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import copy from 'copy-to-clipboard';
-import { useDispatch } from 'react-redux';
-import { actionShowTooltip } from 'src/modules/Tooltip';
-import { isEmpty } from 'lodash';
+import * as React from "react";
+import copy from "copy-to-clipboard";
+import { useDispatch } from "react-redux";
+import { actionShowTooltip } from "src/modules/Tooltip";
+import { isEmpty } from "lodash";
 
 interface IProps {
   value: string;
@@ -29,12 +29,12 @@ const Copy = (props: IProps & any) => {
   const handleCopy = () => {
     onCopy && onCopy();
     if (!isEmpty(value)) {
-      copy(value || '');
+      copy(value || "");
     }
     dispatch(
       actionShowTooltip({
-        id: 'copy',
-        text: 'Copied',
+        id: "copy",
+        text: "Copied",
         ref: iconRef ? iconRef.current : null,
         timeout: 1,
       }),

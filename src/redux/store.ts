@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { camelCase } from 'lodash';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { camelCase } from "lodash";
 
 export interface IConfigStore {
   store: any;
@@ -11,7 +11,7 @@ export interface IConfigStore {
 }
 
 export const configStore = (preloadedState: any = {}) => {
-  const requireModule = require.context('../../src', true, /\.reducer.ts/); // extract [reducerName].reducer.ts files inside redux folder
+  const requireModule = require.context("../../src", true, /\.reducer.ts/); // extract [reducerName].reducer.ts files inside redux folder
   const reducers: any = {};
   requireModule.keys().forEach((fileName: any) => {
     try {
@@ -25,10 +25,10 @@ export const configStore = (preloadedState: any = {}) => {
     ...reducers,
   });
   const persistConfig = {
-    key: 'root',
+    key: "root",
     storage,
     whitelist: [],
-    blacklist: ['config'],
+    blacklist: ["config"],
   };
   const persistedReducer = persistReducer(persistConfig, rootReducers);
   const middlewareEnhancer = applyMiddleware(thunk, logger);

@@ -1,13 +1,13 @@
-import React from 'react';
-import styled, { ITheme } from 'styled-components';
-import Row from 'src/components/Row';
-import { AppLogo } from 'src/components/Icons';
-import { getMiningPublicKey } from 'src/modules/NodeMonitor/components/Table/Table.utils';
-import SelectedList, { ItemSelectedProps } from 'src/components/SelectedList';
-import { isEmpty } from 'lodash';
-import MobileDrawer from 'src/components/Drawer';
-import MenuIcon from 'src/components/Icons/Menu/index';
-import CloseIcon from 'src/components/Icons/Close/index';
+import React from "react";
+import styled, { ITheme } from "styled-components";
+import Row from "src/components/Row";
+import { AppLogo } from "src/components/Icons";
+import { getMiningPublicKey } from "src/modules/NodeMonitor/components/Table/Table.utils";
+import SelectedList, { ItemSelectedProps } from "src/components/SelectedList";
+import { isEmpty } from "lodash";
+import MobileDrawer from "src/components/Drawer";
+import MenuIcon from "src/components/Icons/Menu/index";
+import CloseIcon from "src/components/Icons/Close/index";
 
 export const HeaderFrame = styled(Row)`
   justify-content: space-between;
@@ -43,7 +43,7 @@ export const HeaderFrame = styled(Row)`
 `;
 
 export const HeaderFrameRow = styled(Row)<{ displayEnd?: boolean }>`
-  justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : 'space-between')};
+  justify-content: ${({ displayEnd }) => (displayEnd ? `flex-end` : "space-between")};
   width: fit-content;
   padding: 15px 15px 0 0;
 `;
@@ -54,10 +54,10 @@ const WrapLogo = styled(Row)`
 `;
 
 export const HeaderTabs: ItemSelectedProps[] = [
-  { title: 'My nodes', key: '/node-monitor' },
-  { title: 'Inactive nodes', key: '/red-list' },
-  { title: 'User guide', link: 'https://we.incognito.org/t/how-to-use-the-node-monitor/11684' },
-  { title: 'FAQs', link: 'https://incognito.org/faq' },
+  { title: "My nodes", key: "/node-monitor" },
+  { title: "Inactive nodes", key: "/red-list" },
+  { title: "User guide", link: "https://we.incognito.org/t/how-to-use-the-node-monitor/11684" },
+  { title: "FAQs", link: "https://incognito.org/faq" },
 ];
 
 const Header = React.memo(() => {

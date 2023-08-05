@@ -1,72 +1,72 @@
-import React from 'react';
-import { Button, Row } from 'antd';
-import { TrashIcon } from 'src/components/Icons';
-import { isEmpty } from 'lodash';
-import { MESSAGE_CONSTANTS } from 'src/constants/App.constants';
-import { TextRegular } from 'src/components';
-import { ellipsisRight } from 'src/utils/ellipsis';
-import { getNodeRoleStatus } from './components/Table/Table.utils';
+import React from "react";
+import { Button, Row } from "antd";
+import { TrashIcon } from "src/components/Icons";
+import { isEmpty } from "lodash";
+import { MESSAGE_CONSTANTS } from "src/constants/App.constants";
+import { TextRegular } from "src/components";
+import { ellipsisRight } from "src/utils/ellipsis";
+import { getNodeRoleStatus } from "./components/Table/Table.utils";
 
 export const TableMonitorKey = {
   name: {
-    key: 'name',
-    title: 'Name',
+    key: "name",
+    title: "Name",
   },
   shortMpk: {
-    key: 'ellipsisMpk',
-    title: 'Validator public key',
+    key: "ellipsisMpk",
+    title: "Validator public key",
   },
   role: {
-    key: 'role',
-    title: 'Role',
+    key: "role",
+    title: "Role",
   },
   committeeChain: {
-    key: 'committeeChain',
-    title: 'Committee shard',
+    key: "committeeChain",
+    title: "Committee shard",
   },
   status: {
-    key: 'status',
-    title: 'Status',
+    key: "status",
+    title: "Status",
   },
   syncState: {
-    key: 'syncState',
-    title: 'Sync State',
+    key: "syncState",
+    title: "Sync State",
   },
   voteStats: {
-    key: 'voteStats',
-    title: 'Vote Stats (%)',
+    key: "voteStats",
+    title: "Vote Stats (%)",
   },
   delete: {
-    key: 'delete',
-    title: 'Delete',
+    key: "delete",
+    title: "Delete",
   },
   epoch: {
-    key: 'epoch',
-    title: 'Epoch',
+    key: "epoch",
+    title: "Epoch",
   },
   chainId: {
-    key: 'chainId',
-    title: 'Chain Id',
+    key: "chainId",
+    title: "Chain Id",
   },
   reward: {
-    key: 'reward',
-    title: 'Reward',
+    key: "reward",
+    title: "Reward",
   },
   voteCount: {
-    key: 'voteCount',
-    title: 'Vote Count (%)',
+    key: "voteCount",
+    title: "Vote Count (%)",
   },
   shardName: {
-    key: 'name',
-    title: 'Shard',
+    key: "name",
+    title: "Shard",
   },
   blockHeight: {
-    key: 'blockHeight',
-    title: 'Block Height',
+    key: "blockHeight",
+    title: "Block Height",
   },
   lastInsert: {
-    key: 'message',
-    title: 'Last Insert',
+    key: "message",
+    title: "Last Insert",
   },
 };
 
@@ -95,21 +95,21 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
 
       return (
         <div>
-          <Row style={{ justifyContent: 'center' }}>
-            <TextRegular style={{ color: isCommittee ? '#34C759' : 'text1' }}>{`${nodeRole}`}</TextRegular>
+          <Row style={{ justifyContent: "center" }}>
+            <TextRegular style={{ color: isCommittee ? "#34C759" : "text1" }}>{`${nodeRole}`}</TextRegular>
             {!isEmpty(committee) && (
               <TextRegular ml="8px" color="text4">
                 {committee}
               </TextRegular>
             )}
           </Row>
-          {nodeRole === 'Not stake' && record.slashed && (
-            <Row style={{ justifyContent: 'center' }}>
+          {nodeRole === "Not stake" && record.slashed && (
+            <Row style={{ justifyContent: "center" }}>
               <TextRegular color="red">Slashed</TextRegular>
             </Row>
           )}
           {match && (
-            <Row style={{ justifyContent: 'center' }}>
+            <Row style={{ justifyContent: "center" }}>
               <TextRegular color="text4">for {`${match[1]}`} epochs</TextRegular>
             </Row>
           )}
@@ -122,14 +122,14 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
     title: TableMonitorKey.status.title,
     key: TableMonitorKey.status.key,
     render: (text: string, record: any) => {
-      const color = text === 'Online' ? '#34C759' : text === MESSAGE_CONSTANTS.offline ? 'red1' : 'text1';
+      const color = text === "Online" ? "#34C759" : text === MESSAGE_CONSTANTS.offline ? "red1" : "text1";
       return (
         <div>
-          <Row style={{ justifyContent: 'center' }}>
+          <Row style={{ justifyContent: "center" }}>
             <TextRegular color={color}>{`${text}`}</TextRegular>
           </Row>
-          {text === 'Online' && record.oldVersion && (
-            <Row style={{ justifyContent: 'center' }}>
+          {text === "Online" && record.oldVersion && (
+            <Row style={{ justifyContent: "center" }}>
               <TextRegular color="#ff9500">Not Latest Version</TextRegular>
             </Row>
           )}
@@ -146,7 +146,7 @@ const DEFAULT_COLUMN_TABLE_MONITOR: any = [
     dataIndex: TableMonitorKey.voteStats.key,
     title: TableMonitorKey.voteStats.title,
     key: TableMonitorKey.voteStats.key,
-    render: (text: string) => <div style={{ whiteSpace: 'pre' }}>{text}</div>,
+    render: (text: string) => <div style={{ whiteSpace: "pre" }}>{text}</div>,
   },
 ];
 

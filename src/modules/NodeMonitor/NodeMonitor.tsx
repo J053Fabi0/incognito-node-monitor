@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table } from 'src/modules/NodeMonitor/components';
+import React from "react";
+import { Table } from "src/modules/NodeMonitor/components";
 
 const NodeMonitor = React.memo(() => {
   return <Table />;

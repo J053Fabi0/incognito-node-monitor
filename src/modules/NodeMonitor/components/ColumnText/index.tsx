@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { TextMedium, TextBold } from 'src/components';
-import styled from 'styled-components';
+import React, { memo } from "react";
+import { TextMedium, TextBold } from "src/components";
+import styled from "styled-components";
 
 const Styled = styled.div`
   div:last-child {

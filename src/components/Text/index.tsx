@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { Text, TextProps } from 'rebass';
-import { Colors } from 'src/theme/Theme.styled';
-import React from 'react';
+import styled from "styled-components";
+import { Text, TextProps } from "rebass";
+import { Colors } from "src/theme/Theme.styled";
+import React from "react";
 
 const TextWrapper = styled(Text)<{ color: keyof Colors }>`
   color: ${({ color, theme }) => (theme as any)[color]};

@@ -1,5 +1,5 @@
-import React from 'react';
-import ErrorBoundary from 'src/components/ErrorBoundary';
+import React from "react";
+import ErrorBoundary from "src/components/ErrorBoundary";
 
 interface IProps {
   fetchData: (page: number) => void;

@@ -1,8 +1,8 @@
 /* eslint-disable no-sequences */
-import React, { ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
-import ErrorBoundary from 'src/components/ErrorBoundary';
-import { actionGetRedList } from './TableValidator.actions';
+import React, { ReactNode } from "react";
+import { useDispatch } from "react-redux";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { actionGetRedList } from "./TableValidator.actions";
 
 interface IProps {
   fetchData: (page: number) => void;

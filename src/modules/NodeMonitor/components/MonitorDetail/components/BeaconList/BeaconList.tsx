@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
-import styled from 'styled-components';
-import { IBeacon, IShard } from 'src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.interface';
-import { isEmpty } from 'lodash';
-import AntdTable from 'src/components/Table/AntdTable';
-import { COLUMN_TABLE_BEACON } from 'src/modules/NodeMonitor/NodeMonitor.data';
-import enhance from './BeaconList.enhance';
+import React, { memo } from "react";
+import styled from "styled-components";
+import { IBeacon, IShard } from "src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.interface";
+import { isEmpty } from "lodash";
+import AntdTable from "src/components/Table/AntdTable";
+import { COLUMN_TABLE_BEACON } from "src/modules/NodeMonitor/NodeMonitor.data";
+import enhance from "./BeaconList.enhance";
 
 const Styled = styled.div`
   margin-bottom: 40px;

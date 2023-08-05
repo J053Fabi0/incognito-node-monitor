@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect';
-import { IRootState } from 'src/redux/interface';
-import { IThemeReducer } from './Theme.reducer';
+import { createSelector } from "reselect";
+import { IRootState } from "src/redux/interface";
+import { IThemeReducer } from "./Theme.reducer";
 
 export const themeSelector = createSelector(
   (state: IRootState) => state.theme,

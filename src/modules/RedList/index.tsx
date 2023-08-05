@@ -1,1 +1,1 @@
-export { default } from './RedList';
+export { default } from "./RedList";

@@ -1,7 +1,7 @@
-import { persistReducer } from 'redux-persist';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import storage from 'redux-persist/lib/storage';
-import { ITableReducer } from './Table.interface';
+import { persistReducer } from "redux-persist";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import storage from "redux-persist/lib/storage";
+import { ITableReducer } from "./Table.interface";
 import {
   ACTION_CHANGE_LIMIT_PAGE,
   ACTION_CHANGE_ROWS_PER_PAGE,
@@ -10,8 +10,8 @@ import {
   ACTION_FETCHING_TABLE_DATA,
   ACTION_UPDATE_SEARCH_VALUE,
   ACTION_CHANGE_VISIBLE_MODAL,
-} from './Table.actionsName';
-import { DEFAULT_LIMIT_ROWS } from './Table.constants'; // defaults to localStorage for web
+} from "./Table.actionsName";
+import { DEFAULT_LIMIT_ROWS } from "./Table.constants"; // defaults to localStorage for web
 
 const initialState: ITableReducer = {
   currentPage: 0,
@@ -20,7 +20,7 @@ const initialState: ITableReducer = {
   data: [],
   fetching: false,
   isSearching: false,
-  search: '',
+  search: "",
   visibleModal: false,
   listNode: [],
 };
@@ -88,9 +88,9 @@ const tableReducer = (
 };
 
 const persistConfig = {
-  key: 'tableNodeMonitor',
+  key: "tableNodeMonitor",
   storage,
-  whitelist: ['listNode'],
+  whitelist: ["listNode"],
   stateReconciler: autoMergeLevel2,
 };
 

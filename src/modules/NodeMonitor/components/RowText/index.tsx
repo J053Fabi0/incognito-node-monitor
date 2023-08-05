@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import { TextMedium, TextRegular } from 'src/components';
-import styled from 'styled-components';
-import Row from 'src/components/Row';
+import React, { memo } from "react";
+import { TextMedium, TextRegular } from "src/components";
+import styled from "styled-components";
+import Row from "src/components/Row";
 
 const Wrapper = styled(Row)`
   display: inline-flex;

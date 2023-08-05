@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { API_NODE_MONITOR_URL } from './configs';
+import axios from "axios";
+import { API_NODE_MONITOR_URL } from "./configs";
 
 const TIMEOUT = 20000;
 const instance = axios.create({
   timeout: TIMEOUT,
 });
 
-const HEADERS = { 'Content-Type': 'application/json' };
+const HEADERS = { "Content-Type": "application/json" };
 
 instance.interceptors.request.use(
   (req) => {
@@ -33,7 +33,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     if (error?.isAxiosError && !error?.response) {
-      throw new Error('Send request API failed');
+      throw new Error("Send request API failed");
     }
     return Promise.reject(error);
   },

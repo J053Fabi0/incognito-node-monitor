@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { API_NODE_VALIDATOR_URL } from './configs';
+import axios from "axios";
+import { API_NODE_VALIDATOR_URL } from "./configs";
 
 const TIMEOUT = 20000;
 const instanceValidator = axios.create({
@@ -33,7 +33,7 @@ instanceValidator.interceptors.response.use(
   },
   async (error) => {
     if (error?.isAxiosError && !error?.response) {
-      throw new Error('Send request API failed');
+      throw new Error("Send request API failed");
     }
     return Promise.reject(error);
   },

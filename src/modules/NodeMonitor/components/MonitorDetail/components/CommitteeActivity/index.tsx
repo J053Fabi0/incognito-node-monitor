@@ -1,1 +1,1 @@
-export { default } from './CommitteeActivity';
+export { default } from "./CommitteeActivity";

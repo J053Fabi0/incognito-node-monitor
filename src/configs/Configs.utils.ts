@@ -1,5 +1,5 @@
-import { v4 } from 'uuid';
-import { Storage, STORAGE_KEYS } from 'src/services/storage';
+import { v4 } from "uuid";
+import { Storage, STORAGE_KEYS } from "src/services/storage";
 
 export const getDeviceId = () => {
   let deviceId = Storage.getItem(STORAGE_KEYS.DEVICE_ID);

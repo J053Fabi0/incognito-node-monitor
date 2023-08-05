@@ -1,1 +1,1 @@
-export { default } from './BeaconList';
+export { default } from "./BeaconList";

@@ -1,6 +1,6 @@
-import React from 'react';
-import Table from 'src/modules/RedList/components/Table';
-import styled from 'styled-components';
+import React from "react";
+import Table from "src/modules/RedList/components/Table";
+import styled from "styled-components";
 
 const Wrapper = styled.div``;
 

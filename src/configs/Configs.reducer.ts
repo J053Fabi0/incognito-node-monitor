@@ -1,7 +1,7 @@
-import storage from 'redux-persist/lib/storage';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import { PersistConfig, persistReducer } from 'redux-persist';
-import { Reducer } from 'redux';
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
+import { PersistConfig, persistReducer } from "redux-persist";
+import { Reducer } from "redux";
 
 export interface IConfigsReducer {
   auth?: {
@@ -12,7 +12,7 @@ export interface IConfigsReducer {
 }
 
 const initialState: IConfigsReducer = {
-  language: 'en',
+  language: "en",
 };
 
 interface Action {
@@ -27,9 +27,9 @@ const configReducer: Reducer<IConfigsReducer, Action> = (state = initialState, a
 };
 
 const persistConfig: PersistConfig<IConfigsReducer> = {
-  key: 'config',
+  key: "config",
   storage,
-  whitelist: ['auth'],
+  whitelist: ["auth"],
   stateReconciler: autoMergeLevel2,
 };
 

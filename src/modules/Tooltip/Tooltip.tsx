@@ -1,8 +1,8 @@
-import React from 'react';
-import styled, { ITheme } from 'styled-components';
-import isEmpty from 'lodash/isEmpty';
-import enhance from './Tooltip.enhance';
-import { ITooltipProps } from './Tooltip.interface';
+import React from "react";
+import styled, { ITheme } from "styled-components";
+import isEmpty from "lodash/isEmpty";
+import enhance from "./Tooltip.enhance";
+import { ITooltipProps } from "./Tooltip.interface";
 
 const Styled = styled.div`
   position: absolute;
@@ -17,7 +17,7 @@ const Styled = styled.div`
     padding: 6px 8px;
   }
   .arrow {
-    content: ' ';
+    content: " ";
     position: absolute;
     bottom: 100%; /* At the top of the tooltip */
     left: 50%;

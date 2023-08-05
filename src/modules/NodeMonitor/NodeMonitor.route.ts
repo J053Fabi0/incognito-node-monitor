@@ -1,14 +1,14 @@
-import { lazy } from 'react';
-import { IRouteProps } from 'src/modules';
+import { lazy } from "react";
+import { IRouteProps } from "src/modules";
 
 const nodeMonitorRoute: IRouteProps = {
-  path: '/node-monitor',
+  path: "/node-monitor",
   exact: true,
-  component: lazy(() => import('./NodeMonitor')),
-  name: 'NodeMonitor',
-  to: '/node-monitor',
+  component: lazy(() => import("./NodeMonitor")),
+  name: "NodeMonitor",
+  to: "/node-monitor",
 };
 
-export const route = '/node-monitor';
+export const route = "/node-monitor";
 
 export default nodeMonitorRoute;

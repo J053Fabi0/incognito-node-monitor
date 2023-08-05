@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { API_BASE_URL_DEVICE } from './configs';
+import axios from "axios";
+import { API_BASE_URL_DEVICE } from "./configs";
 
-const HEADERS = { 'Content-Type': 'application/json' };
+const HEADERS = { "Content-Type": "application/json" };
 const TIMEOUT = 20000;
 
 const instance = axios.create({
@@ -9,7 +9,7 @@ const instance = axios.create({
   timeout: TIMEOUT,
   headers: {
     ...HEADERS,
-    Authorization: '',
+    Authorization: "",
   },
 });
 

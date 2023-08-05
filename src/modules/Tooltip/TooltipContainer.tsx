@@ -1,9 +1,9 @@
-import React from 'react';
-import isEmpty from 'lodash/isEmpty';
-import styled from 'styled-components';
-import enhance from './TooltipContainer.enhance';
-import { IProps } from './Tooltip.interface';
-import Tooltip from './Tooltip';
+import React from "react";
+import isEmpty from "lodash/isEmpty";
+import styled from "styled-components";
+import enhance from "./TooltipContainer.enhance";
+import { IProps } from "./Tooltip.interface";
+import Tooltip from "./Tooltip";
 
 const Styled = styled.div`
   position: fixed;

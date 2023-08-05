@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Wrapper, WrapLink, StyledNavLink } from './styled';
+import React, { memo } from "react";
+import { Wrapper, WrapLink, StyledNavLink } from "./styled";
 
 const SelectionTable = () => {
   return (

@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from "lodash/isEmpty";
 
 interface IENVS {
   REACT_APP_IS_MAINNET: boolean;
@@ -10,7 +10,7 @@ interface IENVS {
 
 const defaultEnvs = {
   REACT_APP_IS_MAINNET: false,
-  REACT_APP_VERSION: '1.0',
+  REACT_APP_VERSION: "1.0",
   REACT_APP_IS_DEV: false,
   FAST_REFRESH: true,
 };
@@ -22,8 +22,8 @@ export const getEnvs = () => {
     if (!isEmpty(PROCCESS_ENV)) {
       Object.keys(PROCCESS_ENV).forEach((key: string) => {
         const value = PROCCESS_ENV[key];
-        if (value === 'true' || value === 'false') {
-          envs[key] = value === 'true';
+        if (value === "true" || value === "false") {
+          envs[key] = value === "true";
         } else {
           envs[key] = PROCCESS_ENV[key];
         }
