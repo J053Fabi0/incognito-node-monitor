@@ -1,11 +1,11 @@
+import { isEmpty } from "lodash";
+import { compose } from "recompose";
+import { useDispatch } from "react-redux";
 import React, { PropsWithChildren } from "react";
 import ErrorBoundary from "src/components/ErrorBoundary";
-import { compose } from "recompose";
-import { isEmpty } from "lodash";
-import { useDispatch } from "react-redux";
-import withCommittee from "./MonitorDetail.enhanceCommittee";
-import withSyncStat from "./MonitorDetail.enhanceSyncStat";
 import { getMiningPublicKey } from "../Table/Table.utils";
+import withSyncStat from "./MonitorDetail.enhanceSyncStat";
+import withCommittee from "./MonitorDetail.enhanceCommittee";
 import { actionFetchNodeSyncInfo } from "./MonitorDetail.actions";
 
 interface IProps {
@@ -24,9 +24,7 @@ const enhance = (WrappedComp: React.FunctionComponent<IProps>) => ({
     dispatch(actionFetchNodeSyncInfo(mpk));
   };
 
-  React.useEffect(() => {
-    handleOpenNewTab();
-  }, []);
+  React.useEffect(() => (handleOpenNewTab(), undefined), []);
   return (
     <ErrorBoundary>
       <WrappedComp {...props} isWebview={isWebview} />
