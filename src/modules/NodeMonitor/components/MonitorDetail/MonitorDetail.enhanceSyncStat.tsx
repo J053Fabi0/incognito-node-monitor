@@ -4,22 +4,22 @@ import ErrorBoundary from 'src/components/ErrorBoundary';
 import { actionFetchSyncStat } from './MonitorDetail.actions';
 
 const withSyncStat = (WrappedComponent: React.FunctionComponent) => (props: any) => {
-    const dispatch = useDispatch();
-    const handleFetchSyncState = () => dispatch(actionFetchSyncStat());
+  const dispatch = useDispatch();
+  const handleFetchSyncState = () => dispatch(actionFetchSyncStat());
 
-    React.useEffect(() => {
-        handleFetchSyncState();
-    }, []);
+  React.useEffect(() => {
+    handleFetchSyncState();
+  }, []);
 
-    return (
-        <ErrorBoundary>
-            <WrappedComponent
-                {...{
-                    ...props,
-                }}
-            />
-        </ErrorBoundary>
-    );
+  return (
+    <ErrorBoundary>
+      <WrappedComponent
+        {...{
+          ...props,
+        }}
+      />
+    </ErrorBoundary>
+  );
 };
 
 export default withSyncStat;

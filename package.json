@@ -22,7 +22,7 @@
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
-    "node-sass": "4.14.1",
+    "node-sass": "9.0.0",
     "papp-sdk": "https://github.com/incognitochain/sdk#papp-client-sdk",
     "polished": "^4.1.1",
     "react": "^17.0.1",
@@ -52,7 +52,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
-    "lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
+    "lint": "tsc --noEmit && eslint src --fix",
+    "check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [

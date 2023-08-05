@@ -1,4 +1,4 @@
 export interface IProps {
-    history: any;
-    routes: any;
+  history: any;
+  routes: any;
 }

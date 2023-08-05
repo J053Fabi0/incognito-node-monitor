@@ -6,9 +6,9 @@ import AntdTable from 'src/components/Table/AntdTable';
 import { COLUMN_TABLE_COMMITTEE_ACTIVITY } from 'src/modules/NodeMonitor/NodeMonitor.data';
 
 const CommitteeActivity = React.memo(() => {
-    const { committee } = useSelector(monitorDetailSelector);
-    if (isEmpty(committee)) return null;
-    return <AntdTable columns={COLUMN_TABLE_COMMITTEE_ACTIVITY} data={committee} />;
+  const { committee } = useSelector(monitorDetailSelector);
+  if (isEmpty(committee)) return null;
+  return <AntdTable columns={COLUMN_TABLE_COMMITTEE_ACTIVITY} data={committee} />;
 });
 
 export default CommitteeActivity;

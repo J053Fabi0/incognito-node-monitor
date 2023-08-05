@@ -12,16 +12,16 @@ import 'antd/dist/antd.css';
 const history = createBrowserHistory();
 
 const App: React.FunctionComponent = () => {
-    return (
-        <ThemeProvider>
-            <ThemedGlobalStyle />
-            <Router history={history}>
-                <Header />
-                <MainRoute />
-                <TooltipContainer />
-            </Router>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider>
+      <ThemedGlobalStyle />
+      <Router history={history}>
+        <Header />
+        <MainRoute />
+        <TooltipContainer />
+      </Router>
+    </ThemeProvider>
+  );
 };
 
 export default withApp(React.memo(App));

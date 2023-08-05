@@ -5,11 +5,11 @@ import styled from 'styled-components';
 const Wrapper = styled.div``;
 
 const RedList = React.memo(() => {
-    return (
-        <Wrapper>
-            <Table />
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <Table />
+    </Wrapper>
+  );
 });
 
 export default RedList;

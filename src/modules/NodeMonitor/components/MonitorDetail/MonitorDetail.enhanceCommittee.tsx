@@ -4,23 +4,23 @@ import { useDispatch } from 'react-redux';
 import { actionFetchCommitteeActivity } from 'src/modules/NodeMonitor/components/MonitorDetail/MonitorDetail.actions';
 
 const withCommittee = (WrappedComp: React.FunctionComponent) => (props: any) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleFetchCommitteeActivity = () => dispatch(actionFetchCommitteeActivity());
+  const handleFetchCommitteeActivity = () => dispatch(actionFetchCommitteeActivity());
 
-    React.useEffect(() => {
-        handleFetchCommitteeActivity();
-    }, []);
+  React.useEffect(() => {
+    handleFetchCommitteeActivity();
+  }, []);
 
-    return (
-        <ErrorBoundary>
-            <WrappedComp
-                {...{
-                    ...props,
-                }}
-            />
-        </ErrorBoundary>
-    );
+  return (
+    <ErrorBoundary>
+      <WrappedComp
+        {...{
+          ...props,
+        }}
+      />
+    </ErrorBoundary>
+  );
 };
 
 export default withCommittee;

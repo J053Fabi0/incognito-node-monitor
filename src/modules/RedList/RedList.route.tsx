@@ -2,11 +2,11 @@ import { lazy } from 'react';
 import { IRouteProps } from 'src/modules';
 
 const nodeMonitorRoute: IRouteProps = {
-    path: '/red-list',
-    exact: true,
-    component: lazy(() => import('./RedList')),
-    name: 'RedList',
-    to: '/red-list',
+  path: '/red-list',
+  exact: true,
+  component: lazy(() => import('./RedList')),
+  name: 'RedList',
+  to: '/red-list',
 };
 
 export const route = '/red-list';

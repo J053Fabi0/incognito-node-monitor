@@ -7,11 +7,11 @@ import reportWebVitals from './reportWebVitals';
 require('dotenv').config();
 
 ReactDOM.render(
-    <React.StrictMode>
-        <FixedGlobalStyle />
-        <App />
-    </React.StrictMode>,
-    document.getElementById('root'),
+  <React.StrictMode>
+    <FixedGlobalStyle />
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
 
 reportWebVitals();

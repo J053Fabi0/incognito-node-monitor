@@ -12,27 +12,27 @@ import { actionUpdateMonitorDetail, actionClearMonitorDetail } from '../MonitorD
 interface IProps {}
 
 const withTable = (WrappedComponent: React.FunctionComponent) => (props: IProps & any) => {
-    const dispatch = useDispatch();
-    const handleClickTableCell = (node: ITableData) => {
-        dispatch(actionUpdateMonitorDetail({ node }));
-        dispatch(updateVisibleModal({ visible: true }));
-    };
+  const dispatch = useDispatch();
+  const handleClickTableCell = (node: ITableData) => {
+    dispatch(actionUpdateMonitorDetail({ node }));
+    dispatch(updateVisibleModal({ visible: true }));
+  };
 
-    const handleCloseMonitorModal = () => {
-        dispatch(updateVisibleModal({ visible: false }));
-        dispatch(actionClearMonitorDetail());
-    };
-    return (
-        <ErrorBoundary>
-            <WrappedComponent
-                {...{
-                    ...props,
-                    handleClickTableCell,
-                    handleCloseMonitorModal,
-                }}
-            />
-        </ErrorBoundary>
-    );
+  const handleCloseMonitorModal = () => {
+    dispatch(updateVisibleModal({ visible: false }));
+    dispatch(actionClearMonitorDetail());
+  };
+  return (
+    <ErrorBoundary>
+      <WrappedComponent
+        {...{
+          ...props,
+          handleClickTableCell,
+          handleCloseMonitorModal,
+        }}
+      />
+    </ErrorBoundary>
+  );
 };
 
 export default compose(withData, withFetch, withPagination, withTable);

@@ -6,15 +6,15 @@ import { ITableValidatorReducer } from 'src/modules/RedList/components/Table/Tab
 import { ITooltipReducer } from 'src/modules/Tooltip';
 
 export interface IAction {
-    type: string;
-    payload: any;
+  type: string;
+  payload: any;
 }
 
 export interface IRootState {
-    configs: IConfigsReducer;
-    theme: IThemeReducer;
-    table: ITableReducer; // Node monitor
-    monitorDetail: IMonitorDetailReducer; // Monitor detail
-    tableValidator: ITableValidatorReducer;
-    tooltip: ITooltipReducer;
+  configs: IConfigsReducer;
+  theme: IThemeReducer;
+  table: ITableReducer; // Node monitor
+  monitorDetail: IMonitorDetailReducer; // Monitor detail
+  tableValidator: ITableValidatorReducer;
+  tooltip: ITooltipReducer;
 }

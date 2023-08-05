@@ -10,27 +10,27 @@ import { monitorDetailSelector } from 'src/modules/NodeMonitor/components/Monito
 import { ellipsisRight } from 'src/utils/ellipsis';
 
 interface IProps {
-    visible: boolean;
-    onClose: () => void;
+  visible: boolean;
+  onClose: () => void;
 }
 
 const MonitorDetailModal = ({ visible, onClose }: IProps) => {
-    const { node } = useSelector(monitorDetailSelector);
-    return (
-        <Modal isOpen={visible} onDismiss={onClose}>
-            <ModalWrapper>
-                <Row className="header-row">
-                    <TextMedium color="text1" fontSize="18px">
-                        {ellipsisRight({ str: node?.name || '', limit: 22 })}
-                    </TextMedium>
-                    <CloseWrapper onClick={onClose}>
-                        <CloseIcon width="16" height="16" />
-                    </CloseWrapper>
-                </Row>
-                <MonitorDetail />
-            </ModalWrapper>
-        </Modal>
-    );
+  const { node } = useSelector(monitorDetailSelector);
+  return (
+    <Modal isOpen={visible} onDismiss={onClose}>
+      <ModalWrapper>
+        <Row className="header-row">
+          <TextMedium color="text1" fontSize="18px">
+            {ellipsisRight({ str: node?.name || '', limit: 22 })}
+          </TextMedium>
+          <CloseWrapper onClick={onClose}>
+            <CloseIcon width="16" height="16" />
+          </CloseWrapper>
+        </Row>
+        <MonitorDetail />
+      </ModalWrapper>
+    </Modal>
+  );
 };
 
 export default memo(MonitorDetailModal);

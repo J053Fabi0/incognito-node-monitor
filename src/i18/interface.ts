@@ -1,17 +1,17 @@
 export interface ILanguage {
-    [key: string]: any;
-    app: IApp;
-    reuse: IReuse;
-    nodeMonitor: INodeMonitor;
+  [key: string]: any;
+  app: IApp;
+  reuse: IReuse;
+  nodeMonitor: INodeMonitor;
 }
 
 export interface IApp {
-    company: string;
+  company: string;
 }
 
 export interface INodeMonitor {}
 
 export interface IReuse {
-    search: string;
-    colon: string;
+  search: string;
+  colon: string;
 }
